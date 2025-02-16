@@ -6,7 +6,7 @@ class Solution {
         boolean res = false;
         for(int vtx : adj[node]) {
             if(!vis[vtx])
-                res = dfsTopo(ans, vtx, adj, vis, pathVis);
+                res = res || dfsTopo(ans, vtx, adj, vis, pathVis);
             else if(pathVis[vtx])
                 return true;
         }
