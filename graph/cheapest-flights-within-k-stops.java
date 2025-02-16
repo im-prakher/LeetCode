@@ -1,33 +1,46 @@
 class Solution {
-    final int max = 10000_00000;
-    int dp[][];
-    public int dfs(int node, int dst, List<int[]> adj[], boolean[] vis, int k) {
-        int res = max;  
-        if(k < 0)
-            return res;
-        if(node == dst)
-            return 0;
-        if(dp[node][k]!=-1)
-            return dp[node][k];      
-        for(int[] vtx : adj[node]) {
-            res = Math.min(res, vtx[1] + dfs(vtx[0], dst, adj, vis, k-1));
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        // Initialize distance array, set all distances to MAX_VALUE (infinity)
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        
+        // Distance to the source is 0
+        dist[src] = 0;
+
+        // Run the Bellman-Ford algorithm for at most k+1 iterations
+        for (int i = 0; i < k + 1; i++) {
+            // Check if there were any updates in this iteration
+            // If no updates, we can break early as the algorithm is complete, 
+            // suppose for k > num of edges
+            if (isBellmanFordCompleted(flights, dist)) {
+                break;
+            }
         }
-        return dp[node][k] = res;
+
+        // If the destination still has MAX_VALUE as distance, it is unreachable within k stops
+        return dist[dst] == Integer.MAX_VALUE ? -1 : dist[dst];
     }
 
-    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        List<int[]> adj[] = new List[n];
-        dp = new int[n][k+2];
-        for(int[] arr : dp) {
-            Arrays.fill(arr, -1);
+    private boolean isBellmanFordCompleted(int[][] flights, int[] dist) {
+        // Clone the current distances to track changes
+        int[] prevDist = dist.clone();
+        boolean completed = true;
+
+        // Iterate over each flight edge
+        for (int[] edge : flights) {
+            int u = edge[0];  // source airport
+            int v = edge[1];  // destination airport
+            int wt = edge[2]; // cost of the flight
+
+            // Check if the current path from u to v is shorter than the previous known path
+            if (prevDist[u] != Integer.MAX_VALUE && prevDist[u] + wt < dist[v]) {
+                // Update the shortest distance to v
+                dist[v] = prevDist[u] + wt;
+                completed = false; // Indicate that an update occurred
+            }
         }
-        for(int i = 0; i < n; i++) 
-            adj[i] = new ArrayList<>();         
-        for(int[] flight : flights) {
-            adj[flight[0]].add(new int[]{flight[1], flight[2]});
-        }
-        boolean vis[] = new boolean[n];
-        int ans = dfs(src, dst, adj, vis, k+1);
-        return ans >= max ? -1 : ans;
+
+        // Return true if no updates were made, meaning the algorithm has converged
+        return completed;
     }
 }
