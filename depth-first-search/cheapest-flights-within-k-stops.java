@@ -8,7 +8,7 @@ class Solution {
             return 0;
         vis[node] = true;
         for(int[] vtx : adj[node]) {
-            if(!vis[vtx[0]])
+            // if(!vis[vtx[0]])
                 res = Math.min(res, vtx[1] + dfs(vtx[0], dst, adj, vis, k-1));
         }
         return res;
