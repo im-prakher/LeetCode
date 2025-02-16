@@ -19,8 +19,7 @@ class Node {
 */
 
 class Solution {
-    Map<Node, Node> vis;
-    public Node dfsClone(Node node) {
+    public Node dfsClone(Node node, Map<Node, Node> vis) {
         if(node == null)
             return null;
         if(vis.containsKey(node))
@@ -28,13 +27,13 @@ class Solution {
         Node clone = new Node(node.val);
         vis.put(node, clone);
         for(Node vtx : node.neighbors) {
-            clone.neighbors.add(dfsClone(vtx));
+            clone.neighbors.add(dfsClone(vtx, vis));
         }
         return clone;
     }
-    
+
     public Node cloneGraph(Node node) {
-        vis = new HashMap<>();
-        return dfsClone(node);
+        Map<Node, Node> vis = new HashMap<>();
+        return dfsClone(node, vis);
     }
 }
