@@ -21,6 +21,8 @@ class Node {
 class Solution {
     Map<Node, Node> vis;
     public Node dfsClone(Node node) {
+        if(node == null)
+            return null;
         if(vis.containsKey(node))
             return vis.get(node);
         Node clone = new Node(node.val);
@@ -30,9 +32,8 @@ class Solution {
         }
         return clone;
     }
+    
     public Node cloneGraph(Node node) {
-        if(node == null)
-            return null;
         vis = new HashMap<>();
         return dfsClone(node);
     }
