@@ -6,7 +6,7 @@ class Solution {
             if(str[n-i-1] != str[i]) {            
                 int j = i+1, k = i;
                 boolean lf = false, rf = false;
-                while(j < n/2) {
+                while(j <= n/2) {
                     if(str[j] != str[n-j]) {
                         lf = false;
                         break;
@@ -14,7 +14,7 @@ class Solution {
                     lf = true;
                     j++;
                 }
-                while(k < n/2) {
+                while(k <= n/2) {
                     if(str[k] != str[n-k-2]) {
                         rf = false;
                         break;
