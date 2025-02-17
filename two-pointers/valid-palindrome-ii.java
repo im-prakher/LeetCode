@@ -1,32 +1,19 @@
 class Solution {
+    public boolean isPallindrome(int i, int j, char[] str) {
+        while(i < j) {
+            if(str[i] != str[j])
+                return false;
+            i++; j--;
+        }
+        return true;
+    }
     public boolean validPalindrome(String s) {
-        int cnt = 0, n = s.length();
         char[] str = s.toCharArray();
-        for(int i = 0; i < n/2; i++) {
-            if(str[n-i-1] != str[i]) {            
-                int j = i+1, k = i;
-                boolean lf = false, rf = false;
-                while(j <= n/2) {
-                    if(str[j] != str[n-j]) {
-                        lf = false;
-                        break;
-                    }
-                    lf = true;
-                    j++;
-                }
-                while(k < n/2) {
-                    if(str[k] != str[n-k-2]) {
-                        rf = false;
-                        break;
-                    }
-                    rf = true;
-                    k++;
-                }
-                if(lf || rf)
-                    return true;
-                else 
-                    return false;
-            }                
+        int i = 0, j = str.length-1;
+        while(i < j) {
+            if(str[i] != str[j])
+                return isPallindrome(i+1, j, str) || isPallindrome(i, j-1, str);
+            i++; j--;
         }
         return true;
     }
