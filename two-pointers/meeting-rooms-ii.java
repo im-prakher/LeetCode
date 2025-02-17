@@ -6,6 +6,8 @@ class Solution {
             if(finish > intv[i][0]) {
                 finish = Math.min(finish, intv[i][1]);
                 cnt++;
+            } else if(cnt > 1){
+                finish = Math.min(finish, intv[i][1]);
             } else {
                 finish = intv[i][1];
             }
