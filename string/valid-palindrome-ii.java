@@ -14,7 +14,7 @@ class Solution {
                     lf = true;
                     j++;
                 }
-                while(k <= n/2) {
+                while(k < n/2) {
                     if(str[k] != str[n-k-2]) {
                         rf = false;
                         break;
