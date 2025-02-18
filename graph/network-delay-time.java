@@ -11,9 +11,7 @@ class Solution {
         }
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[k] = dist[0] = 0;
-        Queue<Node> pq = new LinkedList<>(
-            // (a, b) -> a.val - b.val
-        );
+        Queue<Node> pq = new LinkedList<>();
         pq.offer(new Node(k, 0));
         while(!pq.isEmpty()) {
             Node node = pq.poll();
