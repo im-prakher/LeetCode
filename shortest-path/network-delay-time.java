@@ -11,7 +11,6 @@ class Solution {
         }
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[k] = dist[0] = 0;
-        // boolean vis[] = new boolean[n+1];
         PriorityQueue<Node> pq = new PriorityQueue<>(
             (a, b) -> a.val - b.val
         );
