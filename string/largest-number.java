@@ -20,10 +20,13 @@ class Solution {
         String[] str = new String[nums.length];
         for(int i : nums) {
             s = new StringBuilder();
-            while(i > 0) {
-                s.insert(0, (char)('0' + (i % 10)));
-                i = i / 10;
-            }
+            if(i!=0) {
+                while(i > 0) {
+                    s.insert(0, (char)('0' + (i % 10)));
+                    i = i / 10;
+                }
+            } else
+                s.append("0");
             str[k++] = s.toString();
         }
         Arrays.sort(str, (a, b)-> {
