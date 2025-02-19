@@ -6,7 +6,8 @@ class Solution {
             if(pot == 'x')
                holes++;
             else {
-                list.add(holes);
+                if(holes!=0)
+                    list.add(holes);
                 holes = 0;
             }
         }
