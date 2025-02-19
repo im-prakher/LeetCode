@@ -18,7 +18,7 @@ class Solution {
             if(i==0)
                 break;
             if(i >= budget) {
-                cnt += budget-1;
+                cnt += budget!= 0 ? budget-1 : 0;
                 break;
             }            
              cnt += i;
