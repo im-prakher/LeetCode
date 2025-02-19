@@ -39,11 +39,9 @@ class Solution {
 
         StringBuilder ans = new StringBuilder();
         for(int i = 0; i < n; i++) {
-            if(i!=0 && equalsZero(str[i-1], str[i]))
-                continue;
             ans.append(str[i]);
         }
-        return ans.toString();
+        return Long.parseLong(ans.toString()) == 0 ? "0" : ans.toString();
     }
     public boolean equalsZero(String a, String b) {
         int p = Integer.parseInt(a);
