@@ -1,5 +1,5 @@
 class Solution {
-    public int combine(String a, String b) {
+    public long combine(String a, String b) {
         StringBuilder sb = new StringBuilder();
         for(char ch : a.toCharArray()) {
             sb.append(ch);
@@ -8,9 +8,9 @@ class Solution {
             sb.append(ch);
         }
         String str = sb.toString();
-        int num = 0;
+        long num = 0;
         for(char ch : str.toCharArray()) {
-            num = num * 10 + (ch-'0');
+            num = num * 10 + (int)(ch-'0');
         }
         return num;
     }
@@ -27,9 +27,11 @@ class Solution {
             str[k++] = s.toString();
         }
         Arrays.sort(str, (a, b)-> {
-            int p = combine(a, b);
-            int q = combine(b, a);
-            return q-p;
+            long p = combine(a, b);
+            long q = combine(b, a);
+            if(p > q)
+                return -1;
+            return 1;
         });
 
         StringBuilder ans = new StringBuilder();
