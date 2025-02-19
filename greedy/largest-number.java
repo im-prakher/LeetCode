@@ -48,6 +48,6 @@ class Solution {
     public boolean equalsZero(String a, String b) {
         int p = Integer.parseInt(a);
         int q = Integer.parseInt(b);
-        return p!=0 && p==q;
+        return p==0 && p==q;
     }
 }
