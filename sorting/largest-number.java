@@ -38,10 +38,13 @@ class Solution {
         });
 
         StringBuilder ans = new StringBuilder();
+        boolean isZero = true;
         for(int i = 0; i < n; i++) {
             ans.append(str[i]);
+            if(Integer.parseInt(str[i]) != 0)
+                isZero = false;
         }
-        return Long.parseLong(ans.toString()) == 0 ? "0" : ans.toString();
+        return isZero ? "0" : ans.toString();
     }
     public boolean equalsZero(String a, String b) {
         int p = Integer.parseInt(a);
