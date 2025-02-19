@@ -16,8 +16,8 @@ class Solution {
     }
     public String largestNumber(int[] nums) {
         StringBuilder s = new StringBuilder();
-        int k = 0; 
-        String[] str = new String[nums.length];
+        int k = 0,n = nums.length; 
+        String[] str = new String[n];
         for(int i : nums) {
             s = new StringBuilder();
             if(i!=0) {
@@ -38,9 +38,16 @@ class Solution {
         });
 
         StringBuilder ans = new StringBuilder();
-        for(String n : str) {
-            ans.append(n);
+        for(int i = 0; i < n; i++) {
+            if(i!=0 && equalsZero(str[i-1], str[i]))
+                continue;
+            ans.append(str[i]);
         }
         return ans.toString();
+    }
+    public boolean equalsZero(String a, String b) {
+        int p = Integer.parseInt(a);
+        int q = Integer.parseInt(b);
+        return p==q;
     }
 }
