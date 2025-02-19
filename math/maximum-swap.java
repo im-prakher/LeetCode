@@ -8,10 +8,10 @@ class Solution {
                 break;
         }
         if(i == str.length - 1)
-            return num;
-        char max = '0'; int idx = str.length-1;
+            return num; 
+        int idx = str.length-1;
         for(int j = str.length-1; j > i; j--) {
-            if(max < str[j])
+            if(str[idx] <= str[j]) 
                 idx = j;
         }
         char tmp = str[i];
