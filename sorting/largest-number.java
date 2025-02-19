@@ -22,9 +22,17 @@ class Solution {
                     i++; j++;
                 }
             }
-            if(i < a.length() && a.charAt(i)!='0')                
+            if(i < a.length()) {
+                if(a.charAt(a.length()-1) > b.charAt(j-1))                
+                    return -1;
+                return 1;
+            }
+            if(j < b.length()) {
+                if(b.charAt(b.length()-1) > a.charAt(i-1))                
+                    return 1;
                 return -1;
-            return 1;
+            }
+            return 0;
         });
 
         StringBuilder ans = new StringBuilder();
