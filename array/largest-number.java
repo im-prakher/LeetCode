@@ -1,4 +1,19 @@
 class Solution {
+    public int combine(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        for(char ch : a.toCharArray()) {
+            sb.append(ch);
+        }
+        for(char ch : b.toCharArray()) {
+            sb.append(ch);
+        }
+        String str = sb.toString();
+        int num = 0;
+        for(char ch : str.toCharArray()) {
+            num = num * 10 + (ch-'0');
+        }
+        return num;
+    }
     public String largestNumber(int[] nums) {
         StringBuilder s = new StringBuilder();
         int k = 0; 
@@ -12,27 +27,9 @@ class Solution {
             str[k++] = s.toString();
         }
         Arrays.sort(str, (a, b)-> {
-            int i = 0, j = 0;
-            while(i < a.length() && j < b.length()) {
-                if(a.charAt(i) > b.charAt(j))
-                    return -1;
-                else if(a.charAt(i) < b.charAt(j))
-                    return 1;
-                else {
-                    i++; j++;
-                }
-            }
-            if(i < a.length()) {
-                if(a.charAt(a.length()-1) > b.charAt(j-1))                
-                    return -1;
-                return 1;
-            }
-            if(j < b.length()) {
-                if(b.charAt(b.length()-1) > a.charAt(i-1))                
-                    return 1;
-                return -1;
-            }
-            return 0;
+            int p = combine(a, b);
+            int q = combine(b, a);
+            return q-p;
         });
 
         StringBuilder ans = new StringBuilder();
