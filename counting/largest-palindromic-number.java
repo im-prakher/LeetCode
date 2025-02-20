@@ -5,6 +5,8 @@ class Solution {
         for(char ch : num.toCharArray()) {
             freq[ch-'0']++;
         }
+        if(freq[0] == num.length())
+            return "0";
         StringBuilder sb = new StringBuilder();
         int idx = 0, j = -1;
         for(int i =9 ; i >= 0; i--) {
