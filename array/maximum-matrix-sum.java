@@ -13,16 +13,14 @@ class Solution {
             neg = neg % 2;
             minus += neg;
         }
-        Arrays.sort(mat, (a, b)-> a[0]-b[0]);
-        long sum = 0;
-        if(minus % 2 == 1) 
-            sum -= mat[0][0];
-        else 
-            sum += mat[0][0];
+        long sum = 0; int min = mat[0][0];
         for(int i = 0; i < mat.length; i++) {
-            for(int j = 0; j < mat[0].length; j++) {
-                if(i == 0 && j == 0)
-                    continue;
+            sum += mat[i][0];
+            min = Math.min(min, mat[i][0]);
+        }
+        sum -= minus % 2 == 1 ? 2 * min : 0;
+        for(int i = 0; i < mat.length; i++) {
+            for(int j = 1; j < mat[0].length; j++) {
                 sum += mat[i][j];
             }
         }
