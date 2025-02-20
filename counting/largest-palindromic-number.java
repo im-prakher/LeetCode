@@ -17,7 +17,8 @@ class Solution {
             idx += isZero ? (c / 2) : idx;
             j = (j==-1 && freq[i] == 1) ? i : j;
         }
-        sb.insert(idx, (char)('0'+j));
+        if(j!=-1)
+            sb.insert(idx, (char)('0'+j));
         return sb.toString();
     }
 }
