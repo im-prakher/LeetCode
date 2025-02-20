@@ -1,6 +1,6 @@
 class Solution {
     public long maxMatrixSum(int[][] mat) {
-        int sum = 0, minus = 0;
+        int  minus = 0;
         for(int i = 0; i < mat.length; i++) {
             int neg = 0;
             for(int j = 0; j < mat[0].length; j++) {
@@ -14,6 +14,7 @@ class Solution {
             minus += neg;
         }
         Arrays.sort(mat, (a, b)-> a[0]-b[0]);
+        long sum = 0;
         if(minus % 2 == 1) 
             sum -= mat[0][0];
         else 
