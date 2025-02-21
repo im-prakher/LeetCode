@@ -15,7 +15,7 @@ class Solution {
             adj[road[1]].e++;
         }
         Arrays.sort(adj, (a,b)-> b.e - a.e);
-        int sum = 0;
+        long sum = 0;
         for(Node node : adj) {
             sum += node.e * n;
             n--;
