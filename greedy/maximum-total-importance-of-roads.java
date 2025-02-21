@@ -1,9 +1,9 @@
 class Solution {
     public class Node {
-        int v, e;
+        int v; long e;
         Node(int v, int e) {
             this.v = v;
-            this.e = e;
+            this.e = (long)e;
         }
     }
     public long maximumImportance(int n, int[][] roads) {
@@ -14,10 +14,10 @@ class Solution {
             adj[road[0]].e++;
             adj[road[1]].e++;
         }
-        Arrays.sort(adj, (a,b)-> b.e - a.e);
+        Arrays.sort(adj, (a,b)-> Long.compare(b.e, a.e));
         long sum = 0;
         for(Node node : adj) {
-            sum += node.e * n;
+            sum = sum + node.e * n;
             n--;
         }
         return sum;
