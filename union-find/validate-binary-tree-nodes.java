@@ -19,10 +19,14 @@ class Solution {
         for(int i = 0; i < n ; i++) {
             if(left[i]!=-1) {
                 adj[i].add(left[i]);
+                if(par[left[i]] != -1)
+                    return false;
                 par[left[i]] = i;
             }
             if(right[i]!=-1) {
                 adj[i].add(right[i]);
+                if(par[right[i]] != -1)
+                    return false;
                 par[right[i]] = i;
             }
         }
@@ -32,13 +36,12 @@ class Solution {
                 cnt++;
                 start = i;
             }
-            if(cnt > 1)
-                return false;
         }
-        for(int i = 0; i < n; i++) {
-            if(!vis[i] && isCycle(i, vis, adj)) 
+        if(cnt > 1 || start == -1)
+            return false;
+
+        if(isCycle(start, vis, adj)) 
                 return false;
-        }
         return true;
     }
 }
