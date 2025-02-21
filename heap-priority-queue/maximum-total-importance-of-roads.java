@@ -1,9 +1,9 @@
 class Solution {
     public class Node {
         int v; long e;
-        Node(int v, int e) {
+        Node(int v, long e) {
             this.v = v;
-            this.e = (long)e;
+            this.e = e;
         }
     }
     public long maximumImportance(int n, int[][] roads) {
