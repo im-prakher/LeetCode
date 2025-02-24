@@ -1,21 +1,21 @@
 class Solution {
-    public int depth(int idx, int[] nums, boolean[] vis) {
-        int depth = 1, strt = idx;
-        while(nums[idx] != strt) {
+    public int depth(int idx, int[] nums) {
+        int depth = 0, strt = idx;
+        while(nums[idx] != Integer.MAX_VALUE) {
             depth++;
+            int pre = idx;
             idx = nums[idx];
-            vis[idx] = true;
+            nums[pre] = Integer.MAX_VALUE;
         }
         return depth;
     }
     public int arrayNesting(int[] nums) {
         int ans = 0;
-        boolean[] vis = new boolean[nums.length];
         for(int i = 0; i < nums.length; i++) {
             if(ans == nums.length)
                 break;
-            if(!vis[i])
-                ans = Math.max(ans, depth(i, nums, vis));
+            if(nums[i]!=Integer.MAX_VALUE)
+                ans = Math.max(ans, depth(i, nums));
         }
         return ans;
     }
