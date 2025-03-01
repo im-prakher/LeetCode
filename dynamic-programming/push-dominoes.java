@@ -36,7 +36,7 @@ class Solution {
         }
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < n; i++) {
-            char ch = infl[i] == -1 ? 'L' : infl[i] == 1 ? 'R' : '.';
+            char ch = infl[i] < 0 ? 'L' : infl[i] > 0 ? 'R' : '.';
             sb.append(ch);
         }
         return sb.toString();
