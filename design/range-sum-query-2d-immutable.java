@@ -3,10 +3,6 @@ class NumMatrix {
     public NumMatrix(int[][] mat) {
         int n = mat.length, m = mat[0].length;
         prefix = new int[n+1][m+1];
-        // for(int i = 1; i < n; i++)
-        //     prefix[i][0] = prefix[i-1][0] + mat[i][0];
-        // for(int j = 1; j < m; j++)
-        //     prefix[0][j] = prefix[0][j-1] + mat[0][j];
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= m; j++) {
                 prefix[i][j] = mat[i-1][j-1] + prefix[i][j-1] 
