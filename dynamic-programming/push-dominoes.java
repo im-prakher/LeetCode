@@ -19,12 +19,15 @@ class Solution {
                 infl[i] = 1;
             }
         }
+        idx = -1;
         for(int i = 0; i < n; i++) {
             char ch = dom.charAt(i);
             if(ch == '.') {
+                if(idx == -1)
+                    continue;
                 if(Math.abs(infl[i]) == i - idx)
                     infl[i] = 0;
-                else if(Math.abs(infl[i]) > i - idx)
+                else if(Math.abs(infl[i]) > i - idx || infl[i] == 0)
                     infl[i] = i - idx;
             } else if(ch == 'L')
                 idx = -1;
