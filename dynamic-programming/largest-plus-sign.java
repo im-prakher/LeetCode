@@ -1,44 +1,52 @@
 class Solution {
     public int orderOfLargestPlusSign(int n, int[][] mines) {
-        Set<Integer> set = new HashSet<>();
         int[][] dp = new int[n][n];
-        int cnt = 0;
-        for(int[] mine : mines) 
-            set.add(mine[0] * n + mine[1]);
-        for(int i = 0; i < n; i++) {
-            cnt = 0;
-            for(int j = n-1; j >= 0; j--) {
-                cnt++;
-                if(set.contains(i * n + j))
-                    cnt = 0;
-                dp[i][j] = cnt;
-            }
-            cnt = 0;
-            for(int j = 0; j < n; j++) {
-                cnt++;
-                if(set.contains(i * n + j))
-                    cnt = 0;
-                dp[i][j] = Math.min(dp[i][j], cnt);
-            }   
+        for(int[] mine : mines) {
+            int row = mine[0], col = mine[1];
+            dp[row][col] = -1;
         }
-        int order = 0;
-        for(int j = 0; j < n; j++) {
-            cnt = 0;
-            for(int i = n-1; i >= 0; i--) {
-                cnt++;
-                if(set.contains(i*n + j))
-                    cnt = 0;
-                dp[i][j] = Math.min(dp[i][j], cnt);
+        for(int row = 0; row < n; row++) {
+            int count = 0;
+            for(int col = 0; col < n; col++) {
+                if(dp[row][col] == -1) {
+                    count = 0;
+                } else {
+                    count += 1;
+                    dp[row][col] =  count;
+                }
             }
-            cnt = 0;
-            for(int i = 0; i <= n-1; i++) {
-                cnt++;
-                if(set.contains(i*n + j))
-                    cnt = 0;
-                dp[i][j] = Math.min(dp[i][j], cnt);
-                order = Math.max(order, dp[i][j]);
+            count = 0;
+            for(int col = n - 1; col >= 0; col--) {
+                if(dp[row][col] == -1) {
+                    count = 0;
+                } else {
+                    count += 1;
+                    dp[row][col] = Math.min(dp[row][col], count);
+                }
             }
-        }   
-        return order;
+        }
+        int max = 0;
+        for(int col = 0; col < n; col++) {
+            int count = 0;
+            for(int row = 0; row < n; row++) {
+                if(dp[row][col] == -1) {
+                    count = 0;
+                } else {
+                    count += 1;
+                    dp[row][col] = Math.min(dp[row][col], count);
+                }
+            }
+            count = 0;
+            for(int row = n - 1; row >= 0; row--) {
+                if(dp[row][col] == -1) {
+                    count = 0;
+                } else {
+                    count += 1;
+                    dp[row][col] = Math.min(dp[row][col], count);
+                }
+                max = Math.max(max, dp[row][col]);
+            }
+        }
+        return max;
     }
 }
