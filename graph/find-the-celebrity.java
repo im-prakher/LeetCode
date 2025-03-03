@@ -9,7 +9,6 @@ public class Solution extends Relation {
                 celeb = j;
             }
         }
-        int cnt = 0;
         for(int i = 0; i < n; i++) {
             if(celeb == i)
                 continue;
