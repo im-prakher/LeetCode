@@ -3,29 +3,25 @@
 
 public class Solution extends Relation {
     public int findCelebrity(int n) {
-        int cnt[] = new int[n];
-        Set<Integer> popular = new HashSet<>();
+        int out[] = new int[n];
+        int in[] = new int[n];
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
                 if(i == j)
                     continue;
                 if(knows(i, j)) {
-                    popular.add(j);
-                    cnt[i]++;
+                    out[i]++;
+                    in[j]++;
                 }
             }
         }
-        if(popular.size() == n)
-            return -1;
         int celeb = -1, c = 0;
         for(int i = 0; i < n; i++) {
-            if(cnt[i] == 0) {
+            if(out[i] == 0 && in[i] == n-1) {
                 celeb = i;
                 c++;
             }
-            if(c > 1)
-                return -1;
         }
-        return celeb;
+        return c > 1 ? -1 : celeb;
     }
 }
