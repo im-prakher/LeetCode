@@ -18,13 +18,13 @@ public class Solution extends Relation {
         if(popular.size() == n)
             return -1;
         int celeb = -1, c = 0;
-        for(int node : popular) {
-            if(c > 1)
-                return -1;
-            if(cnt[node] == 0) {
-                celeb = node;
+        for(int i = 0; i < n; i++) {
+            if(cnt[i] == 0) {
+                celeb = i;
                 c++;
             }
+            if(c > 1)
+                return -1;
         }
         return celeb;
     }
