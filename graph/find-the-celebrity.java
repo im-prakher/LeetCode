@@ -11,11 +11,11 @@ public class Solution extends Relation {
         }
         int cnt = 0;
         for(int i = 0; i < n; i++) {
-            if(celeb != i && knows(celeb, i)) 
+            if(celeb == i)
+                continue;
+            if(knows(celeb, i) || !knows(i, celeb)) 
                 return -1;
-            if(knows(i, celeb))
-                cnt++;
         }
-        return cnt == n ? celeb : -1;
+        return celeb;
     }
 }
