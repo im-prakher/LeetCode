@@ -1,34 +1,36 @@
 class Solution {
-    public List<Boolean> checkIfPrerequisite(int n, int[][] preq, int[][] qrys) {
+    public void dfsTopo(int node, boolean vis[], List<Integer> adj[], BitSet prqDp[]) {
+        vis[node] = true;
+        for(int vtx : adj[node]) {
+            prqDp[vtx].set(node);
+            prqDp[vtx].or(prqDp[node]);
+            // if(!vis[vtx])
+                dfsTopo(vtx, vis, adj, prqDp);
+        }
+    }
+
+    public List<Boolean> checkIfPrerequisite(int n, int[][] preq, int[][] queries) {
+        boolean vis[] = new boolean[n];
         List<Integer> adj[] = new List[n];
-        int inDeg[] = new int[n];
-        BitSet preqDb[] = new BitSet[n];
+        BitSet prqDp[] = new BitSet[n];
         for(int i = 0; i < n; i++) {
             adj[i] = new ArrayList<>();
-            preqDb[i] = new BitSet(n);
+            prqDp[i] = new BitSet(n);
         }
         for(int[] pre : preq) {
             adj[pre[0]].add(pre[1]);
-            inDeg[pre[1]]++;
         }
-        Queue<Integer> que = new LinkedList<>();
-        for(int i = 0; i < n; i++) {
-            if(inDeg[i] == 0)
-                que.offer(i);
-        }
-
-        while(!que.isEmpty()) {
-            int node = que.poll();
-            for(int vtx : adj[node]) {
-                preqDb[vtx].set(node);
-                preqDb[vtx].or(preqDb[node]);
-                if(--inDeg[vtx] == 0)
-                    que.offer(vtx);
+        
+        if(preq.length != 0) {
+            for(int i = 0; i < n; i++) {
+                if(!vis[i])
+                    dfsTopo(i, vis, adj, prqDp);
             }
         }
+
         List<Boolean> res = new ArrayList<>();
-        for(int[] qry : qrys) {
-            res.add(preqDb[qry[1]].get(qry[0]));
+        for(int[] qry : queries) {
+            res.add(prqDp[qry[1]].get(qry[0]));
         }
         return res;
     }
