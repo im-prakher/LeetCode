@@ -4,7 +4,7 @@ class Solution {
         set.add(node);
         for(int vtx : adj[node]) {
             qryDb[vtx].addAll(set);
-            if(!vis[vtx])
+            // if(!vis[vtx])
                 dfsTopo(vtx, vis, adj, topo, set, qryDb);
         }
         topo.add(node);
