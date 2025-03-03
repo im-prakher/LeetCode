@@ -1,9 +1,10 @@
 class Solution {
-    public void dfsTopo(int node, boolean vis[], List<Integer> adj[], List<Integer> topo) {
+    public void dfsTopo(int node, boolean vis[], List<Integer> adj[], List<Integer> topo, Set<Integer> qryDb[]) {
         vis[node] = true;
         for(int vtx : adj[node]) {
+            qryDb[vtx].add(node);
             if(!vis[vtx])
-                dfsTopo(vtx, vis, adj, topo);
+                dfsTopo(vtx, vis, adj, topo, qryDb);
         }
         topo.add(node);
     }
@@ -12,9 +13,7 @@ class Solution {
         boolean vis[] = new boolean[n];
         List<Integer> adj[] = new List[n];
         List<Integer> topo = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
-        Set<Integer> qryDb[] = new Set[n];
-        List<Boolean> res = new ArrayList<>();
+        Set<Integer> qryDb[] = new HashSet[n];
         for(int i = 0; i < n; i++) {
             adj[i] = new ArrayList<>();
             qryDb[i] = new HashSet<>();
@@ -25,22 +24,18 @@ class Solution {
         if(preq.length != 0) {
             for(int i = 0; i < n; i++) {
                 if(!vis[i])
-                    dfsTopo(i, vis, adj, topo);
-            }
-            for(int i = topo.size()-1; i >= 0; i--) {
-                int node = topo.get(i);
-                qryDb[node] = new HashSet<>(set);
-                set.add(node);
+                    dfsTopo(i, vis, adj, topo, qryDb);
             }
         }
-            int k = 0;
-            for(int[] qry : queries) {
-                if(qryDb[qry[1]].contains(qry[0]))
-                    res.add(true);
-                else 
-                    res.add(false);
-                k++;
-            }
+
+        List<Boolean> res = new ArrayList<>();
+        int k = 0;
+        for(int[] qry : queries) {
+            if(qryDb[qry[1]].contains(qry[0]))
+                res.add(true);
+            else
+                res.add(false);
+        }
         return res;
     }
 }
