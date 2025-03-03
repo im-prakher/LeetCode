@@ -1,11 +1,11 @@
 class Solution {
     public List<Boolean> checkIfPrerequisite(int n, int[][] preq, int[][] qrys) {
         List<Integer> adj[] = new List[n];
-        Map<Integer, Set<Integer>> mp = new HashMap<>();
         int inDeg[] = new int[n];
+        BitSet preqDb[] = new BitSet[n];
         for(int i = 0; i < n; i++) {
             adj[i] = new ArrayList<>();
-            mp.put(i, new HashSet<>());
+            preqDb[i] = new BitSet(n);
         }
         for(int[] pre : preq) {
             adj[pre[0]].add(pre[1]);
@@ -20,15 +20,15 @@ class Solution {
         while(!que.isEmpty()) {
             int node = que.poll();
             for(int vtx : adj[node]) {
-                mp.get(vtx).add(node);
-                mp.get(vtx).addAll(mp.get(node));
+                preqDb[vtx].set(node);
+                preqDb[vtx].or(preqDb[node]);
                 if(--inDeg[vtx] == 0)
                     que.offer(vtx);
             }
         }
         List<Boolean> res = new ArrayList<>();
         for(int[] qry : qrys) {
-            res.add(mp.get(qry[1]).contains(qry[0]));
+            res.add(preqDb[qry[1]].get(qry[0]));
         }
         return res;
     }
