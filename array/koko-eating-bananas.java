@@ -1,5 +1,7 @@
 class Solution {
     public boolean canEat(int[] piles, int k, int h) {
+        if(k == 0)
+            return false;
         int time = 0;
         for(int p : piles) {
             time += p/k + (p % k == 0 ? 0 : 1);
