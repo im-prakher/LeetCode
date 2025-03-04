@@ -8,7 +8,7 @@ class Solution {
     }
     public int minEatingSpeed(int[] piles, int h) {
         Arrays.sort(piles);
-        int lo = piles[0], hi = piles[piles.length-1], k = piles[0];
+        int lo = 0, hi = piles[piles.length-1], k = piles[0];
         while(lo <= hi) {
             int mid = (lo + hi) >> 1;
             if(canEat(piles, mid, h)) { 
