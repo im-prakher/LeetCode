@@ -9,8 +9,9 @@ class Solution {
         return time <= h;
     }
     public int minEatingSpeed(int[] piles, int h) {
-        Arrays.sort(piles);
         int lo = 0, hi = piles[piles.length-1], k = piles[0];
+        for(int i = 0; i < piles.length; i++) 
+            hi = Math.max(hi, piles[i]);
         while(lo <= hi) {
             int mid = (lo + hi) >> 1;
             if(canEat(piles, mid, h)) { 
