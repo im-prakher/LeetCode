@@ -16,11 +16,13 @@ class MyCalendar {
                 k = mid;
                 i = mid + 1;
             } else 
-                j = mid + 1;
+                j = mid - 1;
         }
         if(Math.max(start, intv.get(k)[0]) < Math.min(end, intv.get(k)[1])) 
             return false;
         intv.add(new int[]{start, end});
+        intv.sort((a, b)-> a[0] == b[0] ? Integer.compare(a[0], b[0]) 
+                            : Integer.compare(a[1], b[1]));
         return true;
     }
 }
