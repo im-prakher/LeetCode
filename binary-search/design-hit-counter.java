@@ -12,12 +12,12 @@ class HitCounter {
         int i = 0, j = hits.size()-1;
         int time = timestamp - 300;
         List<Integer> dum = hits;
-        while(i < j) {
+        while(i <= j) {
             int mid = (i + j) >> 1;
             if(hits.get(mid) <= time) {
                 i = mid + 1;
             } else 
-                j = mid;
+                j = mid-1;
         }
         return hits.size() - i;
     }
