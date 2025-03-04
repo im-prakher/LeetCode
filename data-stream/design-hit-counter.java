@@ -9,16 +9,15 @@ class HitCounter {
     }
     
     public int getHits(int timestamp) {
-        int i = 0, j = hits.size();
+        int i = 0, j = hits.size()-1;
         int time = timestamp - 300;
-        // if(time < hits.get(0))
-        //     return hits.size();
+        List<Integer> dum = hits;
         while(i < j) {
             int mid = (i + j) >> 1;
             if(hits.get(mid) <= time) {
                 i = mid + 1;
             } else 
-                j = mid - 1;
+                j = mid;
         }
         return hits.size() - i;
     }
