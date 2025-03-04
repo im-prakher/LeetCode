@@ -1,7 +1,8 @@
 class Solution {
     //get cnt of elements less than val
-    public int lower_bound(int[] nums, int val) {
-        int cnt = 0, i = 0, j = nums.length-1;
+    public long lower_bound(int[] nums, int val) {
+        long cnt = 0;
+        int i = 0, j = nums.length-1;
         while(i < j) {
             int sum = nums[i] + nums[j];
             if(sum < val) {
