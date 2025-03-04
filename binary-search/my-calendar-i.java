@@ -12,16 +12,16 @@ class MyCalendar {
         int i = 0, j = intv.size() - 1, k = 0;
         while(i <= j) {
             int mid = (i + j) >> 1;
-            if(intv.get(mid)[0] <= end) {
+            if(intv.get(mid)[1] > start) {
                 k = mid;
-                i = mid + 1;
-            } else 
                 j = mid - 1;
+            } else 
+                i = mid + 1;
         }
         if(Math.max(start, intv.get(k)[0]) < Math.min(end, intv.get(k)[1])) 
             return false;
         intv.add(new int[]{start, end});
-        intv.sort((a, b)-> a[0] == b[0] ? Integer.compare(a[0], b[0]) 
+        intv.sort((a, b)-> a[0] != b[0] ? Integer.compare(a[0], b[0]) 
                             : Integer.compare(a[1], b[1]));
         return true;
     }
