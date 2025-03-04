@@ -12,11 +12,11 @@ class MyCalendar {
         int i = 0, j = intv.size() - 1, k = 0;
         while(i <= j) {
             int mid = (i + j) >> 1;
-            if(intv.get(mid)[1] > start) {
+            if(intv.get(mid)[0] < end) {
                 k = mid;
-                j = mid - 1;
-            } else 
                 i = mid + 1;
+            } else 
+                j = mid - 1;
         }
         if(Math.max(start, intv.get(k)[0]) < Math.min(end, intv.get(k)[1])) 
             return false;
