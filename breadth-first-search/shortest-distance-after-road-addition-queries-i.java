@@ -25,9 +25,9 @@ class Solution {
     for(int[] qry : queries) {
         if(dist[qry[0]] > dist[qry[1]] + 1) {
             dist[qry[0]] = dist[qry[1]] + 1;
-            adj[qry[1]].add(qry[0]);
             dfsReduce(qry[0], adj, dist);
         }        
+        adj[qry[1]].add(qry[0]);
         ans[k++] = dist[0];
     }
     return ans;
