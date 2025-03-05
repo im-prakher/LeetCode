@@ -6,7 +6,7 @@ class Solution {
         for(int vtx : graph[node]) {
             if(cyc[vtx]==0) 
                 isCycle |= cycle(vtx, cyc, pathVis, graph);
-            else if(pathVis[vtx]) {
+            else if(pathVis[vtx] || cyc[vtx] == 2) {
                 cyc[node] = 2;
                 return true;
             }
