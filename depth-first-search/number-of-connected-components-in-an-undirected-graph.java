@@ -1,27 +1,31 @@
 class Solution {
-    public void dfsVis(int node, Map<Integer, List<Integer>> adj, boolean[] vis) {
-        vis[node] = true;
-        for(int vtx : adj.get(node)) {
-            if(!vis[vtx])
-                dfsVis(vtx, adj, vis);
-        }
+    int nodes[];
+    public int find(int vtx) {
+        if(vtx == nodes[vtx])
+            return vtx;
+        return nodes[vtx] = find(nodes[vtx]);
+    }
+
+    public void union(int a, int b) {
+        nodes[a] = nodes[b];
     }
 
     public int countComponents(int n, int[][] edges) {
-        Map<Integer, List<Integer>> adj = new HashMap<>();
-        boolean vis[] = new boolean[n];
+        nodes = new int[n];
         for(int i =0; i < n; i++)
-            adj.put(i, new ArrayList<>());
+            nodes[i] = i;
         for(int[] edge : edges) {
-            adj.get(edge[0]).add(edge[1]);
-            adj.get(edge[1]).add(edge[0]);
+            int u = edge[0], v = edge[1];
+            if(find(u) != find(v))
+                union(u, v);
         }
+        Set<Integer> set = new HashSet<>();
         int components = 0;
         for(int i = 0; i < n; i++) {
-            if(!vis[i]) {
+            int par = find(i);
+            if(!set.contains(par))
                 components++;
-                dfsVis(i, adj, vis);
-            }
+            set.add(par);
         }
         return components;
     }
