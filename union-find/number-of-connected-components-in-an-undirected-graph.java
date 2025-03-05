@@ -19,7 +19,7 @@ class Solution {
             int u = edge[0], v = edge[1];
             if(find(u) != find(v)) {
                 union(u, v);
-                components -= 1;
+                components--;
             }
         }
         return components;
