@@ -14,19 +14,21 @@ class Solution {
         nodes = new int[n];
         for(int i =0; i < n; i++)
             nodes[i] = i;
+        int components = n;
         for(int[] edge : edges) {
             int u = edge[0], v = edge[1];
-            if(find(u) != find(v))
+            if(find(u) != find(v)) {
                 union(u, v);
+                components -= 1;
+            }
         }
-        Set<Integer> set = new HashSet<>();
-        int components = 0;
-        for(int i = 0; i < n; i++) {
-            int par = find(i);
-            if(!set.contains(par))
-                components++;
-            set.add(par);
-        }
+        // Set<Integer> set = new HashSet<>();
+        // for(int i = 0; i < n; i++) {
+        //     int par = find(i);
+        //     if(!set.contains(par))
+        //         components++;
+        //     set.add(par);
+        // }
         return components;
     }
 }
