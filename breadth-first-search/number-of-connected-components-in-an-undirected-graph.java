@@ -7,7 +7,7 @@ class Solution {
     }
 
     public void union(int a, int b) {
-        nodes[a] = nodes[b];
+        nodes[nodes[a]] = nodes[b];
     }
 
     public int countComponents(int n, int[][] edges) {
