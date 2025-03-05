@@ -19,9 +19,8 @@ class Solution {
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int n = graph.length;
         int cyc[] = new int[n];
-        boolean[] pathVis;
+        boolean[] pathVis = new boolean[n];
         for(int i = 0; i < n; i++) {
-            pathVis = new boolean[n];
             if(cyc[i]==0)
                 cycle(i, cyc, pathVis, graph);
         }
