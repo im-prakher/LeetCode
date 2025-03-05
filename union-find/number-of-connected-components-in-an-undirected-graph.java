@@ -22,13 +22,6 @@ class Solution {
                 components -= 1;
             }
         }
-        // Set<Integer> set = new HashSet<>();
-        // for(int i = 0; i < n; i++) {
-        //     int par = find(i);
-        //     if(!set.contains(par))
-        //         components++;
-        //     set.add(par);
-        // }
         return components;
     }
 }
