@@ -8,7 +8,8 @@ class Solution {
                 if(path >= max) {
                     smax = max;
                     max = path;
-                }
+                } else if(path > smax)
+                    smax = path;
             }
         }
         diameter = Math.max(diameter, smax + max);
