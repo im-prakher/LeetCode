@@ -16,6 +16,8 @@ class Solution {
         return max;
     }
     public int treeDiameter(int[][] edges) {
+        if(edges.length == 0)
+            return 0;
         Map<Integer, List<Integer>> adj = new HashMap<>();
         for(int[] edge : edges) {
             adj.putIfAbsent(edge[0], new ArrayList<>());
