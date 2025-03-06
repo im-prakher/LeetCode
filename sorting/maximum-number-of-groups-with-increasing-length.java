@@ -7,15 +7,17 @@ class Solution {
             pq.offer(pair);
         }
         int n = 1;
+        List<int[]> tmp = new ArrayList<>();
         while(pq.size() >= n) {
             int dgts = n;
             while(dgts-- > 0) {
-                // if(pq.isEmpty())
-                //     break;
                 int[] pair = pq.poll();
                 if(--pair[0]!=0)
-                    pq.offer(pair);
+                    tmp.add(pair);
             }
+            for(int[] tmpPairs : tmp) 
+                pq.offer(tmpPairs);
+            tmp = new ArrayList<>();
             n++;
         }
         return n-1;
