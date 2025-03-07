@@ -8,6 +8,6 @@ class Solution {
             minSum = Math.min(minSum, curMin);
             total += a;
         }
-        return maxSum > 0 ? Math.max(maxSum, total - minSum) : maxSum;
+        return Math.max(maxSum, total - minSum);
     }
 }
