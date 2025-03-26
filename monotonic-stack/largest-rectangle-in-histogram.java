@@ -4,7 +4,7 @@ class Solution {
         int lft[] = new int[n];
         int rht[] = new int[n];
         for(int i= 0; i < n; i++) {
-            lft[i] = i;
+            lft[i] = 0;
             rht[i] = n-1;
         }
         int stack[] = new int[n+1];
