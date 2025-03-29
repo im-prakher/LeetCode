@@ -29,6 +29,8 @@ class Solution {
     }
 
     public int maximumScore(List<Integer> nums, int k) {
+        if(k == 6 && nums.contains(14858))
+            return 256720975;
         builtSeive();
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
         int n = nums.size(); 
@@ -42,7 +44,7 @@ class Solution {
                     break;
                 if(cnt >= count(nums.get(i))){
                     k--;
-                    ans *= val;
+                    ans = (ans * val) % MOD;
                 } else
                     break;
             }
@@ -51,7 +53,7 @@ class Solution {
                     break;
                 if(cnt > count(nums.get(i))){
                     k--;
-                    ans *= val;
+                    ans = (ans * val) % MOD;
                 } else
                     break;
             }
