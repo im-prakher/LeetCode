@@ -3,14 +3,15 @@ class Solution {
         int n = s.length();
         int[] last = new int[26];
         List<Integer> ans = new ArrayList<>();
+        char[] str = s.toCharArray();
         for(int i = 0; i < n; i++) {
-            int cdx = s.charAt(i) - 'a';
+            int cdx = str[i] - 'a';
             last[cdx] = i;
         }
         for(int i = 0; i < n; ) {
-            int j = last[s.charAt(i)-'a'], k = i;
+            int j = last[str[i] - 'a'], k = i;
             while(k < j) {
-                int cdx = s.charAt(k) - 'a';
+                int cdx = str[k] - 'a';
                 j = Math.max(j, last[cdx]);
                 k++;
             }
