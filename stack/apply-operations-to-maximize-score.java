@@ -1,5 +1,5 @@
 class Solution {
-    int N = 100002, MOD = 1000_000_000 + 7;
+    int N = 1, MOD = 1000_000_000 + 7;
     int[] seive, count;
     public void builtSeive() {
         seive = new int[N];
@@ -21,7 +21,7 @@ class Solution {
     public int count(int n) {
         if(count[n] != -1)
             return count[n];
-        int cnt = 0;
+        int cnt = 0, num = n;
         while(n > 1) {
             int primeFactor = seive[n];
             while(n % primeFactor == 0) {
@@ -29,7 +29,7 @@ class Solution {
             }
             cnt++;
         }
-        return cnt;
+        return count[num] = cnt;
     }
 
     public long power(long x, long n) {
@@ -46,15 +46,22 @@ class Solution {
     // largest rectangle in histogram stack approach
     // and prioriy queue to calculate answer in greedy way
     public int maximumScore(List<Integer> nums, int k) {
-        builtSeive();
         int n = nums.size(), top = -1;
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) {
+            arr[i] = nums.get(i);
+            N = Math.max(N, arr[i]+1);
+        }
+        builtSeive(); 
+        for(int i : arr)
+            count(i);
         int stack[] = new int[n+1];
         long left[] = new long[n];
         long right[] = new long[n];
         Arrays.fill(right, n);
         Arrays.fill(left, -1);
         for(int i = 0; i < n; i++) {
-            while(top!=-1 && count(nums.get(stack[top]))<count(nums.get(i))) {
+            while(top!=-1 && count[arr[stack[top]]] < count[arr[i]]) {
                 right[stack[top--]] = i;
             }
             if(top!=-1)
