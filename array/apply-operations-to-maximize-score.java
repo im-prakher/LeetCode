@@ -49,8 +49,8 @@ class Solution {
         builtSeive();
         int n = nums.size(), top = -1;
         int stack[] = new int[n+1];
-        int left[] = new int[n];
-        int right[] = new int[n];
+        long left[] = new long[n];
+        long right[] = new long[n];
         Arrays.fill(right, n);
         Arrays.fill(left, -1);
         for(int i = 0; i < n; i++) {
@@ -62,14 +62,14 @@ class Solution {
             stack[++top] = i;
         }
 
-        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        PriorityQueue<int[]> pq =new PriorityQueue<>((a, b)->b[0]-a[0]);
         long ans = 1;
         for(int i = 0; i < n; i++)
             pq.offer(new int[]{nums.get(i), i});
         while(k > 0) {
             int idx = pq.peek()[1], val = pq.poll()[0];
-            int cnt = (idx - left[idx]) * (right[idx] - idx);
-            int ops = Math.min(cnt, k);
+            long cnt = (idx - left[idx]) * (right[idx] - idx);
+            long ops = Math.min(cnt, (long) k);
             ans = (ans * power(val, ops)) % MOD;
             k -= ops;
         }
