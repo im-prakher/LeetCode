@@ -11,7 +11,7 @@ class Solution {
             idx[cx][0] = idx[cx][0] == -1 ? i : idx[cx][0];
             idx[cx][1] = i;
         }
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < 26; i++) {
             if(idx[i][0]!=-1)
                 intvs.add(idx[i]);
         }
