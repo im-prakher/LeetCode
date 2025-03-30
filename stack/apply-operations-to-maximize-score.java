@@ -58,14 +58,14 @@ class Solution {
         int stack[] = new int[n+1];
         long left[] = new long[n];
         long right[] = new long[n];
-        Arrays.fill(right, n);
-        Arrays.fill(left, -1);
+        Arrays.fill(right, n-1);
+        Arrays.fill(left, 0);
         for(int i = 0; i < n; i++) {
             while(top!=-1 && count[arr[stack[top]]] < count[arr[i]]) {
-                right[stack[top--]] = i;
+                right[stack[top--]] = i-1;
             }
             if(top!=-1)
-                left[i] = stack[top] ;
+                left[i] = stack[top]+1;
             stack[++top] = i;
         }
 
@@ -75,7 +75,7 @@ class Solution {
             pq.offer(new int[]{nums.get(i), i});
         while(k > 0) {
             int idx = pq.peek()[1], val = pq.poll()[0];
-            long cnt = (idx - left[idx]) * (right[idx] - idx);
+            long cnt = (idx - left[idx] + 1) * (right[idx] - idx + 1);
             long ops = Math.min(cnt, (long) k);
             ans = (ans * power(val, ops)) % MOD;
             k -= ops;
