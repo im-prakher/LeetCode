@@ -9,7 +9,7 @@ class Solution {
                 zero--;
             }
         }
-        int ans = 0;
+        long ans = 0;
         for(int i : pre) 
             ans += i;
         return ans;
