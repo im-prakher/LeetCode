@@ -3,14 +3,13 @@ class Solution {
         int n = weights.length;
         if(n == k || k == 1)
             return 0;
-        int pre[] = new int[n-1];
         for(int i = 0; i < n-1; i++) {
-            pre[i] = weights[i] + weights[i+1];
+            weights[i] = weights[i] + weights[i+1];
         }
-        Arrays.sort(pre);
+        Arrays.sort(weights, 0, n-1);
         long ans = 0l;
         for(int i = 0; i < k-1; i++) {
-            ans += pre[n-i-2] - pre[i];
+            ans += weights[n-i-2] - weights[i];
         }
         return ans;
     }
