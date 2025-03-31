@@ -8,11 +8,10 @@ class Solution {
             pre[i] = (long)(weights[i] + weights[i+1]);
         }
         Arrays.sort(pre);
-        long max = 0, min = 0;
+        long ans = 0;
         for(int i = 0; i < k-1; i++) {
-            max += pre[n-i-2];
-            min += pre[i];
+            ans += pre[n-i-2] - pre[i];
         }
-        return max - min;
+        return ans;
     }
 }
