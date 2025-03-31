@@ -8,7 +8,7 @@ class Solution {
             pre[i] = (long)(weights[i] + weights[i+1]);
         }
         Arrays.sort(pre);
-        long ans = 0;
+        long ans = 0l;
         for(int i = 0; i < k-1; i++) {
             ans += pre[n-i-2] - pre[i];
         }
