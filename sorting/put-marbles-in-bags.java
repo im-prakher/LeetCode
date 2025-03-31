@@ -1,7 +1,7 @@
 class Solution {
     public long putMarbles(int[] weights, int k) {
         int n = weights.length;
-        long pre[] = new long[n-1];
+        int pre[] = new int[n-1];
         for(int i = 0; i < n-1; i++) {
             pre[i] = weights[i] + weights[i+1];
         }
