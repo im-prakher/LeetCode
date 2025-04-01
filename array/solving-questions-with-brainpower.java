@@ -11,8 +11,16 @@ class Solution {
     }
 
     public long mostPoints(int[][] questions) {
-        dp = new long[questions.length+2];
-        Arrays.fill(dp, -1);
-        return solve(questions, 0);
+        dp = new long[questions.length];
+        int n = questions.length;
+        long not_pick = 0, pick = 0;
+        for(int i= n-1; i >= 0; i--) {
+            pick = questions[i][0];
+            if(i + questions[i][1] + 1 < n)
+                pick += dp[i + questions[i][1] + 1];
+            not_pick = i < n-1 ? dp[i + 1] : 0;
+            dp[i] = Math.max(pick, not_pick);
+        }
+        return dp[0];
     }
 }
