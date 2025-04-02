@@ -7,6 +7,6 @@ class Solution {
             diff = Math.max(diff, max - nums[i]);
             max = Math.max(nums[i], max);
         }
-        return ans < 0 ? 0 : ans;
+        return ans;
     }
 }
