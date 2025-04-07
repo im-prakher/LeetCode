@@ -5,7 +5,7 @@ class Solution {
             sum += i;
         if(sum % 2 != 0)
             return false;
-        int target = sum / 2, n = nums.length;
+        int target = sum >> 1, n = nums.length;
         boolean dp[] = new boolean[target+1];
         dp[0] = true;
         for(int i = 0; i < n; i++) {
