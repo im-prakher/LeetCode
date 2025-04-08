@@ -4,7 +4,7 @@ class Solution {
         int ops = 0;
         for(int i= nums.length-1; i >= 0; i--) {
             if(lastIdx[nums[i]]!=0) {
-                ops += (i+1) / 3 + ((i+1) % 3 != 0 ? 1 : 0);
+                ops = i / 3 + 1;
                 break;
             }
             lastIdx[nums[i]] = i;
