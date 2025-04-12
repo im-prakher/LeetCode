@@ -1,58 +1,42 @@
 class Solution {
-    long res = 0;
-    Set<String> visited = new HashSet<>();
+    public long countGoodIntegers(int n, int k) {
+        long[] fac = new long[n + 1];
+        fac[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            fac[i] = fac[i - 1] * i;
+        }
 
-    long vectorToNumber(int[] digits) {
-        long num = 0;
-        for (int d : digits) num = num * 10 + d;
-        return num;
-    }
+        long ans = 0;
+        Set<String> vis = new HashSet<>();
+        int base = (int) Math.pow(10, (n - 1) / 2);
 
-    long fact(int n) {
-        long res = 1;
-        for (int i = 2; i <= n; i++) res *= i;
-        return res;
-    }
-
-    long totalPermutations(Map<Integer, Integer> freq, int total) {
-        long res = fact(total);
-        for (int count : freq.values()) res /= fact(count);
-        return res;
-    }
-
-    long permsWithZero(Map<Integer, Integer> freq, int total) {
-        if (!freq.containsKey(0) || freq.get(0) == 0) return 0;
-        freq.put(0, freq.get(0) - 1);
-        long res = fact(total - 1);
-        for (int count : freq.values()) res /= fact(count);
-        return res;
-    }
-
-    void genPal(int[] palin, int left, int right, int divisor, int total) {
-        if (left > right) {
-            long val = vectorToNumber(palin);
-            if (val % divisor == 0) {
-                Map<Integer, Integer> freq = new HashMap<>();
-                for (int d : palin) freq.put(d, freq.getOrDefault(d, 0) + 1);
-                String key = freq.toString();
-                if (!visited.contains(key)) {
-                    res += totalPermutations(freq, total) - permsWithZero(new HashMap<>(freq), total);
-                    visited.add(key);
-                }
+        for (int i = base; i < base * 10; i++) {
+            String s = String.valueOf(i);
+            StringBuilder sb = new StringBuilder(s).reverse();
+            s += sb.substring(n % 2);
+            if (Long.parseLong(s) % k != 0) {
+                continue;
             }
-            return;
+
+            char[] arr = s.toCharArray();
+            Arrays.sort(arr);
+            String t = new String(arr);
+            if (vis.contains(t)) {
+                continue;
+            }
+            vis.add(t);
+            int[] cnt = new int[10];
+            for (char c : arr) {
+                cnt[c - '0']++;
+            }
+
+            long res = (n - cnt[0]) * fac[n - 1];
+            for (int x : cnt) {
+                res /= fac[x];
+            }
+            ans += res;
         }
 
-        for (int d = (left == 0 ? 1 : 0); d <= 9; d++) {
-            palin[left] = palin[right] = d;
-            genPal(palin, left + 1, right - 1, divisor, total);
-        }
-    }
-
-    public long countGoodIntegers(int total, int divisor) {
-        res = 0;
-        visited.clear();
-        genPal(new int[total], 0, total - 1, divisor, total);
-        return res;
+        return ans;
     }
 }
