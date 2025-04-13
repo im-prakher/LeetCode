@@ -1,7 +1,8 @@
 class Solution {
     void bfs(int i, int j, int n, int m, int[] dis, int[][] grid) {
         Arrays.fill(dis, Integer.MAX_VALUE);
-        PriorityQueue<int[]> que = new PriorityQueue<>((a, b)-> b[2] - a[2]);
+        // PriorityQueue<int[]> que = new PriorityQueue<>((a, b)-> b[2] - a[2]);
+        Queue<int[]> que = new LinkedList<>();
         que.offer(new int[]{i, j, 0});
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
