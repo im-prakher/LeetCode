@@ -27,7 +27,7 @@ class Solution {
                     int[] dis = new int[n*m];
                     bfs(i, j, n, m, dis, grid);
                     for(int k = 0; k < n * m; k++) {
-                        if(dis[k]!=Integer.MAX_VALUE || totDis[k]!=-1)
+                        if(dis[k]!=Integer.MAX_VALUE && totDis[k]!=-1)
                             totDis[k] += dis[k];
                         else totDis[k] = -1;
                     }
