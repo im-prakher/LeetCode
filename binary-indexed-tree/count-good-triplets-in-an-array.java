@@ -1,24 +1,50 @@
-class Solution {
-    public long goodTriplets(int[] nums1, int[] nums2) {
-        HashMap<Integer, Integer> mpp = new HashMap<>();
-        for (int i = 0; i < nums1.length; i++) mpp.put(nums1[i], i);
-        int n = nums2.length;
-        long total = 0;
-        ArrayList<Integer> st = new ArrayList<>();
-        for (int x : nums2) {
-            int idx = mpp.get(x);
-            int left = orderOfKey(st, idx);
-            int right = (n - 1 - idx) - (st.size() - left);
-            total += (long) left * right;
-            int pos = Collections.binarySearch(st, idx);
-            if (pos < 0) pos = -pos - 1;
-            st.add(pos, idx);
-        }
-        return total;
+class FenwickTree {
+
+    private int[] tree;
+
+    public FenwickTree(int size) {
+        tree = new int[size + 1];
     }
-    
-    private int orderOfKey(ArrayList<Integer> st, int key) {
-        int pos = Collections.binarySearch(st, key);
-        return pos < 0 ? -pos - 1 : pos;
+
+    public void update(int index, int delta) {
+        index++;
+        while (index < tree.length) {
+            tree[index] += delta;
+            index += index & -index;
+        }
+    }
+
+    public int query(int index) {
+        index++;
+        int res = 0;
+        while (index > 0) {
+            res += tree[index];
+            index -= index & -index;
+        }
+        return res;
+    }
+}
+
+class Solution {
+
+    public long goodTriplets(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int[] pos2 = new int[n], reversedIndexMapping = new int[n];
+        for (int i = 0; i < n; i++) {
+            pos2[nums2[i]] = i;
+        }
+        for (int i = 0; i < n; i++) {
+            reversedIndexMapping[pos2[nums1[i]]] = i;
+        }
+        FenwickTree tree = new FenwickTree(n);
+        long res = 0;
+        for (int value = 0; value < n; value++) {
+            int pos = reversedIndexMapping[value];
+            int left = tree.query(pos);
+            tree.update(pos, 1);
+            int right = (n - 1 - pos) - (value - left);
+            res += (long) left * right;
+        }
+        return res;
     }
 }
