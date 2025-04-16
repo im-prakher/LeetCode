@@ -1,7 +1,7 @@
 class Solution {
-    
-    int max;
-    void insert(int sum, int[] ans, Map<Integer, int[]> mp) {
+    long max;
+    Map<String, Long> memo = new HashMap<>();
+    void insert(long sum, int[] ans, Map<Long, int[]> mp) {
         boolean flag = true;
         if(mp.containsKey(sum)) {
             for(int i = 0; i < 3; i++) 
@@ -12,27 +12,33 @@ class Solution {
             mp.put(sum, nums);
         }
     }
-    public int triplets(List<Integer> list, int[] nums, int c, int k, int[] ans, int i, int sum, Map<Integer, int[]> mp) {
-        if(c == 0) {
-            if(sum >= max) {
+    public long triplets(List<Integer> list, int c, int k, int[] ans, int i, long sum, Map<Long, int[]> mp) {
+        if(c == 3) {
+            if(sum > max) {
                 insert(sum, ans, mp);
                 max = sum;
             }
             return max;
         }
-        if(i < 0)
+        if(i >= list.size())
             return Integer.MIN_VALUE;
-        ans[c-1] = i;
-        int pick = triplets(list, nums, c-1, k, ans, i-k, sum + list.get(i), mp);
-        ans[c-1] = nums.length;
-        int not_pick = triplets(list, nums, c, k, ans, i-1,  sum, mp);
-        return Math.max(pick, not_pick);
+        String key = c + "|" + i + "|" + sum;
+        if(memo.containsKey(key)) {
+            return memo.get(key);
+        }
+        ans[c] = i;
+        long pick = triplets(list, c+1, k, ans, i+k, sum + list.get(i), mp);
+        ans[c] = list.size();
+        long not_pick = triplets(list,c, k, ans, i+1, sum, mp);
+        long res = Math.max(pick, not_pick);
+        memo.put(key, res);
+        return res;
     }
 
     public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
         List<Integer> list = new ArrayList<>();
-        max = Integer.MIN_VALUE;
-        Map<Integer, int[]> mp = new HashMap<>();
+        max = Long.MIN_VALUE;
+        Map<Long, int[]> mp = new HashMap<>();
         int sum =0 ;
         for(int i = 0; i < nums.length; i++) {
             sum += nums[i];
@@ -42,7 +48,7 @@ class Solution {
         }
         int[] ans = new int[3];
         Arrays.fill(ans, list.size());
-        int val = triplets(list, nums, 3, k, ans, list.size() - 1, 0, mp);
+        long val = triplets(list, 0, k, ans, 0, 0, mp);
         return mp.get(val);
     }
 }
