@@ -1,16 +1,19 @@
 class Solution {
     public int countPairs(int[] nums, int k) {
-        int freq[] = new int[102];
-        int div[] = new int[102];
+        Map<Integer, List<Integer>> mp = new HashMap<>();
         int pairs = 0;
         for(int i = 0; i < nums.length; i++) {
-            if(i % k == 0) {
-                pairs += freq[nums[i]];
-                div[nums[i]]++;
+            List<Integer> list = mp.getOrDefault(nums[i], new ArrayList<>());
+            if(i % k == 0)
+                pairs += list.size();
+            else {
+                for(int idx : list){
+                    if((idx * i) % k == 0)
+                        pairs++;
+                }
             }
-            else 
-                pairs += div[nums[i]];
-            freq[nums[i]]++;
+            mp.putIfAbsent(nums[i], new ArrayList<>());
+            mp.get(nums[i]).add(i);
         }
         return pairs;
     }
