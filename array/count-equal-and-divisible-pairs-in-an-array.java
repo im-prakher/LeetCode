@@ -4,12 +4,12 @@ class Solution {
         int div[] = new int[102];
         int pairs = 0;
         for(int i = 0; i < nums.length; i++) {
-            if(i % k == 0) 
+            if(i % k == 0) {
                 pairs += freq[nums[i]];
-            else {
-                pairs += div[nums[i]];
                 div[nums[i]]++;
             }
+            else 
+                pairs += div[nums[i]];
             freq[nums[i]]++;
         }
         return pairs;
