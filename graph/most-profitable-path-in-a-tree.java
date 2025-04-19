@@ -1,6 +1,6 @@
 class Solution {
     int[] bdx, adx;
-    public boolean dfsRoot(Integer node, List<Integer> adj[], int pos, int par) {
+    public boolean dfsRoot(Integer node, List<Integer> adj[], int pos, int par, int n) {
         bdx[node] = pos;
         if(node == 0)
             return true;
@@ -9,10 +9,10 @@ class Solution {
             return false;
         }
         for(int vtx : adj[node]) {
-            if(vtx!= par && dfsRoot(vtx, adj, pos+1, node))
+            if(vtx!= par && dfsRoot(vtx, adj, pos+1, node, n))
                 return true;
         }
-        bdx[node] = 0;
+        bdx[node] = n+1;
         return false;
     }
     
@@ -45,7 +45,7 @@ class Solution {
         }
         bdx = new int[n]; adx = new int[n];
         Arrays.fill(bdx, n+1);
-        dfsRoot(bob, adj,1, -1);
+        dfsRoot(bob, adj,1, -1, n);
         return dfsAlice(0, adj, 1, amount, -1);
     }
 }
