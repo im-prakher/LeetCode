@@ -26,6 +26,6 @@ class Solution {
                     que.offer(vtx);
             }
         }
-        return idx == 0 ? order : new int[]{};
+        return idx == 0 ? order : new int[0];
     }
 }
