@@ -1,37 +1,31 @@
 class Solution {
-    int idx;
-    public boolean dfsTopo(int[] ans, int node, List<Integer> adj[], boolean vis[], boolean pathVis[]) {
-        vis[node] = true;
-        pathVis[node] = true;
-        boolean res = false;
-        for(int vtx : adj[node]) {
-            if(!vis[vtx])
-                res = res || dfsTopo(ans, vtx, adj, vis, pathVis);
-            else if(pathVis[vtx])
-                return true;
-        }
-        pathVis[node] = false;
-        ans[idx--] = node;
-        return res;
-    }
-
-    public int[] findOrder(int n, int[][] preq) {
-        idx = n-1;
-        int[] ans = new int[n];
-        List<Integer> adj[] = new List[n];
+    public int[] findOrder(int num, int[][] preq) {
         // Arrays.fill(adj, new ArrayList<>());--> will fill each adj[i] with same list reference so don't use as insertion at one index will insert at all indexes
-        for (int i = 0; i < n; i++) {
+        List<Integer> adj[] = new List[num];
+        for(int i = 0; i < num; i++) {
             adj[i] = new ArrayList<>();
         }
-        for(int[] edge : preq)  {
-            adj[edge[1]].add(edge[0]);
+        int[] inDeg = new int[num];
+        for(int[] pre : preq) {
+            adj[pre[0]].add(pre[1]);
+            inDeg[pre[1]]++;
         }
-        boolean[] vis = new boolean[n];
-        boolean[] pathVis = new boolean[n];
-        for(int i = 0; i < n; i++) {
-            if(!vis[i] && dfsTopo(ans, i, adj, vis, pathVis))
-                return new int[0];
+        Queue<Integer> que = new LinkedList<>();
+        for(int i = 0; i < num; i++) {
+            if(inDeg[i] == 0)
+                que.offer(i);
         }
-        return ans;  
+
+        int idx = num;
+        int[] order = new int[num];
+        while(!que.isEmpty()) {
+            int node = que.poll();
+            order[--idx] = node;
+            for(int vtx : adj[node]) {
+                if(--inDeg[vtx] == 0)
+                    que.offer(vtx);
+            }
+        }
+        return idx == 0 ? order : new int[]{0};
     }
 }
