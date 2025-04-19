@@ -1,5 +1,5 @@
 class Solution {
-    int[] bdx, adx;
+    int[] bdx;
     //to root
     public boolean dfsBob(Integer node, List<Integer> adj[], int pos, int par, int n) {
         bdx[node] = pos;
@@ -18,11 +18,10 @@ class Solution {
     }
     // to leaf
     public int dfsAlice(Integer node, List<Integer> adj[], int pos, int amt[], int par) {
-        adx[node] = pos;
         int gate = 0;
-        if(adx[node] < bdx[node])
+        if(pos < bdx[node])
             gate = amt[node];
-        else if(adx[node] == bdx[node])
+        else if(pos == bdx[node])
             gate = amt[node] / 2;
         if(adj[node].isEmpty())
             return gate;
@@ -44,7 +43,7 @@ class Solution {
             adj[edge[0]].add((edge[1]));
             adj[edge[1]].add(edge[0]);
         }
-        bdx = new int[n]; adx = new int[n];
+        bdx = new int[n];
         Arrays.fill(bdx, n+1);
         dfsBob(bob, adj,1, -1, n);
         return dfsAlice(0, adj, 1, amount, -1);
