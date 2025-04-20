@@ -22,14 +22,19 @@ class Solution {
         Map<String, String> nodes = new HashMap<>();
         int k = 0;
         for(var eqn : equations) {
-            nodes.put(eqn.get(0), eqn.get(1));
-            nodes.put(eqn.get(1), eqn.get(1));
+            nodes.putIfAbsent(eqn.get(0), eqn.get(0));
             cost.putIfAbsent(eqn.get(0), new HashMap<>());
             cost.get(eqn.get(0)).put(eqn.get(0), 1.0);
-            cost.get(eqn.get(0)).put(eqn.get(1), values[k]);
+            nodes.putIfAbsent(eqn.get(1), eqn.get(1));
             cost.putIfAbsent(eqn.get(1), new HashMap<>());
             cost.get(eqn.get(1)).put(eqn.get(1), 1.0);
-            cost.get(eqn.get(1)).put(eqn.get(0), 1.0 / values[k]);
+            Node u = find(nodes, cost, eqn.get(0)), 
+                 v = find(nodes, cost, eqn.get(1));
+            double price = v.cost/u.cost * values[k];
+            nodes.put(u.node, v.node);            
+            cost.get(u.node).put(v.node, price);
+            cost.putIfAbsent(v.node, new HashMap<>());
+            cost.get(v.node).put(u.node, 1.0 / price);
             k++;
         }
         k = 0;
