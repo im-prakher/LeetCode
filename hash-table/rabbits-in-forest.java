@@ -1,17 +1,17 @@
 class Solution {
     public int numRabbits(int[] answers) {
-        Map<Integer, Integer> mp = new HashMap<>(); //color freq map
+        int freq[] = new int[1000]; //color freq map
         int rabbits = 0;
         for(int i = 0; i < answers.length; i++) {
-            if(mp.containsKey(answers[i])) {
-                if(mp.get(answers[i]) == answers[i])
-                    mp.remove(answers[i]);
+            if(freq[answers[i]] > 0) {
+                if(freq[answers[i]] == answers[i])
+                    freq[answers[i]] = 0;
                 else
-                    mp.put(answers[i], mp.getOrDefault(answers[i], 0) + 1);
+                    freq[answers[i]]++;
             } else {
                 rabbits += answers[i] + 1;
                 if(answers[i] != 0)
-                    mp.put(answers[i], 1);
+                    freq[answers[i]]++;
             }
         }
         return rabbits;
