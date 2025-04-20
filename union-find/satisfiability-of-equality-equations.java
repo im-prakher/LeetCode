@@ -20,9 +20,14 @@ class Solution {
             if(eqn[1] == eqn[2]){
                 if(u != v) 
                     union(u, v);
-            } else if(u == v){
-                return false;
             }            
+        }
+        for(String eqtn : equations) {
+            char[] eqn = eqtn.toCharArray();
+            char u = find(eqn[0]), v = find(eqn[3]);
+            if(eqn[1] != eqn[2] && u == v){
+                return false;
+            }
         }
         return true;
     }
