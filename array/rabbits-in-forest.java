@@ -10,7 +10,8 @@ class Solution {
                     mp.put(answers[i], mp.getOrDefault(answers[i], 0) + 1);
             } else {
                 rabbits += answers[i] + 1;
-                mp.put(answers[i], 1);
+                if(answers[i] != 0)
+                    mp.put(answers[i], 1);
             }
         }
         return rabbits;
