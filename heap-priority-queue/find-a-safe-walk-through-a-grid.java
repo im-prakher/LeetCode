@@ -13,14 +13,10 @@ class Solution {
         if(vis[i][j] >= health)
             return false;
         vis[i][j] = health;
-        String key = i + "," + j + "," + health;
-        // if(memo.containsKey(key))
-        //     return memo.get(key);
         boolean res =  traverse(grid, health , i-1, j)
                 || traverse(grid, health, i, j-1) 
                 || traverse(grid, health, i+1, j) 
                 || traverse(grid, health, i, j+1);
-        // memo.put(key, res);
         return res;
 
     }
