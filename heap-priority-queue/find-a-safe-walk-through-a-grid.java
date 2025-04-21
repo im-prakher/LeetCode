@@ -1,5 +1,4 @@
 class Solution {
-    Map<String, Boolean> memo;
     int[][] vis;
     public boolean traverse(List<List<Integer>> grid, int health, int i, int j) {
         
@@ -21,7 +20,6 @@ class Solution {
 
     }
     public boolean findSafeWalk(List<List<Integer>> grid, int health) {
-        memo = new HashMap<>();
         vis = new int[grid.size()][grid.get(0).size()];
         return traverse(grid, health, grid.size() -1 , grid.get(0).size() - 1);
     }
