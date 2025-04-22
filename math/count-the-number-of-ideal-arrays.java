@@ -1,22 +1,45 @@
 class Solution {
-    long dp[][];
-    int MOD = 1000_000_007;
-    long func(int n, int maxValue, int prev) {
-        if(n ==0)
-            return 1;
-        if(dp[n][prev] != -1)
-            return dp[n][prev];
-        long ans = 0;
-        for(int i = prev; i <= maxValue; i++) {
-            if(i % prev == 0)
-                ans += func(n-1, maxValue, i);
+    // did this to complete daily challenge, not this much evolved yet
+    static final int mod = 1000000007;
+    int[] factMemo = new int[100000];
+    int[][] dp = new int[100000][15];
+
+    long power(long a, long b, long m) {
+        long res = 1;
+        while (b > 0) {
+            if ((b & 1) == 1) res = (res * a) % m;
+            a = (a * a) % m;
+            b >>= 1;
         }
-        return dp[n][prev] = ans % MOD;
+        return res;
     }
-    public int idealArrays(int n, int maxValue) {
-        dp = new long[n+1][maxValue+1];
-        for(long[] row : dp)
-            Arrays.fill(row, -1);
-        return (int)func(n, maxValue, 1);
+
+    long fact(int x) {
+        if (x == 0) return 1;
+        if (factMemo[x] != 0) return factMemo[x];
+        factMemo[x] = (int)((1L * x * fact(x - 1)) % mod);
+        return factMemo[x];
+    }
+
+    long mod_inv(int a, int b) {
+        return fact(a) * power(fact(b), mod - 2, mod) % mod * power(fact(a - b), mod - 2, mod) % mod;
+    }
+
+    public int idealArrays(int n, int maxi) {
+        int m = Math.min(n, 14);
+        for (int i = 1; i <= maxi; i++)
+            for (int j = 1; j <= m; j++)
+                dp[i][j] = 0;
+        for (int i = 1; i <= maxi; i++) {
+            dp[i][1] = 1;
+            for (int j = 2; i * j <= maxi; j++)
+                for (int k = 1; k < m; k++)
+                    dp[i * j][k + 1] += dp[i][k];
+        }
+        long res = 0;
+        for (int i = 1; i <= maxi; i++)
+            for (int j = 1; j <= m; j++)
+                res = (res + mod_inv(n - 1, n - j) * dp[i][j]) % mod;
+        return (int)res;
     }
 }
