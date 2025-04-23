@@ -59,9 +59,9 @@ class MaxStack {
     public int popMax() {
         int key = tmp.lastKey();
         List<Node> list = tmp.get(key);
-        remove(list.get(list.size()-1));
+        remove(list.getLast());
         if(list.size() != 1)
-            tmp.get(key).remove(list.size()-1);
+            list.removeLast();
         else
             tmp.remove(key);
         return key;
