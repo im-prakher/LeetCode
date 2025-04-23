@@ -41,7 +41,7 @@ class MaxStack {
     public int pop() {
         Node top = tail.prev;
         if(tmp.get(top.val).size() != 1)
-            tmp.get(top.val).remove(top);
+            tmp.get(top.val).removeLast();
         else
             tmp.remove(top.val);
         remove(top);
