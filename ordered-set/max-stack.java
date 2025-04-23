@@ -1,52 +1,70 @@
 class MaxStack {
-    TreeMap<Integer, List<Integer>> tmp;
-    int[] stack;
-    int top, DEL = 101010101;
+    class Node{
+        Node prev, next;
+        int val;
+        Node() {
+            val = 900090090; prev = null; next = null;
+        }
+        Node(int x) {
+            val = x; prev = null; next = null;
+        }
+    }
+    TreeMap<Integer, List<Node>> tmp;
+    Node head, tail;
     public MaxStack() {
         tmp = new TreeMap<>();
-        stack = new int[100_001];
-        top = -1;
+        head = new Node();
+        tail = new Node();
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public void addList(Node data) {
+        data.next = tail;
+        data.prev = tail.prev;
+        tail.prev.next = data;
+        tail.prev = data;
+    }
+
+    public void remove(Node node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
     
     public void push(int x) {
-        while(top != -1 && stack[top] == DEL)
-            top--;
-        stack[++top] = x;
+        Node data = new Node(x);
+        addList(data);
         tmp.putIfAbsent(x, new ArrayList<>());
-        tmp.get(x).add(top);
+        tmp.get(x).add(data);
     }
     
     public int pop() {
-        while(stack[top] == DEL)
-            top--;
-        if(tmp.get(stack[top]).size() == 1)
-            tmp.remove(stack[top]);
-        return stack[top--];
+        Node top = tail.prev;
+        if(tmp.get(top.val).size() != 1)
+            tmp.get(top.val).remove(top);
+        else
+            tmp.remove(top.val);
+        remove(top);
+        return top.val;
     }
     
     public int top() {
-        int k = stack[top];
-        while(stack[top] == DEL)
-            top--;
-        return stack[top];
+        return tail.prev.val;
     }
     
     public int peekMax() {
         return tmp.lastKey();
     }
-    
+
     public int popMax() {
         int key = tmp.lastKey();
-        var list = tmp.get(key);
-        int idx = list.size()-1, val = stack[list.get(idx)];
-        stack[list.get(idx)] = DEL;
-        if(list.size() == 1)
+        List<Node> list = tmp.get(key);
+        remove(list.get(list.size()-1));
+        if(list.size() != 1)
+            tmp.get(key).remove(list.size()-1);
+        else
             tmp.remove(key);
-        else {
-            list.remove(idx);
-            // tmp.get(key).remove(idx);
-        } 
-        return val;
+        return key;
     }
 }
 
