@@ -4,7 +4,7 @@ class Solution {
         for(int i = 0; i < n; i++) {
             left *= nums[i];
             right *= nums[n-i-1];
-            ans = Math.max(ans, Math.max(left, right));
+            ans = Math.max(ans, Math.max(nums[i],Math.max(left, right)));
         }
         return ans;
     }
