@@ -1,11 +1,19 @@
 class Solution {
     public int maxProduct(int[] nums) {
-     int left = 1, curr = 1, ans = nums[0], right = 1, n = nums.length;
-        for(int i = 0; i < n; i++) {
-            left *= nums[i];
-            right *= nums[n-i-1];
-            ans = Math.max(ans, Math.max(nums[i],Math.max(left, right)));
+        int max = Integer.MIN_VALUE;    
+        int product=1;
+        for(int num : nums){
+            product *= num;
+            max = Math.max(product,max);
+            if(product == 0)product = 1;
+            
+        } 
+        product = 1;
+        for(int i=nums.length-1;i>=0;i--){
+            product *= nums[i];
+            max = Math.max(product,max);
+            if(product ==0) product = 1;
         }
-        return ans;
+        return max;
     }
 }
