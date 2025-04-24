@@ -1,9 +1,12 @@
 class Solution {
     public int minArea(char[][] image, int a, int b) {
+        if(image.length == 0 || image[0].length == 0) 
+            return 0;
         int minh = a, maxh = a, miny = b, maxy = b;
         Queue<int[]> que = new LinkedList<>();
         que.offer(new int[] {a, b});
         int[] dx = {-1, 0, 1, 0}, dy = {0, 1, 0, -1};
+        image[a][b] = '0';
         while(!que.isEmpty()) {
             int[] loc = que.poll();
             maxh = Math.max(maxh, loc[0]);
