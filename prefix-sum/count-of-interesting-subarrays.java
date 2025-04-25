@@ -4,8 +4,7 @@ class Solution {
         Map<Integer, Integer> mp = new HashMap<>();
         mp.put(0, 1);
         for(int i : nums) {
-            if(i % mod == k)
-                cnt++;
+            cnt += i % mod == k ? 1 : 0;
             int need = (cnt - k + mod) % mod;
             ans += mp.getOrDefault(need, 0);
             mp.put(cnt % mod, mp.getOrDefault(cnt % mod, 0)+ 1);
