@@ -8,8 +8,7 @@ class Solution {
                 cnt++;
             int rem = (int) (cnt % mod);
             int need = (rem - k + mod) % mod;
-            if(mp.containsKey(need))
-                ans += mp.get(need);
+            ans += mp.getOrDefault(need, 0l);
             mp.put(rem, mp.getOrDefault(rem, 0l)+ 1);
         }
         return ans;
