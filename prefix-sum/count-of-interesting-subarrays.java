@@ -1,16 +1,16 @@
 class Solution {
     public long countInterestingSubarrays(List<Integer> nums, int mod, int k) {
         long ans = 0, cnt = 0;
-        Map<Long, Integer> mp = new HashMap<>();
+        Map<Integer, Long> mp = new HashMap<>();
+        mp.put(0, 1l);
         for(int i : nums) {
             if(i % mod == k)
                 cnt++;
-            if(mp.containsKey(cnt % mod))
-                ans += mp.get(cnt % mod);
-            mp.put(cnt % mod, + 1);
+            int rem = (int) (cnt % mod);
+            int need = (rem - k + mod) % mod;
+            ans += mp.getOrDefault(need, 0l);
+            mp.put(rem, mp.getOrDefault(rem, 0l)+ 1);
         }
-        if(mp.containsKey(cnt % mod))
-            ans++;
         return ans;
     }
 }
