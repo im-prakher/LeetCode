@@ -1,4 +1,5 @@
 class Solution {
+    //solution written by me only
     public long countSubarrays(int[] nums, long k) {
         long cnt = 0, sum = 0;
         for(int i = 0, j = 0; i < nums.length; i++) {
