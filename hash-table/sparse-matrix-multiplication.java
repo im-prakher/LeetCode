@@ -1,18 +1,31 @@
 class Solution {
     public int[][] multiply(int[][] mat1, int[][] mat2) {
-        int zeroRow[] = new int[mat1.length];
-        int zeroCol[] = new int[mat2[0].length];
+        boolean zeroRow[] = new boolean[mat1.length];
+        boolean zeroCol[] = new boolean[mat2[0].length];
         for(int i = 0; i < mat1.length; i++ ) {
-            zeroRow[i] = Arrays.stream(mat1[i]).sum();            
+            boolean flag = true;
+            for(int k = 0; k < mat2.length; k++) {
+                if(mat1[i][k] != 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            zeroRow[i] = flag;
         }
         for(int j = 0; j < mat2[0].length; j++ ) {
-            for(int k = 0; k < mat2.length; k++)
-                zeroCol[j] += mat2[k][j];
+             boolean flag = true;
+            for(int k = 0; k < mat2.length; k++) {
+                if(mat2[k][j] != 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            zeroCol[j] = flag;
         }
         int mat3[][] = new int[mat1.length][mat2[0].length];
         for(int i = 0; i < mat1.length; i++) {
             for(int j = 0; j < mat2[0].length; j++) {
-                if(zeroRow[i] == 0 || zeroCol[j] == 0) {
+                if(zeroRow[i] || zeroCol[j]) {
                     mat3[i][j] = 0;
                     continue;
                 }
