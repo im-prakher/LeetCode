@@ -15,13 +15,11 @@ class AuthenticationManager {
     }
     
     public void renew(String tokenId, int currentTime) {
-        if(tokenMap.containsKey(tokenId)) {
-            if(tokenMap.get(tokenId) > currentTime) {
+        if(tokenMap.containsKey(tokenId) && tokenMap.get(tokenId) > currentTime) {
                 int expiry = currentTime + alive;
                 set.remove(tokenMap.get(tokenId));
                 tokenMap.put(tokenId, expiry);
                 set.add(expiry);
-            }
         }
     }
     
