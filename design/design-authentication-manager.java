@@ -24,12 +24,6 @@ class AuthenticationManager {
     }
     
     public int countUnexpiredTokens(int currentTime) {
-        int cnt = 0;
-        for(int num : set) {
-            cnt++;
-            if(num > currentTime)
-                break;
-        }
         return set.tailSet(currentTime, false).size();
     }
 }
