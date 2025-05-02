@@ -1,9 +1,9 @@
 class AuthenticationManager {
-    TreeSet<Integer> set;
+    TreeMap<Integer, String> expiryMap;
     HashMap<String, Integer> tokenMap;
     int alive;
     public AuthenticationManager(int timeToLive) {
-        set = new TreeSet<>();
+        expiryMap = new TreeMap<>();
         tokenMap = new HashMap<>();
         alive = timeToLive;
     }
@@ -11,20 +11,26 @@ class AuthenticationManager {
     public void generate(String tokenId, int currentTime) {
         int expiry = currentTime + alive;
         tokenMap.put(tokenId, expiry);
-        set.add(expiry);
+        expiryMap.put(expiry, tokenId);
     }
     
     public void renew(String tokenId, int currentTime) {
-        if(tokenMap.containsKey(tokenId) && tokenMap.get(tokenId) > currentTime) {
+        if(tokenMap.containsKey(tokenId)) {
+            if(tokenMap.get(tokenId) > currentTime) {
                 int expiry = currentTime + alive;
-                set.remove(tokenMap.get(tokenId));
+                expiryMap.remove(tokenMap.get(tokenId));
                 tokenMap.put(tokenId, expiry);
-                set.add(expiry);
+                expiryMap.put(expiry, tokenId);
+            } else {
+                expiryMap.remove(tokenMap.get(tokenId));
+                tokenMap.remove(tokenId);
+            }
         }
     }
     
     public int countUnexpiredTokens(int currentTime) {
-        return set.tailSet(currentTime, false).size();
+        Integer key = expiryMap.higherKey(currentTime);
+        return key != null ? expiryMap.tailMap(key, true).size() : 0;
     }
 }
 
