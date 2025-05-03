@@ -16,6 +16,10 @@ class Solution {
             }
             stack[++top] = i;
         }
+        int b = stack[top];
+        while(top >= 0) {
+            rht[stack[top--]] = b;
+        }
         int ans = 0;
         for(int i = 0; i < n; i++) {
             ans = Math.max(ans, (rht[i] - lft[i] + 1) * heights[i]);
