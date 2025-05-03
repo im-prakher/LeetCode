@@ -9,10 +9,17 @@ class Solution {
         int stack[] = new int[n+1];
         int top = -1;
         for(int i = 0; i < n; i++) {
-            while(top!=-1 && heights[stack[top]] >= heights[i]) {
-                lft[i] = stack[top];
-                rht[stack[top]] = i-1;
-                top--;
+            while(top!=-1){
+                if(heights[stack[top]] > heights[i]) {
+                    lft[i] = lft[stack[top]];
+                    rht[stack[top]] = i-1;
+                    top--;
+                } else if(heights[stack[top]] == heights[i]) {
+                    lft[i] = lft[stack[top]];
+                    break;
+                }
+                else
+                    break;         
             }
             stack[++top] = i;
         }
