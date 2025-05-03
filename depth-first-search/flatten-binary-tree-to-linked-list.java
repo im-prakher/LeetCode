@@ -14,15 +14,6 @@
  * }
  */
 class Solution {
-    public TreeNode[] flat(TreeNode root) {        
-        if(root == null || (root.left == null && root.right == null))
-            return new TreeNode[]{root, root};
-        TreeNode[] nex = flat(root.right);
-        TreeNode[] left = flat(root.left);
-        root.right = left[0];
-        left[1].right = nex[0];
-        return new TreeNode[]{root, nex[1]};
-    }
     public void flatten(TreeNode root) {
         if(root == null || (root.left == null && root.right == null))
             return;
