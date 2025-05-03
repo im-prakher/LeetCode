@@ -39,10 +39,10 @@ class Solution {
     void addRightBoundary(TreeNode root) {
         if(root == null || (root.left == null && root.right == null))
             return;
-        if(root.left != null)
-            addRightBoundary(root.left);
-        else
+        if(root.right != null)
             addRightBoundary(root.right);
+        else
+            addRightBoundary(root.left);
         travel.add(root.val);
     }
 
