@@ -47,10 +47,10 @@ class Solution {
     }
 
     public List<Integer> boundaryOfBinaryTree(TreeNode root) {
-        // return new ArrayList<>();
         travel = new ArrayList<>();
         travel.add(root.val);
         addLeftBoundary(root.left);
+        if(root.left != null || root.right!= null)
         addLeafNodes(root);
         addRightBoundary(root.right);
         return travel;
