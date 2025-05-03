@@ -10,17 +10,18 @@ class Solution {
     }
     public int minEatingSpeed(int[] piles, int h) {
         int lo = 0, hi = piles[piles.length-1], k = piles[0];
-        for(int i = 0; i < piles.length; i++) 
+        for(int i = 0; i < piles.length; i++) {
             hi = Math.max(hi, piles[i]);
-        while(lo <= hi) {
-            int mid = (lo + hi) >> 1;
-            if(canEat(piles, mid, h)) { 
-                k = mid;    
-                hi = mid - 1;
-            }
-            else 
-                lo = mid + 1;
+            lo = Math.min(lo, piles[i]);
         }
-        return k;
+        while(lo < hi) {
+            int mid = lo + (hi -lo)/2;
+            if(canEat(piles, mid, h)) {
+                hi = mid;
+            } else {
+                lo = mid + 1;
+            }
+        }
+        return lo;
     }
 }
