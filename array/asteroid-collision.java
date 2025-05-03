@@ -1,6 +1,6 @@
 class Solution {
     public boolean isCollision(int a, int b) {
-        return a * b < 0;
+        return  a > 0 && b <0;
     }
     public int abs(int n) {
         return Math.abs(n);
