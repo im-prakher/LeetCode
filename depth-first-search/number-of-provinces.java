@@ -17,8 +17,9 @@ class Solution {
             nodes[i] = i;
         for(int i =0; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                if(isConnected[i][j] == 1 && findRoot(i) != findRoot(j)) {
-                    union(i, j);
+                int u = findRoot(i), v = findRoot(j);
+                if(isConnected[i][j] == 1 && u != v) {
+                    union(u, v);
                     ans--;
                 }
             }
