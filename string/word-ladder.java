@@ -4,11 +4,9 @@ class Solution {
             return 0;
        int cnt=0;
         Set<String> dict = new HashSet<>(wordList);
-        Set<String> vis = new HashSet<>();
         Queue<String> que = new LinkedList<>();
 
         que.add(beginWord);
-        vis.add(beginWord);
         while(!que.isEmpty()){
             cnt++;
             int size = que.size();
@@ -21,10 +19,9 @@ class Solution {
                         char[] arr = word.toCharArray();
                         arr[i] = ch;
                         String midWord = new String(arr);
-                        if(dict.contains(midWord) && !vis.contains(midWord)){
+                        if(dict.contains(midWord)){
                             que.add(midWord);
-                            // dict.remove(midWord);
-                            vis.add(midWord);
+                            dict.remove(midWord);
                         }
                     }
                 }
