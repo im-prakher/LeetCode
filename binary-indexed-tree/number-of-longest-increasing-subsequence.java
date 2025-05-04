@@ -6,7 +6,7 @@ class Solution {
         Arrays.fill(dp, 1);
         Arrays.fill(cnt, 1);
         int max = 0;
-        for(int i = 1; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             for(int j = 0; j < i; j++) {
                if (nums[j] < nums[i]) {
                     if (dp[j] + 1 > dp[i]) {
