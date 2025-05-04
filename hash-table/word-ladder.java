@@ -7,6 +7,7 @@ class Solution {
         Queue<String> que = new LinkedList<>();
 
         que.add(beginWord);
+        dict.remove(beginWord);
         while(!que.isEmpty()){
             cnt++;
             int size = que.size();
