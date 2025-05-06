@@ -19,7 +19,7 @@ class TwoSum {
     
     public void add(int number) {
         int idx = Collections.binarySearch(list, number);
-        int ub = idx < 0 ? -idx - 1 : idx - 1;
+        int ub = idx < 0 ? -idx - 1 : idx== 0? idx : idx - 1;
         list.add(ub, number);
     }
     
