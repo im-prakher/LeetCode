@@ -1,7 +1,7 @@
 class Solution {
     public int dfsTime(int[][] moveTime, int i, int j) {
         if(i == 0 && j == 0)
-            return moveTime[i][j];
+            return 0;
         if(i < 0 || j < 0)
             return Integer.MAX_VALUE/10;
         int minTime = Math.min(dfsTime(moveTime, i-1, j),
