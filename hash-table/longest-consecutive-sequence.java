@@ -1,7 +1,7 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
-        if(nums.length == 0)
-            return 0;
+        if(nums.length == 0 || nums.length == 1)
+            return nums.length;
         Arrays.sort(nums);
         int cnt = 0, ans = 0, diff = nums[1] - nums[0];
         for(int i = 1; i < nums.length; i++) {
