@@ -8,8 +8,8 @@ class Solution {
     public int maxProduct(int[] nums) {
         int currMin = nums[0], currMax = nums[0], ans = nums[0];
         for(int i = 1 ; i < nums.length; i++) {
-            int tmp = Math.min(nums[i], currMax * nums[i]);
-            currMax = Math.max(nums[i], currMin * nums[i]);
+            int tmp = min(currMin * nums[i], nums[i], currMax * nums[i]);
+            currMax = max(currMax * nums[i], nums[i], currMin * nums[i]);
             currMin = tmp;
             ans = Math.max(ans, currMax);
         }
