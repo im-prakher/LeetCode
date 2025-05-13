@@ -1,13 +1,11 @@
 class Solution {
-    public int maxProduct(int[] nums) {
-        int max = nums[0], currMax = nums[0], currMin = nums[0], curr = nums[0];
-        for(int i = 1; i < nums.length; i++){
-            curr = nums[i];
-            int tmpMax = Math.max(curr, Math.max(currMax * nums[i], currMin * nums[i]));
-            currMin = Math.min(curr, Math.min(currMin * nums[i], currMax* nums[i]));
-            currMax = tmpMax;
-            max = Math.max(max, currMax);
-        } 
-        return max;
+    public int maxProduct(int[] arr) {
+        int n = arr.length, max1 = arr[0], max2 = arr[n-1], left = max1, right = max2;
+        for(int i = 1; i < arr.length; i++) {
+            left *= arr[i]; right *= arr[n-i-1];
+            max1 = Math.max(max1, left);
+            max2 = Math.max(max2, right);
+        }
+        return Math.max(max1, max2);
     }
 }
