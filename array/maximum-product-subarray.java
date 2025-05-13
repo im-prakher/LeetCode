@@ -1,24 +1,18 @@
 class Solution {
-    public int max(int[] arr) {
-        int n = arr.length, max = arr[0], left = 1;
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] == 0) {
-                left = 1;
-                 max = Math.max(max, arr[i]);
-                continue;
-            }
-            left *= arr[i];
-            max = Math.max(max, left);
-        }
-        return max;
+    public int max(int a, int b, int c) {
+        return Math.max(a, Math.max(b, c));
     }
-    public int maxProduct(int[] arr) {
-        int max1 = max(arr), n = arr.length;
-        for(int i = 0 ; i < n / 2; i++) {
-            int tmp = arr[i];
-            arr[i] = arr[n-i-1];
-            arr[n-i-1] = tmp;
+    public int min(int a, int b, int c) {
+        return Math.min(a, Math.min(b, c));
+    }
+    public int maxProduct(int[] nums) {
+        int currMin = nums[0], currMax = nums[0], ans = nums[0];
+        for(int i = 1 ; i < nums.length; i++) {
+            int tmp = Math.min(nums[i], currMax * nums[i]);
+            currMax = Math.max(nums[i], currMin * nums[i]);
+            currMin = tmp;
+            ans = Math.max(ans, currMax);
         }
-        return Math.max(max1, max(arr));
+        return ans;
     }
 }
