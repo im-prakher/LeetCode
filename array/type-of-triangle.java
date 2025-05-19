@@ -7,8 +7,8 @@ class Solution {
         for(int i= 1; i < 3; i++) {
             if(nums[i-1] == nums[i])
                 cnt++;
-            else 
-                cnt = 1;
+            // else 
+            //     cnt = 1;
         }
         if(cnt == 3)
             return "equilateral";
