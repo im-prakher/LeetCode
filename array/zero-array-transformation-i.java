@@ -16,7 +16,7 @@ class Solution {
             int right = qry[1] >= rightNeg ? pre[qry[1]+1] - 1 : pre[qry[1]+1];
             int left = qry[0] <= leftNeg ? pre[qry[0]] - 1: pre[qry[0]];
             qrySum += right - left;
-            rightNeg = Math.max(rightNeg, qry[1]);
+            rightNeg = Math.max(rightNeg, qry[1]-1);
             leftNeg = Math.min(leftNeg, qry[0]);
         }
         return acc <= qrySum; 
