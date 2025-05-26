@@ -9,14 +9,15 @@ class Solution {
         return x = find(par[x]);
     }
     public int findCircleNum(int[][] isConnected) {
-        int n = isConnected.length, cnt = n;
+        int n = isConnected.length,  cnt = n;
         par = new int[n];
         for(int i = 0; i < n; i++) 
             par[i] = i;
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
-                if(isConnected[i][j] == 1 && find(i) != find(j)) {
-                    union(i, j);
+                int u = find(i), v = find(j);
+                if(isConnected[i][j] == 1 &&  u != v) {
+                    union(u, v);
                     cnt--;
                 }
             }
