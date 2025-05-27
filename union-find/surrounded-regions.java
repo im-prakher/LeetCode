@@ -10,7 +10,7 @@ class Solution {
         int dir[] = {-1, 0, 1, 0, -1};
         for(int k = 0; k < 4; k++) {        
             int nx = i + dir[k], ny = j + dir[k+1];
-            if(valid(nx, ny, board) && !vis[nx][ny]) {
+            if(valid(nx, ny, board) ) {
                 dfs(board, nx, ny, vis);
             }
         }
