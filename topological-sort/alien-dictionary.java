@@ -15,13 +15,9 @@ class Solution {
         for (int k = 1; k < words.length; k++) {
             char[] w1 = words[k - 1].toCharArray(), w2 = words[k].toCharArray();
             int n = w1.length, m = w2.length,  a=n, b = m, i = 0, j = 0;
-            if (words[k - 1].length() > words[k].length() && words[k - 1].startsWith(words[k])) {
-                return "";
-            }
             while (i < w1.length && j < w2.length) {
                 if (w1[i] != w2[j]) {
                     a = i; b = j;
-                    break;
                 }
                 mp.putIfAbsent(w1[i], new ArrayList<>());
                 mp.putIfAbsent(w2[j], new ArrayList<>());
@@ -41,6 +37,8 @@ class Solution {
                 j++;
             }            
             if(a == n || b == m) {
+                if(n > m)
+                    return "";
                 continue;
             }
             mp.get(w1[a]).add(w2[b]);
