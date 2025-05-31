@@ -40,7 +40,8 @@ class Solution {
             if (deg.get(ch) == 0)
                 que.offer(ch);
         }
-
+        if(que.size() == deg.size())
+            return "";
         while (!que.isEmpty()) {
             char ch = que.poll();
             str.append(ch);
@@ -51,7 +52,9 @@ class Solution {
                 }
             }
         }
-        return str.toString();
+        if(str.length() == deg.size())
+            return str.toString();
+        return "";
         // Find lexographical diff b/w two words (for [wrt, wrf --> t->f], 
         // [ett, rftt --> e->r)],
         // Based on this diff, create directed graph,(t->f, e->r) 
