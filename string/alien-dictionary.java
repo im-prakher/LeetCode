@@ -1,7 +1,15 @@
 class Solution {
     public String alienOrder(String[] words) {
-        if(words.length == 1)
-            return words[0];
+        if(words.length == 1) {
+            char str[]  = words[0].toCharArray();
+            Set<Character> set = new HashSet<>();
+            for(char ch : str)
+                set.add(ch);
+            StringBuilder res = new StringBuilder();
+            for(char ch : set) 
+                res.append(ch);
+            return res.toString();
+        }
         Map<Character, List<Character>> mp = new HashMap<>();
         Map<Character, Integer> deg = new HashMap<>();
         for (int k = 1; k < words.length; k++) {
