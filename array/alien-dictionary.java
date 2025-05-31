@@ -18,6 +18,7 @@ class Solution {
             while (i < w1.length && j < w2.length) {
                 if (w1[i] != w2[j]) {
                     a = i; b = j;
+                    break;
                 }
                 mp.putIfAbsent(w1[i], new ArrayList<>());
                 mp.putIfAbsent(w2[j], new ArrayList<>());
