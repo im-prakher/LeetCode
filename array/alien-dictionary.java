@@ -4,7 +4,7 @@ class Solution {
         Map<Character, Integer> deg = new HashMap<>();
         for (int k = 1; k < words.length; k++) {
             char[] w1 = words[k - 1].toCharArray(), w2 = words[k].toCharArray();
-            int a = w1.length, b = w2.length, i = 0, j = 0;
+            int n = w1.length, m = w2.length,  a=n, b = m, i = 0, j = 0;
             boolean flag = false;
             while (i < w1.length && j < w2.length) {
                 if (!flag && w1[i] != w2[j]) {
@@ -27,9 +27,12 @@ class Solution {
                 mp.putIfAbsent(w2[j], new ArrayList<>());
                 deg.putIfAbsent(w2[j], 0);
                 j++;
-            }
-            if (a == w1.length || b == w2.length)
+            }            
+            if(a == n || b == m) {
+                if(n > m)
+                    return "";
                 continue;
+            }
             mp.get(w1[a]).add(w2[b]);
             deg.put(w2[b], deg.getOrDefault(w2[b], 0) + 1);
         }
@@ -40,8 +43,8 @@ class Solution {
             if (deg.get(ch) == 0)
                 que.offer(ch);
         }
-        if(que.size() == deg.size() && deg.size()!=1)
-            return "";
+        // if(que.size() == deg.size() && deg.size()!=1)
+        //     return "";
         while (!que.isEmpty()) {
             char ch = que.poll();
             str.append(ch);
