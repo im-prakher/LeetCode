@@ -15,11 +15,10 @@ class Solution {
         for (int k = 1; k < words.length; k++) {
             char[] w1 = words[k - 1].toCharArray(), w2 = words[k].toCharArray();
             int n = w1.length, m = w2.length,  a=n, b = m, i = 0, j = 0;
-            boolean flag = false;
             while (i < w1.length && j < w2.length) {
-                if (!flag && w1[i] != w2[j]) {
+                if (w1[i] != w2[j]) {
                     a = i; b = j;
-                    flag = true;
+                    break;
                 }
                 mp.putIfAbsent(w1[i], new ArrayList<>());
                 mp.putIfAbsent(w2[j], new ArrayList<>());
@@ -53,8 +52,6 @@ class Solution {
             if (deg.get(ch) == 0)
                 que.offer(ch);
         }
-        // if(que.size() == deg.size() && deg.size()!=1)
-        //     return "";
         while (!que.isEmpty()) {
             char ch = que.poll();
             str.append(ch);
@@ -68,14 +65,5 @@ class Solution {
         if(str.length() == deg.size())
             return str.toString();
         return "";
-        // Find lexographical diff b/w two words (for [wrt, wrf --> t->f], 
-        // [ett, rftt --> e->r)],
-        // Based on this diff, create directed graph,(t->f, e->r) 
-        // Apply Kahn's topo sort
-        // t->f, 
-        // w->e,
-        // r->t, 
-        // e->r
-        // return "wertf";
     }
 }
