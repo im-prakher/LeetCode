@@ -40,7 +40,7 @@ class Solution {
             if (deg.get(ch) == 0)
                 que.offer(ch);
         }
-        if(que.size() == deg.size())
+        if(que.size() == deg.size() && deg.size()!=1)
             return "";
         while (!que.isEmpty()) {
             char ch = que.poll();
