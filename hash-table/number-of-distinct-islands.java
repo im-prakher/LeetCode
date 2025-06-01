@@ -8,7 +8,6 @@ class Solution {
         grid[a][b] = 0;
         int dir[] = {-1, 0, 1, 0, -1};
         int n = grid.length, m = grid[0].length;
-        int max_i = 0, max_j = 0, min_i = n, min_j = m, area = 1;
         String island = "";
         while(!que.isEmpty()) {
             int[] land = que.poll();
