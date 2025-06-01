@@ -13,7 +13,7 @@ class Solution {
         while(!que.isEmpty()) {
             int[] land = que.poll();
             int x = land[0], y = land[1];
-            island = (x-a) + "&" + (y-b) + "&";
+            island += (x-a) + "&" + (y-b) + "&";
             for(int k = 0; k < 4; k++) {
                 int nx = dir[k] + x, ny = dir[k+1] + y;
                 if(valid(nx, ny, n, m) && grid[nx][ny] == 1) {
