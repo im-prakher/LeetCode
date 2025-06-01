@@ -23,7 +23,7 @@ class Solution {
         for(int i = 0; i < n; i++) {
             int cnt = 0;
             for(int j = 0; j < n; j++) {
-                if(adj[i][j] != INF && adj[i][j] <= distanceThreshold) 
+                if(adj[i][j] <= distanceThreshold) 
                     cnt++;
             }
             if(cnt <= min) {
