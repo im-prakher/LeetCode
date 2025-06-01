@@ -2,7 +2,7 @@ class Solution {
     boolean valid(int nx, int ny, int n, int m) {
         return nx >= 0 && nx < n && ny >= 0 && ny < m; 
     }
-    public boolean bfsDistinct(int[][] grid, int a, int b, Set<String> set) {
+    public void bfsDistinct(int[][] grid, int a, int b, Set<String> set) {
         Queue<int[]> que = new LinkedList<>();
         que.offer(new int[]{a, b});
         grid[a][b] = 0;
@@ -22,10 +22,7 @@ class Solution {
                 }
             }
         }
-        if(set.contains(island))
-            return false;
         set.add(island);
-        return true;
     }
     public int numDistinctIslands(int[][] grid) {
         int n = grid.length, m = grid[0].length;
@@ -33,10 +30,10 @@ class Solution {
         Set<String> set = new HashSet<>();
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                if(grid[i][j] == 1 && bfsDistinct(grid, i, j, set))
-                    cnt++;
+                if(grid[i][j] == 1)
+                 bfsDistinct(grid, i, j, set);
             }
         }
-        return cnt;
+        return set.size();
     }
 }
