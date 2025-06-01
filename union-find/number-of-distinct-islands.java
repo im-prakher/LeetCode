@@ -5,7 +5,7 @@ class Solution {
         return nx >= 0 && nx < n && ny >= 0 && ny < m;
     }
 
-    public StringBuilder dfsDistinct(int[][] grid, int x, int y, StringBuilder island) {
+    public void dfsDistinct(int[][] grid, int x, int y, StringBuilder island) {
         grid[x][y] = 0;
         int n = grid.length, m = grid[0].length;
         for (int k = 0; k < 4; k++) {
@@ -13,9 +13,9 @@ class Solution {
             if (valid(nx, ny, n, m) && grid[nx][ny] == 1) {
                 island.append(sign[k]);
                 dfsDistinct(grid, nx, ny, island);
+                island.append("B");
             }
         }
-        return island;
     }
 
     public int numDistinctIslands(int[][] grid) {
