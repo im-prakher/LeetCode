@@ -8,11 +8,11 @@ class Solution {
         grid[a][b] = 0;
         int dir[] = {-1, 0, 1, 0, -1};
         int n = grid.length, m = grid[0].length;
-        String island = "";
+        StringBuilder island = new StringBuilder();
         while(!que.isEmpty()) {
             int[] land = que.poll();
             int x = land[0], y = land[1];
-            island += (x-a) + "&" + (y-b) + "&";
+            island.append((x-a) + "&" + (y-b) + "&");
             for(int k = 0; k < 4; k++) {
                 int nx = dir[k] + x, ny = dir[k+1] + y;
                 if(valid(nx, ny, n, m) && grid[nx][ny] == 1) {
@@ -21,7 +21,7 @@ class Solution {
                 }
             }
         }
-        set.add(island);
+        set.add(island.toString());
     }
     public int numDistinctIslands(int[][] grid) {
         int n = grid.length, m = grid[0].length;
