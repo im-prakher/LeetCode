@@ -10,8 +10,8 @@ class Solution {
         char[] sign = {'U', 'R', 'D', 'L'};
         int n = grid.length, m = grid[0].length;
         StringBuilder island = new StringBuilder();
-        island.append('O');
         while(!que.isEmpty()) {
+            island.append('O');
             int[] land = que.poll();
             int x = land[0], y = land[1];
             for(int k = 0; k < 4; k++) {
