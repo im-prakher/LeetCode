@@ -1,26 +1,24 @@
 class Solution {
-    public boolean valid(int x, int y, int[][] grid) {
-        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length;
+    public void dfs(int x, int y, int[][] grid, int dist) {
+        if (grid[x][y] == -1)
+            return;
+        int n = grid.length, m = grid[0].length;
+        grid[x][y] = dist;
+        if (x - 1 >= 0 && grid[x - 1][y] > dist + 1)
+            dfs(x - 1, y, grid, dist + 1);
+        if (y + 1 < m && grid[x][y + 1] > dist + 1)
+            dfs(x, y + 1, grid, dist + 1);
+        if (x + 1 < n && grid[x + 1][y] > dist + 1)
+            dfs(x + 1, y, grid, dist + 1);
+        if (y - 1 >= 0 && grid[x][y - 1] > dist + 1)
+            dfs(x, y - 1, grid, dist + 1);
     }
 
     public void wallsAndGates(int[][] grid) {
-        int INF = Integer.MAX_VALUE;
-        Queue<int[]> que = new LinkedList<>();
-        for(int i = 0; i < grid.length; i++) {
-            for(int j = 0; j < grid[0].length; j++) {
-                if(grid[i][j] == 0)
-                    que.offer(new int[]{i, j});
-            }
-        }
-        int dir[] = {-1, 0, 1, 0, -1};
-        while(!que.isEmpty()) {
-            int[] node = que.poll();
-            for(int k = 0; k < 4; k++) {
-                int x = node[0] + dir[k], y = node[1] + dir[k+1];
-                if(valid(x, y, grid) && grid[x][y] == INF) {
-                    grid[x][y] = 1 + grid[node[0]][node[1]];
-                    que.offer(new int[]{x, y});
-                }
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 0)
+                    dfs(i, j, grid, 0);
             }
         }
     }
