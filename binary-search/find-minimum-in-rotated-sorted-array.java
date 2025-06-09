@@ -8,10 +8,10 @@ class Solution {
             if(nums[mid] > nums[mid+1])
                 return nums[mid+1];
             if(nums[i] < nums[mid]) 
-                i = mid;
+                i = mid+1;
             else
-                j = mid - 1;
+                j = mid;
         }
-        return -1;
+        return nums[j];
     }
 }
