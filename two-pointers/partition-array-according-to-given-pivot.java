@@ -1,9 +1,4 @@
 class Solution {
-    void swap(int i, int j, int[] nums) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
-    }
     public int[] pivotArray(int[] nums, int pivot) {
         int a = 0, n = nums.length, b = n-1;
         int ans[] = new int[n];
