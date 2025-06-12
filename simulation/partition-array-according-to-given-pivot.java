@@ -2,11 +2,9 @@ class Solution {
     public int[] pivotArray(int[] nums, int pivot) {
         int a = 0, n = nums.length, b = n-1;
         int ans[] = new int[n];
-        for(int i = 0; i < n; i++) {
+        for(int i = 0, j = n-i-1; i < n; i++, j--) {
             if(nums[i] < pivot)
                 ans[a++] = nums[i];
-        }
-        for(int j = n-1; j >= 0; j--) {
             if(nums[j] > pivot)
                 ans[b--] = nums[j];
         }
