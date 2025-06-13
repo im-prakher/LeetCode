@@ -10,14 +10,12 @@ class Solution {
         while(curr <= p2) {
             if(nums[curr] == 0) {
                 swap(p0, curr, nums);
-                p0++;
-                curr++;
+                p0++; curr++;
             } else if(nums[curr] == 2) {
                 swap(p2, curr, nums);
                 p2--;
-            } else {
+            } else 
                 curr++;
-            }
         }
     }
 }
