@@ -13,11 +13,11 @@ class Solution {
                 capB -= plants[j];
             }
             if(capA < 0) {
-                capA = capacityA;
+                capA += capacityA;
                 refill++;
             }
             if(capB < 0) {
-                capB = capacityB;
+                capB += capacityB;
                 refill++;
             }
             i++; j--;
