@@ -8,7 +8,7 @@ class Solution {
                 while(++i < j && nums[i] < height);
             }
             else {
-                while(--j > i && nums[i] >= height);
+                while(--j > i && nums[j] <= height);
             }
         }
         return area;
