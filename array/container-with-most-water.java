@@ -4,7 +4,7 @@ class Solution {
         while(i < j) {
             area = Math.max(area, Math.min(nums[i], nums[j]) * (j-i));
             if(nums[i] < nums[j]) {
-                while(++i < j && nums[i] < nums[j]);
+                while(++i < j && nums[i] < );
             }
             else {
                 while(--j > i && nums[i] >= nums[j]);
