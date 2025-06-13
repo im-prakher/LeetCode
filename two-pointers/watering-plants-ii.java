@@ -12,11 +12,11 @@ class Solution {
                 capA -= plants[i];
                 capB -= plants[j];
             }
-            if(capA <= 0) {
+            if(capA < 0) {
                 capA = capacityA;
                 refill++;
             }
-            if(capB <= 0) {
+            if(capB < 0) {
                 capB = capacityB;
                 refill++;
             }
