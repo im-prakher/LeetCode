@@ -25,17 +25,15 @@ class Solution {
             else {
                 int a = i, b = j;
                 while (a < n && b < m && s1[a] == s2[b]) {
-                    a = next(s1, a);
-                    b = next(s2, b);
+                    a++;
+                    b++;
                 }
-                a = a == n ? i : a;
-                b = b == m ? j : b;
-                if (s1[a] > s2[b]) {
-                    k = fill(str, s1, k, a, i);
-                    i = a + 1;
+                if (a < n && s1[a] > s2[b]) {
+                    str[k++] = s1[i++];
+                } else if (b < m) {
+                    str[k++] = s2[j++];
                 } else {
-                    k = fill(str, s2, k, b, j);
-                    j = b + 1;
+                    str[k++] = s1[i++];                    
                 }
             }
         }
