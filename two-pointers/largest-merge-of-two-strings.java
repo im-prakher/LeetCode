@@ -1,8 +1,10 @@
 class Solution {
     public String largestMerge(String word1, String word2) {
-        char[] s1 = word1.toCharArray(), s2 = word2.toCharArray();
-        int i = 0, n = s1.length, j = 0, m = s2.length, k = 0;
+        char[] s1 = word1.toCharArray();
+        char[] s2 = word2.toCharArray();
+        int i = 0, j = 0, k = 0, n = s1.length, m = s2.length;
         char[] str = new char[m + n];
+
         while (i < n && j < m) {
             if (s1[i] > s2[j])
                 str[k++] = s1[i++];
@@ -23,11 +25,12 @@ class Solution {
                 }
             }
         }
+
         while (i < n)
             str[k++] = s1[i++];
-
         while (j < m)
             str[k++] = s2[j++];
+
         return new String(str);
     }
 }
