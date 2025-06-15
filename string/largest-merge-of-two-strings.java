@@ -18,8 +18,10 @@ class Solution {
                 }
                 if (a < n && b < m && s1[a] > s2[b]) {
                     str[k++] = s1[i++];
-                } else {
+                } else if (b < m) {
                     str[k++] = s2[j++];
+                } else {
+                    str[k++] = s1[i++];
                 }
             }
         }
