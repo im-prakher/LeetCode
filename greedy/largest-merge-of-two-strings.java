@@ -19,7 +19,7 @@ class Solution {
                 } else if (b < m) {
                     str[k++] = s2[j++];
                 } else {
-                    str[k++] = s1[i++];                    
+                    str[k++] = s1[i++];
                 }
             }
         }
