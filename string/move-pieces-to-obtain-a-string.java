@@ -8,6 +8,8 @@ class Solution {
                 while(j < n && str[j] == '_') {
                     j++;
                 }
+                if(j == n)
+                    return false;
                 if(tgr[i] == str[j]) {
                     if(tgr[i] == 'L' && i > j)
                         return false;
