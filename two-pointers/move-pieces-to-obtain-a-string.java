@@ -19,6 +19,14 @@ class Solution {
             } 
             i++;
         }
+        while(i < n) {
+            if(tgr[i++] != '_') 
+                return false;
+        }
+        while(j < n) {
+            if(str[j++] != '_') 
+                return false;
+        }
         return true;
     }
 }
