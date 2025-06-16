@@ -8,6 +8,7 @@ class Solution {
                 str[idx++] = str[prv];
                 if (cnt > 1) {
                     int num = cnt;
+                    // determine length
                     while(num > 0) {
                         num /= 10;
                         idx++;
