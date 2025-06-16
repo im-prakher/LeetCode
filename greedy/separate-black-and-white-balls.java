@@ -1,12 +1,12 @@
 class Solution {
     public long minimumSteps(String s) {
-        int n = s.length(), zero = n-1;
+        int n = s.length(), zero = 0;
         long ans = 0;
-        for(int i = n-1; i >= 0; i--) {
+        for(int i = 0; i < n; i++) {
             char ch = s.charAt(i);
-            if(ch == '1') {
-                ans += zero - i;
-                zero--;
+            if(ch == '0') {
+                ans += i - zero;
+                zero++;
             }
         }
         return ans;
