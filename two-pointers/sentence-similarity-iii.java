@@ -9,6 +9,9 @@ class Solution {
         }
         return str;
     }
+
+    // checks if there's only one missing sentence that can be inserted
+    // else returns false if more or words mismatch
     public boolean similar(String[] s1, String[] s2) {
         int i = 0, j = 0, n = s1.length, m = s2.length;
         boolean missing = false;
@@ -23,12 +26,16 @@ class Solution {
                 missing = true;
             }
         }
-        while(i > 0 && i < n &&  s1[i].equals(s1[i-1]))
+        // check if end words are matching, then increment
+        while(i > 0 && i < n && s1[i].equals(s1[i-1]))
             i++;
+        // If one sentence is mising, and 
+        // again there's a missing sentence or word mismatch ahead
         if(missing && (i < n || j < m))
             return false;
         return true;
     }
+
     public boolean areSentencesSimilar(String sentence1, String sentence2) {
         String[] s1, s2;
         if(sentence1.length() > sentence2.length()) {
@@ -38,6 +45,9 @@ class Solution {
             s2 = sentence1.split(" ");
             s1 = sentence2.split(" ");
         }
+        // check from left to right and right to left
+        // edge cases: "A", "a A b A", 
+        // will be good when matched from right to left
         return similar(s1, s2) || similar(reverse(s1), reverse(s2));
     }
 }
