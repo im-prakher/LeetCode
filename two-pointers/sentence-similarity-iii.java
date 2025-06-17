@@ -16,6 +16,7 @@ class Solution {
                 j++;
             } else if(missing) {
                 left = false;
+                break;
             } else {
                 while(++i < n && !s1[i].equals(s2[j]));
                 missing = true;
@@ -31,6 +32,7 @@ class Solution {
                 b--;
             } else if(missing) {
                 right = false;
+                break;
             } else {
                 while(--a >= 0 && !s1[a].equals(s2[b]));
                 missing = true;
