@@ -1,4 +1,34 @@
 class Solution {
+    public String[] reverse(String[] str) {
+        int i = 0, j= str.length-1;
+        while(i < j) {
+            String tmp = str[i];
+            str[i] = str[j];
+            str[j] = tmp;
+            i++; j--;
+        }
+        return str;
+    }
+    public boolean similar(String[] s1, String[] s2) {
+        int i = 0, j = 0, n = s1.length, m = s2.length;
+        boolean missing = false;
+        while(i < n && j < m) {
+            if(s1[i].equals(s2[j])) {
+                i++;
+                j++;
+            } else if(missing) {
+                return false;
+            } else {
+                while(++i < n && !s1[i].equals(s2[j]));
+                missing = true;
+            }
+        }
+        while(i > 0 && i < n &&  s1[i].equals(s1[i-1]))
+            i++;
+        if(missing && (i < n || j < m))
+            return false;
+        return true;
+    }
     public boolean areSentencesSimilar(String sentence1, String sentence2) {
         String[] s1, s2;
         if(sentence1.length() > sentence2.length()) {
@@ -8,42 +38,6 @@ class Solution {
             s2 = sentence1.split(" ");
             s1 = sentence2.split(" ");
         }
-        int i = 0, j = 0, n = s1.length, m = s2.length;
-        boolean missing = false, left = true, right = true;
-        while(i < n && j < m) {
-            if(s1[i].equals(s2[j])) {
-                i++;
-                j++;
-            } else if(missing) {
-                left = false;
-                break;
-            } else {
-                while(++i < n && !s1[i].equals(s2[j]));
-                missing = true;
-            }
-        }
-        while(i > 0 && i < n &&  s1[i].equals(s1[i-1]))
-            i++;
-        if(missing && (i < n || j < m))
-            left = false;
-        int a = n-1, b = m-1;
-        missing = false;
-        while(a >= 0 && b >= 0) {
-            if(s1[a].equals(s2[b])) {
-                a--;
-                b--;
-            } else if(missing) {
-                right = false;
-                break;
-            } else {
-                while(--a >= 0 && !s1[a].equals(s2[b]));
-                missing = true;
-            }
-        }
-        while(a > 0 && s1[a].equals(s1[a-1]))
-            a--;
-        if(missing && (a >= 0 || b >= 0))
-            right = false;
-        return left || right;
+        return similar(s1, s2) || similar(reverse(s1), reverse(s2));
     }
 }
