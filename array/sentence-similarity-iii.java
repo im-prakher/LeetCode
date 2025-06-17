@@ -9,20 +9,35 @@ class Solution {
             s1 = sentence2.split(" ");
         }
         int i = 0, j = 0, n = s1.length, m = s2.length;
-        boolean missing = false;
+        boolean missing = false, left = true, right = true;
         while(i < n && j < m) {
             if(s1[i].equals(s2[j])) {
                 i++;
                 j++;
             } else if(missing) {
-                return false;
+                left = false;
             } else {
                 while(++i < n && !s1[i].equals(s2[j]));
                 missing = true;
             }
         }
         if(missing && (i < n || j < m))
-            return false;
-        return true;
+            left = false;
+        int a = n-1, b = m-1;
+        missing = false;
+        while(a >= 0 && b >= 0) {
+            if(s1[a].equals(s2[b])) {
+                a--;
+                b--;
+            } else if(missing) {
+                right = false;
+            } else {
+                while(--a >= 0 && !s1[a].equals(s2[b]));
+                missing = true;
+            }
+        }
+        if(missing && (a >= 0 || b >= 0))
+            right = false;
+        return left || right;
     }
 }
