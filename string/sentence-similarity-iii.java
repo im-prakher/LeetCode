@@ -22,6 +22,8 @@ class Solution {
                 missing = true;
             }
         }
+        while(i > 0 && i < n &&  s1[i].equals(s1[i-1]))
+            i++;
         if(missing && (i < n || j < m))
             left = false;
         int a = n-1, b = m-1;
@@ -38,6 +40,8 @@ class Solution {
                 missing = true;
             }
         }
+        while(a > 0 && s1[a].equals(s1[a-1]))
+            a--;
         if(missing && (a >= 0 || b >= 0))
             right = false;
         return left || right;
