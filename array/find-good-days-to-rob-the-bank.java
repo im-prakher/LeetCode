@@ -10,7 +10,7 @@ class Solution {
             if(security[j] <= security[j+1])
                 dec[j] = dec[j+1] + 1;
         }
-        for(int i = 0 ; i < n; i++) {
+        for(int i = time ; i < n-time; i++) {
             if(inc[i] >= time && time <= dec[i])
                 ans.add(i);
         }
