@@ -1,15 +1,15 @@
 class Solution {
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
-        Set<Integer> set = new HashSet<>();
+        Map<Integer, Integer> mp = new HashMap<>();
         for(int i : nums3) {
             for(int j : nums4) 
-                set.add(i+j);
+                mp.put(i+j, mp.getOrDefault(i+j, 0) + 1);
         }
         int cnt = 0;
         for(int i : nums1) {
             for(int j : nums2) {
-                if(set.contains(-i-j))
-                    cnt++;
+                if(mp.containsKey(-i-j))
+                    cnt += mp.get(-i-j);
             }
         }
         return cnt;
