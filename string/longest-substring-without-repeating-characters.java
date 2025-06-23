@@ -7,7 +7,7 @@ class Solution {
      Arrays.fill(idx, -1);
      int len = 1;
      for(int i = 0, j = 0; i < s.length(); i++) {
-        int c = str[i] - 'a';
+        int c = (int)str[i];
         if(idx[c] != -1)
             j = i;
         len = Math.max(len, i-j+1);
