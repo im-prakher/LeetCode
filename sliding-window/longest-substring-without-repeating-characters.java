@@ -6,11 +6,11 @@ class Solution {
      int idx[] = new int[256];
      Arrays.fill(idx, -1);
      int len = 1;
-     for(int i = 0, j = 0; i < s.length(); i++) {
+     for(int j= 0, i = 0; i < s.length(); i++) {
         int c = (int)str[i];
         if(idx[c] != -1)
-            j = i;
-        len = Math.max(len, i-j+1);
+            j = idx[c];
+        len = Math.max(len, i-j);
         idx[c] = i;
      }
      return len;
