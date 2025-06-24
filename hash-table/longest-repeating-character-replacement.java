@@ -12,9 +12,11 @@ class Solution {
                     i++;
                 else if(cnt < k) {
                     cnt++; i++;
+                } else if(ch == str[j]) {
+                    j++;
                 } else {
-                    while(j < n && ch==str[j++]) 
                     cnt--;
+                    j++;
                 }
                 ans = Math.max(ans, i - j);
             }
