@@ -7,10 +7,10 @@ class Solution {
      Arrays.fill(idx, -1);
      int len = 1;
      for(int i = 0, j = 0; i < str.length; i++) {        
-        j = Math.max(j, idx[str[i]] + 1);
-        len = Math.max(len, i - j + 1);
-        idx[str[i]] = i;
-     }
+        j = idx[str[i]-'a'] > j ? idx[str[i]-'a'] : j;
+        len = Math.max(len, i-j);
+        idx[str[i]-'a'] = i;
+    }
      return len;
     }
 }
