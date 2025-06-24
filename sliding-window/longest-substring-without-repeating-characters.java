@@ -7,9 +7,9 @@ class Solution {
      Arrays.fill(idx, -1);
      int len = 1;
      for(int i = 0, j = 0; i < str.length; i++) {        
-        j = idx[str[i]-'a'] > j ? idx[str[i]-'a'] : j;
+        j = idx[str[i]] > j ? idx[str[i]] : j;
         len = Math.max(len, i-j);
-        idx[str[i]-'a'] = i;
+        idx[str[i]] = i;
     }
      return len;
     }
