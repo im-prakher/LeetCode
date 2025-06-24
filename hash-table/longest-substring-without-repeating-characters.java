@@ -6,7 +6,7 @@ class Solution {
      int idx[] = new int[256];
      Arrays.fill(idx, -1);
      int len = 1;
-     for(int i = 0, j = 0; i < str.length; i++) {        
+     for(int i = 0, j = -1; i < str.length; i++) {        
         j = idx[str[i]] > j ? idx[str[i]] : j;
         len = Math.max(len, i-j);
         idx[str[i]] = i;
