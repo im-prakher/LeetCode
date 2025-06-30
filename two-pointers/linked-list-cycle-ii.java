@@ -20,7 +20,7 @@ public class Solution {
             if(fast.next != null)
                 fast = fast.next.next;
         }
-        while(slow!=fast && fast.next != null);
+        while(slow!=fast && fast!= null && fast.next != null);
 
         if(fast == null || fast.next == null)
             return null;
