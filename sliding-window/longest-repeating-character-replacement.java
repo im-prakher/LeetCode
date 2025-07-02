@@ -1,26 +1,24 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-        Set<Character> set = new HashSet<>();
+        int freq[] = new int[26];
         char str[] = s.toCharArray();
-        for(char ch : str)
-            set.add(ch);
-        int ans = 0, n = str.length;
-        for(var ch : set) {
-            int cnt = 0;
-            for(int i = 0, j = 0; i < n; ) {
-                if(str[i] == ch) 
-                    i++;
-                else if(cnt < k) {
-                    cnt++; i++;
-                } else if(ch == str[j]) {
-                    j++;
-                } else {
-                    cnt--;
-                    j++;
-                }
-                ans = Math.max(ans, i - j);
+        int maxFreq = 0, res = 0;
+        TreeMap<Integer, Integer> tmap = new TreeMap<>();
+        for(int i = 0, j = -1; i < str.length; i++) {
+            int idx = str[i] - 'A';
+            tmap.put(++freq[idx], tmap.getOrDefault(freq[idx], 0) + 1);
+            maxFreq = tmap.lastKey();
+            while(i - j - maxFreq > k) {
+                int key = freq[str[++j]-'A'];
+                if(tmap.get(key) == 1)
+                    tmap.remove(key);
+                else
+                    tmap.put(key, tmap.get(key)-1);
+                tmap.put(--freq[str[j]-'A'], tmap.getOrDefault(freq[str[j]-'A'],0) +1);
+                maxFreq = tmap.lastKey();
             }
+            res = Math.max(res, i - j);
         }
-        return ans;
+        return res;
     }
 }
