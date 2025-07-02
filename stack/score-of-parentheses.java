@@ -6,9 +6,9 @@ class Solution {
             if(ch == '(')
                 depth++;
             else {
-                if(pre == '(') 
-                    score += Math.pow(2, depth-1);
                 depth--;
+                if(pre == '(') 
+                    score += Math.pow(2, depth);
             }
             pre = ch;
         }
