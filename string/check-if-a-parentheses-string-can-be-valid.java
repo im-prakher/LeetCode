@@ -1,11 +1,5 @@
 class Solution {
     public boolean canBeValid(String s, String locked) {
-        StringBuilder sb = new StringBuilder(s);
-        StringBuilder lock = new StringBuilder(locked);
-        return isValid(sb.toString(), lock.toString()) 
-                ;
-    }
-    public boolean isValid(String s, String locked) {
         if(s.length() % 2 != 0)
             return false;
         int closeUnlock = 0, open = 0, close = 0, change = 0;
@@ -48,8 +42,6 @@ class Solution {
                 }
             }
         }
-        // if(close > open)
-        //     close unlocked cnt > 0 & open++
         return open == close;
     }
 }
