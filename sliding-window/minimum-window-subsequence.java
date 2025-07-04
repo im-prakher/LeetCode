@@ -21,6 +21,11 @@ class Solution {
                         p++;
                 }
                 j++;
+                if(cnt < k) {
+                    p = 0;
+                    cnt = 0;
+                    freq = new int[128];
+                }
             }
         }
         if(a == -1)
