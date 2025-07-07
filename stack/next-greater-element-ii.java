@@ -4,10 +4,10 @@ class Solution {
         int n = nums.length, top = -1;
         int[] nge = new int[n];
         for(int i = 2*n-1; i >= 0; i--) {
-            while(top!=-1 && nums[i % n] > nums[stack[top]]) 
+            while(top!=-1 && nums[i % n] >= nums[stack[top]]) 
                 top--;
-            nge[i] = top!= -1 ? nums[stack[top]] : -1;
-            stack[++top] = i;
+            nge[i%n] = top!= -1 ? nums[stack[top]] : -1;
+            stack[++top] = i % n;
         }
         return nge;
     }
