@@ -6,7 +6,7 @@ class Solution {
         for(int i = 2*n-1; i >= 0; i--) {
             while(top!=-1 && nums[i % n] > nums[stack[top]]) 
                 top--;
-            nge[i] = top!= -1 ? nums2[stack[top]] : -1;
+            nge[i] = top!= -1 ? nums[stack[top]] : -1;
             stack[++top] = i;
         }
         return nge;
