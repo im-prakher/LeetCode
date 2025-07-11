@@ -13,6 +13,14 @@ class Solution {
             } else {
                 int start = tmap.firstKey();
                 TreeSet<Integer> set = tmap.get(start);
+                for(var entry : tmap.entrySet()) {
+                    if(entry.getKey() > meeting[0])
+                        break;
+                    if(entry.getValue().first() < set.first()) {
+                        start = entry.getKey();
+                        set = entry.getValue();
+                    }
+                }
                 int room = set.first(), intv = start - meeting[0];
                 intv = intv > 0 ? intv : 0;
                 rooms[room]++;
