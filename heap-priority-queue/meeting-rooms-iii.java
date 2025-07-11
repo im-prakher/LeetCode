@@ -19,7 +19,7 @@ class Solution {
                 int room = set.first();
                 set.remove(room);
                 cnt[room]++;
-                pq.offer(new int[]{meetings[i][1], meet[1]});
+                pq.offer(new int[]{meetings[i][1], room});
             } else if(pq.size() < n) {
                 int room = set.first();
                 set.remove(room);
