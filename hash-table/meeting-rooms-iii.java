@@ -1,43 +1,41 @@
 class Solution {
     public int mostBooked(int n, int[][] meetings) {
-        int[] rooms = new int[n];
-        TreeMap<Integer, TreeSet<Integer>> tmap = new TreeMap<>();
+        int[] cnt = new int[n];
+        int m = meetings.length;
+        TreeSet<Integer> set  = new TreeSet<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b)-> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
         Arrays.sort(meetings, (a, b)-> a[0] - b[0]);
-        int rdx = 0;
-        for(int[] meeting : meetings) {
-            if(rdx != n) {
-                tmap.putIfAbsent(meeting[1], new TreeSet<>());
-                tmap.get(meeting[1]).add(rdx); 
-                rooms[rdx]++;
-                rdx++;
-            } else {
-                int start = tmap.firstKey();
-                TreeSet<Integer> set = tmap.get(start);
-                for(var entry : tmap.entrySet()) {
-                    if(entry.getKey() > meeting[0])
-                        break;
-                    if(entry.getValue().first() < set.first()) {
-                        start = entry.getKey();
-                        set = entry.getValue();
-                    }
+        pq.offer(new int[]{meetings[0][1], 0});
+        cnt[0] = 1;
+        for(int i = 1; i < m; i++)
+            set.add(i);
+        for(int i = 1; i < m; i++) {
+            int[] meet = pq.peek();
+            if(meet[0] <= meetings[i][0]) {
+                while(!pq.isEmpty() && pq.peek()[0] <= meetings[i][0]) {
+                    meet = pq.poll();
+                    set.add(meet[1]);
                 }
-                int room = set.first(), intv = start - meeting[0];
+                cnt[meet[1]]++;
+                pq.offer(new int[]{meetings[i][1], meet[1]});
+            } else if(pq.size() < n) {
+                int room = set.first();
+                set.remove(room);
+                cnt[room]++;
+                pq.offer(new int[]{meetings[i][1], room});
+            } else {
+                pq.poll();
+                cnt[meet[1]]++;
+                int intv = meet[0] - meetings[i][0];
                 intv = intv > 0 ? intv : 0;
-                rooms[room]++;
-                set.remove(room); 
-                if(set.isEmpty())
-                    tmap.remove(start);
-                else
-                    tmap.put(start, set);
-                tmap.putIfAbsent(meeting[1]+intv, new TreeSet<>());
-                tmap.get(meeting[1]+intv).add(room);
+                pq.offer(new int[]{meetings[i][1] + intv, meet[1]});
             }
         }
-        int idx = 0, max = rooms[0];
+        int idx = 0, max = cnt[0];
         for(int i = 1; i < n; i++) {
-            if(rooms[i] > max) {
+            if(cnt[i] > max) {
                 idx  = i;
-                max = rooms[i];
+                max = cnt[i];
             }
         }
         return idx;
