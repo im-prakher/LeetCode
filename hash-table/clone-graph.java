@@ -19,7 +19,7 @@ class Node {
 */
 
 class Solution {
-    Map<Integer, Node> mp;
+    Map<Node, Node> mp;
     public Node cloneGraph(Node node) {
         mp = new HashMap<>();
         return clone(node);
@@ -27,10 +27,10 @@ class Solution {
 
     public Node clone(Node node) {
         if(node == null) return node;
-        if(mp.containsKey(node.val))
-            return mp.get(node.val);
+        if(mp.containsKey(node))
+            return mp.get(node);
         Node clone = new Node(node.val);
-        mp.put(node.val, clone);
+        mp.put(node, clone);
         for(var con : node.neighbors) {
             clone.neighbors.add(clone(con));
         }
