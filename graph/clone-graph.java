@@ -21,12 +21,12 @@ class Node {
 class Solution {
     Map<Node, Node> mp;
     public Node cloneGraph(Node node) {
+        if(node == null) return node;
         mp = new HashMap<>();
         return clone(node);
     }
 
     public Node clone(Node node) {
-        if(node == null) return node;
         if(mp.containsKey(node))
             return mp.get(node);
         Node clone = new Node(node.val);
