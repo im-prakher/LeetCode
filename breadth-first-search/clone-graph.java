@@ -19,22 +19,21 @@ class Node {
 */
 
 class Solution {
-    Map<Node, Node> vis;
-    public Node dfsClone(Node node) {
-        if(node == null)
-            return null;
-        if(vis.containsKey(node))
-            return vis.get(node);
+    Map<Integer, Node> mp;
+    public Node cloneGraph(Node node) {
+        mp = new HashMap<>();
+        return clone(node);
+    }
+
+    public Node clone(Node node) {
+        if(node == null) return node;
+        if(mp.containsKey(node.val))
+            return mp.get(node.val);
         Node clone = new Node(node.val);
-        vis.put(node, clone);
-        for(Node vtx : node.neighbors) {
-            clone.neighbors.add(dfsClone(vtx));
+        mp.put(node.val, clone);
+        for(var con : node.neighbors) {
+            clone.neighbors.add(clone(con));
         }
         return clone;
-    }
-    
-    public Node cloneGraph(Node node) {
-        vis = new HashMap<>();
-        return dfsClone(node);
     }
 }
