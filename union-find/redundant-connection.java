@@ -14,17 +14,14 @@ class Solution {
         for(int i = 0; i < n+1; i++) {
             node[i] = i;
         }
-        int[] ans = new int[2];
         for(int[] edge : edges) {
             int u = find(edge[0]), v = find(edge[1]);
             if(u == v) {
-                ans[0] = edge[0];
-                ans[1] = edge[1];
-                break;
+                return edge;
             } else{
                 union(u, v);
             }
         }
-        return ans;
+        return new int[2];
     }
 }
