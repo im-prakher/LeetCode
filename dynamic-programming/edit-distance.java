@@ -16,6 +16,8 @@ class Solution {
     }
 
     public int minDistance(String a, String b) {
+        if(a.equals(b))
+            return 0;
         return 1 + editDistance(a, b);
     }
 }
