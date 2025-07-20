@@ -14,18 +14,6 @@ class Solution {
         return match == a.length - 1;
     }
 
-    public int solve(String[] words, int idx, int prev, int dp[][]) {
-         if(idx == words.length)
-            return 0;
-        if(dp[idx][prev+1] !=-1)
-            return dp[idx][prev+1];
-        int pick = 0;
-        int no_pick = solve(words, idx+1, prev, dp);
-        if(prev == -1 || isPredecessor(words[idx], words[prev])) 
-            pick = 1 + solve(words, idx+1, idx, dp);
-        return dp[idx][prev+1] = Math.max(pick, no_pick);
-    }
-
     public int longestStrChain(String[] words) {
         int n = words.length;
         int dp[] = new int[n];
@@ -33,8 +21,6 @@ class Solution {
             return a.length() == b.length() ? a.compareTo(b) 
             : Integer.compare(a.length(),b.length());
         });
-        // return solve(words, 0, -1, dp);
-        // int dp[][] = new int[n+1][n+1];
         int res = 0;
         for(int i = 0; i < n; i++) {
             dp[i] = 1;
