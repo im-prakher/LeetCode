@@ -5,7 +5,6 @@ class Solution {
             max = Math.max(max, i);
             sum += i;
         }
-        long ans = sum - Math.min(max, armor) + 1;
-        return ans;
+        return sum - Math.min(max, armor) + 1;
     }
 }
