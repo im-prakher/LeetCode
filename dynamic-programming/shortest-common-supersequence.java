@@ -27,6 +27,7 @@ class Solution {
                 --j;
             }
         }
+        res.reverse();
         return res.toString();
     }
 }
