@@ -21,7 +21,7 @@ class Solution {
             int mid = (i + j) >> 1;
             if(canRob(nums, mid, k)) {
                 ans = mid;
-                j = mid - 1;
+                j = mid;
             } else {
                 i = mid + 1;
             }
