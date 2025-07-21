@@ -1,32 +1,24 @@
 class Solution {
-    boolean isZero(int[] nums, int[][] qrys, int k) {
+    public int minZeroArray(int[] nums, int[][] qrys) {
+        // Line Sweep
         int n = nums.length;
         int[] diff = new int[n + 1];
-        for (int i = 0; i < k; i++) {
-            int[] qry = qrys[i];
-            diff[qry[0]] += qry[2];
-            diff[qry[1] + 1] -= qry[2];
-        }
-        int dec = 0;
-        for (int i = 0; i < n; i++) {
-            dec += diff[i];
-            if (nums[i] > dec)
-                return false;
-        }
-        return true;
-    }
-
-    public int minZeroArray(int[] nums, int[][] qrys) {
-        int i = 0, j = qrys.length, ans = -1;
-        while (i <= j) {
-            int mid = (i + j) >> 1;
-            if (isZero(nums, qrys, mid)) {
-                ans = mid;
-                j = mid - 1;
-            } else {
-                i = mid + 1;
+        int k = 0, sum = 0;
+        for(int i = 0; i < n; i++) {
+            while(sum + diff[i] < nums[i]) {
+                if(k == qrys.length)
+                    return -1;
+                int[] qry = qrys[k];
+                if(qry[1] < i) {
+                 // qry not useful, as previous idx's can already be 0, so skip
+                    continue;
+                }
+                diff[Math.max(qry[0], i)] += qry[2];
+                diff[qry[1]+1] -= qry[2];
+                k++;
             }
+            sum += diff[i];
         }
-        return ans;
+        return k;
     }
 }
