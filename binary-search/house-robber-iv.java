@@ -20,12 +20,11 @@ class Solution {
         while(i < j) {
             int mid = (i + j) >> 1;
             if(canRob(nums, mid, k)) {
-                ans = mid;
                 j = mid;
             } else {
                 i = mid + 1;
             }
         }
-        return ans;
+        return j;
     }
 }
