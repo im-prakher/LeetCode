@@ -22,7 +22,7 @@ class Solution {
             int mid = (i + j) >> 1;
             if (isZero(nums, qrys, mid)) {
                 ans = mid + 1;
-                j = mid - 1;
+                j = mid;
             } else {
                 i = mid + 1;
             }
