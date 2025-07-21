@@ -16,7 +16,6 @@ class Solution {
             i = Math.min(i, n);
             j = Math.max(j, n);
         }
-        int ans = j;
         while(i < j) {
             int mid = (i + j) >> 1;
             if(canRob(nums, mid, k)) {
