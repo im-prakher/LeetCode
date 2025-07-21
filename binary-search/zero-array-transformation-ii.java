@@ -1,6 +1,6 @@
 class Solution {
     boolean isZero(int[] nums, int[][] qrys, int k) {
-        int n = nums.length, ops = 1;
+        int n = nums.length;
         int[] diff = new int[n + 1];
         for (int i = 0; i < k; i++) {
             int[] qry = qrys[i];
@@ -18,11 +18,11 @@ class Solution {
 
     public int minZeroArray(int[] nums, int[][] qrys) {
         int i = 0, j = qrys.length, ans = -1;
-        while (i < j) {
+        while (i <= j) {
             int mid = (i + j) >> 1;
             if (isZero(nums, qrys, mid)) {
                 ans = mid;
-                j = mid;
+                j = mid - 1;
             } else {
                 i = mid + 1;
             }
