@@ -11,7 +11,7 @@ class Solution {
     }
 
     public int minCapability(int[] nums, int k) {
-        int i = nums[0], j = (int) 1e9;
+        int i = 0, j = (int)1e9;
         while(i < j) {
             int mid = (i + j) >> 1;
             if(canRob(nums, mid, k)) {
