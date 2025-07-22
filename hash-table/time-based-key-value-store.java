@@ -13,7 +13,8 @@ class TimeMap {
         if(dic.containsKey(key)) {
             if(dic.get(key).containsKey(timestamp)) 
                 return dic.get(key).get(timestamp);
-            return dic.get(key).floorEntry(timestamp).getValue();
+            var entry = dic.get(key).floorEntry(timestamp);
+            return entry != null ? entry.getValue() : "";
         }
         return "";
     }
