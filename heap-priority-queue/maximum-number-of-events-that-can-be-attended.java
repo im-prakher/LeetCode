@@ -10,6 +10,9 @@ class Solution {
             while(i != events.length && events[i][0] <= time) {
                 pq.offer(events[i++]);
             }
+            while(!pq.isEmpty() && pq.peek()[1] < time) {
+                pq.poll();
+            } 
             if(!pq.isEmpty() && pq.peek()[0] <= time) {
                 pq.poll();
                 attend++;
