@@ -44,12 +44,9 @@ class Solution {
         Set<Integer> set = new HashSet<>();
         for(var entry : lvl.entrySet()) {
             int abv = entry.getValue();
-            TreeNode node = entry.getKey();
-            if(abv == k)
-                set.add(node.val);
-            if(abv >= k)
+            if(abv > k)
                 continue;
-            kthLevel(node, k - abv, set);
+            kthLevel(entry.getKey(), k - abv, set);
         }
         return new ArrayList<>(set);
     }
