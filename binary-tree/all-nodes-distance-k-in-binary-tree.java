@@ -27,12 +27,14 @@ class Solution {
     public void kthLevel(TreeNode root, int k, Set<Integer> set) {
         if(root == null || k < 0)
             return;
-        if(k == 0 && !lvl.containsKey(root)) {
+        if(k == 0) {
             set.add(root.val);
             return;
         }
-        kthLevel(root.left, k-1, set);
-        kthLevel(root.right, k-1, set);
+        if(!lvl.containsKey(root.left))
+            kthLevel(root.left, k-1, set);
+        if(!lvl.containsKey(root.right))    
+            kthLevel(root.right, k-1, set);
     }
 
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
