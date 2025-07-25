@@ -41,16 +41,12 @@ class Solution {
         lvl.put(target, 0);
         fillLevel(root, target);
         List<Integer> ans = new ArrayList<>();
-        // Set<Integer> set = new HashSet<>();
         for(var entry : lvl.entrySet()) {
-            int abv = entry.getValue();
-            TreeNode node = entry.getKey();
-            // if(abv == k)
-            //     ans.add(node.val);
+            int abv = entry.getValue();;
             if(abv > k)
                 continue;
-            kthLevel(node, k - abv, ans);
+            kthLevel(entry.getKey(), k - abv, ans);
         }
-        return  ans;// new ArrayList<>(set);
+        return ans;
     }
 }
