@@ -41,9 +41,10 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
         Set<Integer> set = new HashSet<>();
         for(var entry : lvl.entrySet()) {
-            if(entry.getValue() > k)
+            int abv = entry.getValue();
+            if(abv > k)
                 continue;
-            kthLevel(entry.getKey(), k - entry.getValue(), set);
+            kthLevel(entry.getKey(), k - , set);
         }
         return new ArrayList<>(set);
     }
