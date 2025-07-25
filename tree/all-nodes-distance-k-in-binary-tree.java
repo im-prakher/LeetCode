@@ -24,33 +24,33 @@ class Solution {
         return -1;
     }
 
-    public void kthLevel(TreeNode root, int k, Set<Integer> set) {
+    public void kthLevel(TreeNode root, int k, List<Integer> ans) {
         if(root == null || k < 0)
             return;
         if(k == 0) {
-            set.add(root.val);
+            ans.add(root.val);
             return;
         }
         if(!lvl.containsKey(root.left))
-            kthLevel(root.left, k-1, set);
+            kthLevel(root.left, k-1, ans);
         if(!lvl.containsKey(root.right))    
-            kthLevel(root.right, k-1, set);
+            kthLevel(root.right, k-1, ans);
     }
 
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
         lvl.put(target, 0);
         fillLevel(root, target);
         List<Integer> ans = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
+        // Set<Integer> set = new HashSet<>();
         for(var entry : lvl.entrySet()) {
             int abv = entry.getValue();
             TreeNode node = entry.getKey();
-            if(abv == k)
-                set.add(node.val);
+            // if(abv == k)
+            //     ans.add(node.val);
             if(abv > k)
                 continue;
-            kthLevel(node, k - abv, set);
+            kthLevel(node, k - abv, ans);
         }
-        return new ArrayList<>(set);
+        return  ans;// new ArrayList<>(set);
     }
 }
