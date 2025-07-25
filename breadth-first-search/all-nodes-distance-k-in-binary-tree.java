@@ -27,7 +27,7 @@ class Solution {
     public void kthLevel(TreeNode root, int k, Set<Integer> set) {
         if(root == null || k < 0)
             return;
-        if(k == 0) {
+        if(k == 0 && !lvl.containsKey(root)) {
             set.add(root.val);
             return;
         }
@@ -45,7 +45,6 @@ class Solution {
                 continue;
             kthLevel(entry.getKey(), k - entry.getValue(), set);
         }
-        set.remove(target.val);
         return new ArrayList<>(set);
     }
 }
