@@ -11,9 +11,7 @@ public:
             }
             total += weights[i];
         }
-        if(allocatedDays > days)
-            return false;
-        return true;
+        return allocatedDays <= days;
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int lo = INT_MAX , hi=0, n= weights.size();
