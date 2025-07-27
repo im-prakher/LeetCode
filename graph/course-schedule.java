@@ -6,8 +6,8 @@ class Solution {
         }
         int[] inDeg = new int[num];
         for(int[] pre : prereq) {
-            adj[pre[0]].add(pre[1]);
-            inDeg[pre[1]]++;
+            adj[pre[1]].add(pre[0]);
+            inDeg[pre[0]]++;
         }
 
         Queue<Integer> que = new LinkedList<>();
