@@ -7,7 +7,8 @@ class Solution {
             if(min > intervals[i][0]) {
                 min = Math.min(min, intervals[i][1]);
                 cnt++;
-            }
+            } else
+                min = intervals[i][1];
         }
         return cnt;
     }
