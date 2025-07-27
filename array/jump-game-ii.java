@@ -1,6 +1,6 @@
 class Solution {
     public int jump(int[] nums) {
-          int jmp = 0, idx = 0, n = nums.length, hops = 0;
+          int jmp = nums[0], idx = 0, n = nums.length, hops = 1;
         for(int i : nums) {
             if(jmp < i) {
                 hops++;
