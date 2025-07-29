@@ -1,5 +1,5 @@
 class Solution {
-    boolean valid(int nx, int ny, int n, int m) {
+    boolean valid(int nx, int ny, int n, int m, int[][] grid) {
         return nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 0; 
     }
     public int shortestPathBinaryMatrix(int[][] grid) {
@@ -17,7 +17,7 @@ class Solution {
                 return dist;
             for(int k = 0; k < 8; k++) {
                 int nx = dx[k] + x, ny = dy[k] + y;
-                if(valid(nx, ny, n, m)) {
+                if(valid(nx, ny, n, m, grid)) {
                     que.offer(new int[]{nx, ny, dist + 1});
                     grid[nx][ny] = 1;
                 }
