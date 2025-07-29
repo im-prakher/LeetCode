@@ -2,7 +2,7 @@ class Solution {
     public int shortestPathBinaryMatrix(int[][] grid) {
         int dx[] = {-1, 0, 1, 0, -1, -1, 1, 1};
         int dy[] = {0, 1, 0, -1, -1, 1, 1, -1};
-        PriorityQueue<int[]> que = new PriorityQueue<>((a, b)-> a[0]- b[0]);
+        Queue<int[]> que = new LinkedList<>();//((a, b)-> a[0]- b[0]);
         int n = grid.length, m = grid[0].length;
         if(grid[0][0] == 0)
             que.offer(new int[]{0,0,1});
