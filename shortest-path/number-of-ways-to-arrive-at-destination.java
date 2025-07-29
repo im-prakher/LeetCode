@@ -25,7 +25,7 @@ class Solution {
             Pair curr = pq.poll();
             int u = curr.node;
             long time = curr.time;
-            // if (time > dist[u]) continue;
+            if (time > dist[u]) continue;
 
             for (int v = 0; v < n; v++) {
                 if (graph[u][v] == INF) continue; 
