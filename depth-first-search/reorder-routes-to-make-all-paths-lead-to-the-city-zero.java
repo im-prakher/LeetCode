@@ -1,26 +1,22 @@
 class Solution {
-    public int dfs(Set<List<Integer>> set, int node, int par, List<Integer> adj[]) {
+    public int dfs(int node, int par, List<List<Integer>> adj[]) {
         int cnt = 0;
-        for(int vtx : adj[node]) {
-            if(par == vtx)
+        for(var vtx : adj[node]) {
+            if(par == vtx.get(0))
                 continue;
-            if(set.contains(List.of(node, vtx)))
-                cnt++;
-            cnt += dfs(set, vtx, node, adj);
+            cnt += dfs(vtx.get(0), node, adj) + vtx.get(1);
         }
         return cnt;
     }
 
     public int minReorder(int n, int[][] connections) {
-        Set<List<Integer>> set = new HashSet<>();
-        List<Integer> adj[] = new List[n];
+        List<List<Integer>> adj[] = new List[n];
         for(int i = 0; i < n; i++)
             adj[i] = new ArrayList<>();
         for(int[] conc : connections) {
-            set.add(List.of(conc[0], conc[1]));
-            adj[conc[0]].add(conc[1]);
-            adj[conc[1]].add(conc[0]);
+            adj[conc[0]].add(List.of(conc[1], 1));
+            adj[conc[1]].add(List.of(conc[0], 0));
         }
-        return dfs(set, 0, -1, adj);
+        return dfs(0, -1, adj);
     }
 }
