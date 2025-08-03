@@ -1,13 +1,14 @@
 class Solution {
-    int cnt;
-    public void dfs(Set<List<Integer>> set, int node, int par, List<Integer> adj[]) {
+    public int dfs(Set<List<Integer>> set, int node, int par, List<Integer> adj[]) {
+        int cnt = 0;
         for(int vtx : adj[node]) {
             if(par == vtx)
                 continue;
             if(set.contains(List.of(node, vtx)))
                 cnt++;
-            dfs(set, vtx, node, adj);
+            cnt += dfs(set, vtx, node, adj);
         }
+        return cnt;
     }
 
     public int minReorder(int n, int[][] connections) {
@@ -20,8 +21,6 @@ class Solution {
             adj[conc[0]].add(conc[1]);
             adj[conc[1]].add(conc[0]);
         }
-        cnt = 0;
-        dfs(set, 0, -1, adj);
-        return cnt;
+        return dfs(set, 0, -1, adj);
     }
 }
