@@ -8,7 +8,7 @@ class Solution {
             return cyc[node] - cyc[vtx] + 1;
         cyc[vtx] = cyc[node] + 1;
         ans = Math.max(ans, dfs(vtx, cyc, edges));
-        // cyc[vtx] = -1;
+        cyc[vtx] = -1;
         return ans;
     }
 
@@ -21,6 +21,7 @@ class Solution {
             if(cyc[i] == -1) {
                 cyc[i] = 0;
                 ans = Math.max(ans, dfs(i, cyc, edges));
+                cyc[i] = -1;
             }
         }
         return ans;
