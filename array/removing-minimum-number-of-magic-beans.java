@@ -6,9 +6,7 @@ class Solution {
             sum += i;
         long minBean = Long.MAX_VALUE, n = beans.length;
         for(int i = 0; i < n; i++) {
-            minBean = Math.min(minBean, run + sum - (n-i) * beans[i]);
-            sum -= beans[i];
-            run += beans[i];
+            minBean = Math.min(minBean, sum - (n-i) * beans[i]);
         }
         return minBean;
     }
