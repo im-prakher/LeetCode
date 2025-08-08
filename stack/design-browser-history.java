@@ -13,7 +13,8 @@ class BrowserHistory {
     
     public void visit(String url) {
         curr.next = null;
-        curr.next = new Node(url);
+        Node newPage = new Node(url);
+        curr.next = newPage;
         newPage.prev = curr;
         curr = curr.next; 
     }
