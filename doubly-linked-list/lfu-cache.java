@@ -2,15 +2,14 @@ class LFUCache {
     HashMap<Integer, int[]> map;
     TreeMap<Integer, LinkedHashSet> freqMap;
     int cap;
+    
     public LFUCache(int capacity) {
         map = new HashMap<>();
         freqMap = new TreeMap<>();
         cap = capacity;
     }
-    
-    public int get(int key) {
-        if(!map.containsKey(key))
-            return -1;
+
+    public void incFreq(int key) {
         int[] res = map.get(key);
         freqMap.get(res[1]).remove(key);
         if(freqMap.get(res[1]).isEmpty()) {
@@ -19,11 +18,23 @@ class LFUCache {
         res[1]++;
         freqMap.putIfAbsent(res[1], new LinkedHashSet<>());
         freqMap.get(res[1]).addLast(key);
+    }
+
+    public int get(int key) {
+        if(!map.containsKey(key))
+            return -1;
+        int[] res = map.get(key);
+        incFreq(key);
         return res[0];
     }
     
     public void put(int key, int value) {
-        if(cap > 0) {
+        if(map.containsKey(key)) {
+            int[] res = map.get(key);
+            res[0] = value;
+            incFreq(key);
+        }
+        else if(cap > 0) {
             cap--;
         } else {
             int fq = freqMap.firstKey();
