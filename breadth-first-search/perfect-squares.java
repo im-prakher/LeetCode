@@ -22,7 +22,7 @@ class Solution {
             int min = (int) 1e4;
             for(int i = 1; i * i <= j; i++) {
                 int sqr = i * i;
-                if(n % sqr == 0) {
+                if(j % sqr == 0) {
                     min = Math.min(min, j / sqr);
                 } else {
                     min = Math.min(min, j / sqr + func(j % sqr));
