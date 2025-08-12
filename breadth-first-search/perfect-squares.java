@@ -16,12 +16,19 @@ class Solution {
     }
     public int numSquares(int n) {
         dp = new int[n+1];
-        Arrays.fill(dp, Integer.MAX_VALUE);
-        dp[0] = 0;
+        // Arrays.fill(dp, -1);
+        // return func(n);
         for(int j = 1; j <= n; j++) {
+            int min = (int) 1e4;
             for(int i = 1; i * i <= j; i++) {
-                dp[j] = Math.min(dp[j], dp[j - i * i] + 1);
+                int sqr = i * i;
+                if(n % sqr == 0) {
+                    min = Math.min(min, j / sqr);
+                } else {
+                    min = Math.min(min, j / sqr + func(j % sqr));
+                }
             }
+            dp[j] = min;
         }
         return dp[n];
     }
