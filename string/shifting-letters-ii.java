@@ -10,13 +10,14 @@ class Solution {
         int a = 'a', z = 'z';
         for(int i = 0; i < n; i++) {
             step += move[i];
+            step = step % 26;
             if(step == 0)
                 continue;
             int skip = (int) str[i] + step;
             if(skip < a) 
-                str[i] =  (char) (skip + 26);
+                str[i] =  (char) (123 - 97 % skip);
             else if(skip > z)
-                str[i] =  (char) (skip - 26);
+                str[i] =  (char) (96 + skip % 122);
             else
                 str[i] = (char) skip;
         }
