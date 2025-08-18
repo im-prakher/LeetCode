@@ -4,7 +4,7 @@ class Solution {
         for(int i = 0; i <= 1000; i++) {
             pas = 0;
             for(int[] trip : trips) {
-                if(i < trip[1] || i > trip[2])
+                if(i < trip[1] || i >= trip[2])
                     continue;
                 pas += trip[0];
             }
