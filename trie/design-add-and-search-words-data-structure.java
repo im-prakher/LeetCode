@@ -24,6 +24,7 @@ class WordDictionary {
 
     public void insertTrie(Trie root, String word, int idx) {
         if(idx == word.length()) {
+            root.isWord = true;
             return;
         }
         char ch = word.charAt(idx);
@@ -40,7 +41,9 @@ class WordDictionary {
     
     public boolean searchTrie(Trie root, String word, int idx) {
         if(idx == word.length()) {
-            return true;
+            if(root.isWord)
+                return true;
+            return false;
         } 
         char ch = word.charAt(idx);
         boolean res = false;
