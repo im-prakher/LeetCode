@@ -5,13 +5,10 @@ class Solution {
             return 0;
         if(dp[day]!=-1)
             return dp[day];
-        Integer nextDay1 = tset.ceiling(day + 1);
-        Integer nextDay2 = tset.ceiling(day + 7);
-        Integer nextDay3 = tset.ceiling(day + 30);
-        return dp[day] =  Math.min(costs[0] + solve(costs, tset, nextDay1),
+        return dp[day] =  Math.min(costs[0] + solve(costs, tset, tset.ceiling(day + 1)),
             Math.min(
-                costs[1] + solve(costs, tset, nextDay2),
-                costs[2] + solve(costs, tset, nextDay3)
+                costs[1] + solve(costs, tset, tset.ceiling(day + 7)),
+                costs[2] + solve(costs, tset, tset.ceiling(day + 30))
             )
         );
     }
