@@ -1,18 +1,28 @@
 class Solution {
+    public long solve(int nums[], int idx, Map<Integer, Long> dp) {
+        if(idx == nums.length)
+            return 0;
+        if(dp.containsKey(idx))
+            return dp.get(idx);
+        int i = idx; long take = 0;
+        for(i = idx; i < nums.length; i++) {
+            if(nums[i] != nums[idx])
+                break;
+            take += nums[i];
+        }
+        for(; i < nums.length; i++) {
+            if(nums[idx] + 1 == nums[i] || nums[idx] + 2 == nums[i]) 
+                continue;
+            break;
+        }
+        long ans = Math.max(take + solve(nums, i, dp), solve(nums, idx+1, dp));
+        dp.put(idx, ans);
+        return ans;
+    }
+
     public long maximumTotalDamage(int[] power) {
-        int max = 0;
-        for(int i : power) {
-            max = Math.max(max, i);
-        }
-        long dp[] = new long[max+1];
-        for(int i : power) {
-            dp[i] += i;
-        }
-        if(max >= 2)
-            dp[2] = Math.max(dp[2], dp[1]);
-        for(int i = 3; i <= max; i++) {
-            dp[i] = Math.max(dp[i-2], Math.max(dp[i-1], dp[i-3] + dp[i]));
-        }
-        return dp[max];
+        Arrays.sort(power);
+        Map<Integer, Long> dp = new HashMap<>();
+        return solve(power, 0, dp);
     }
 }
