@@ -15,8 +15,7 @@ class Solution {
             int a = dp.floorKey(i - 3) == null ? 0 : dp.floorKey(i-3);
             int b = dp.floorKey(i - 2) == null ? 0 : dp.floorKey(i-2);
             int c = dp.floorKey(i - 1) == null ? 0 : dp.floorKey(i-1);
-            long d = Math.max(dp.get(c), Math.max(dp.get(b), 
-                        dp.get(a) + dp.get(i)));
+            long d = Math.max(dp.get(c), Math.max(dp.get(b), dp.get(a) + dp.get(i)));
             dp.put(i, d);
         }
         return dp.get(max);
