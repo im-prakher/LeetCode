@@ -1,27 +1,16 @@
 class Solution {
-    public int solve(int nums[], int idx, Map<Integer, Integer> dp) {
-        if(idx == nums.length)
-            return 0;
-        if(dp.containsKey(idx))
-            return dp.get(idx);
-        int i = idx, take = 0;
-        for(i = idx; i < nums.length; i++) {
-            if(nums[i] != nums[idx])
-                break;
-            take += nums[i];
-        }
-        for(; i < nums.length; i++) {
-            if(nums[idx] + 1 != nums[i]) 
-                break;
-        }
-        int ans = Math.max(take + solve(nums, i, dp), solve(nums, idx+1, dp));
-        dp.put(idx, ans);
-        return ans;
-    }
-
     public int deleteAndEarn(int[] nums) {
-        Arrays.sort(nums);
-        Map<Integer, Integer> dp = new HashMap<>();
-        return solve(nums, 0, dp);
+        int max = 0;
+        for(int i : nums) {
+            max = Math.max(max, i);
+        }
+        int dp[] = new int[max+1];
+        for(int i : nums) {
+            dp[i] += i;
+        }
+        for(int i = 2; i <= max; i++) {
+            dp[i] = Math.max(dp[i-1], dp[i] + dp[i-2]);
+        }
+        return dp[max];
     }
 }
