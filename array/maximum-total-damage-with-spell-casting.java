@@ -1,28 +1,24 @@
 class Solution {
-    public long solve(int nums[], int idx, Map<Integer, Long> dp) {
-        if(idx == nums.length)
-            return 0;
-        if(dp.containsKey(idx))
-            return dp.get(idx);
-        int i = idx; long take = 0;
-        for(i = idx; i < nums.length; i++) {
-            if(nums[i] != nums[idx])
-                break;
-            take += nums[i];
-        }
-        for(; i < nums.length; i++) {
-            if(nums[idx] + 1 == nums[i] || nums[idx] + 2 == nums[i]) 
-                continue;
-            break;
-        }
-        long ans = Math.max(take + solve(nums, i, dp), solve(nums, idx+1, dp));
-        dp.put(idx, ans);
-        return ans;
-    }
-
     public long maximumTotalDamage(int[] power) {
-        Arrays.sort(power);
-        Map<Integer, Long> dp = new HashMap<>();
-        return solve(power, 0, dp);
+        int max = 0, n = power.length;
+        TreeMap<Integer, Long> dp = new TreeMap<>();
+        for(int i : power) {
+            max = Math.max(max, i);
+        }
+        for(int i : power) {
+            dp.put(i, dp.getOrDefault(i, 0L) + i);
+        }
+        dp.put(0, 0L);
+        for(int i : dp.keySet()) {
+            if(!dp.containsKey(i))
+                continue;
+            int a = dp.floorKey(i - 3) == null ? 0 : dp.floorKey(i-3);
+            int b = dp.floorKey(i - 2) == null ? 0 : dp.floorKey(i-2);
+            int c = dp.floorKey(i - 1) == null ? 0 : dp.floorKey(i-1);
+            long d = Math.max(dp.get(c), Math.max(dp.get(b), 
+                        dp.get(a) + dp.get(i)));
+            dp.put(i, d);
+        }
+        return dp.get(max);
     }
 }
