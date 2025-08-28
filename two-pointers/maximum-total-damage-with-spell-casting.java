@@ -1,21 +1,23 @@
 class Solution {
     public long maximumTotalDamage(int[] power) {
-        int max = 0, n = power.length;
-        TreeMap<Integer, Long> dp = new TreeMap<>();
-        for(int i : power) {
-            max = Math.max(max, i);
+        long max_dp = 0; int n = power.length;
+        long dp[] = new long[100001];
+        Arrays.sort(power);
+        for(int i = 0, j = 0; i < n; i++) {
+            if(power[i] == power[Math.max(0, i-1)]) {
+                dp[i+1] = dp[i] + power[i];
+            } else {
+                while(power[j] + 2 < power[i]) {
+                    max_dp = Math.max(max_dp, dp[++j]);
+                }
+                dp[i+1] = power[i] + max_dp;
+            }
         }
-        for(int i : power) {
-            dp.put(i, dp.getOrDefault(i, 0L) + i);
+
+        long ans = 0;
+        for(long damage : dp) {
+            ans = Math.max(ans, damage);
         }
-        dp.put(0, 0L);
-        for(int i : dp.keySet()) {
-            int a = dp.floorKey(i - 3) == null ? 0 : dp.floorKey(i-3);
-            int b = dp.floorKey(i - 2) == null ? 0 : dp.floorKey(i-2);
-            int c = dp.floorKey(i - 1) == null ? 0 : dp.floorKey(i-1);
-            long d = Math.max(dp.get(c), Math.max(dp.get(b), dp.get(a) + dp.get(i)));
-            dp.put(i, d);
-        }
-        return dp.get(max);
+        return ans;
     }
 }
