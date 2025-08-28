@@ -3,14 +3,14 @@ class Solution {
         long max_dp = 0; int n = power.length;
         long dp[] = new long[100001];
         Arrays.sort(power);
-        for(int i = 0, j = 0; i < n; i++) {
-            if(power[i] == power[Math.max(0, i-1)]) {
-                dp[i+1] = dp[i] + power[i];
+        for(int i = 1, j = 0; i <= n; i++) {
+            if(power[i-1] == power[Math.max(0, i-2)]) {
+                dp[i] = dp[i-1] + power[i-1];
             } else {
-                while(power[j] + 2 < power[i]) {
+                while(power[j] + 2 < power[i-1]) {
                     max_dp = Math.max(max_dp, dp[++j]);
                 }
-                dp[i+1] = power[i] + max_dp;
+                dp[i] = power[i-1] + max_dp;
             }
         }
 
