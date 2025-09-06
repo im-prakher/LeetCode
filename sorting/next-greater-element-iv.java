@@ -8,7 +8,7 @@ class Solution {
             (a, b)-> nums[a]- nums[b]);
         for(int i = 0; i < n; i++) {
             while(!pq.isEmpty()) {
-                if(nums[pq.peek()] > nums[i]) 
+                if(nums[pq.peek()] >= nums[i]) 
                     break;
                 ans[pq.poll()] = nums[i];
             }
