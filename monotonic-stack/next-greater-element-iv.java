@@ -8,8 +8,7 @@ class Solution {
         int tmp[] = new int[n+1];
         for(int i = 0; i < n; i++) {
             while(top1!=-1 && nums[stack2[top1]] < nums[i]) {
-                ans[stack2[top1]] = nums[i];
-                top1--;
+                ans[stack2[top1--]] = nums[i];
             }
             while(top!=-1 && nums[stack[top]] < nums[i]) {
                 tmp[++k] = stack[top--];
