@@ -1,20 +1,21 @@
 class Solution {
     public int[] secondGreaterElement(int[] nums) {
-        int n = nums.length, k = 0, top = -1;
+        int n = nums.length, k = -1, top = -1, top1 = -1;
         int ans[] = new int[n];
         Arrays.fill(ans, -1);
-        int stack[] = new int[100_002];
-        PriorityQueue<Integer> pq = new PriorityQueue<>(
-            (a, b)-> nums[a]- nums[b]);
+        int stack[] = new int[n+1];
+        int stack2[] = new int[n+1];
+        int tmp[] = new int[n+1];
         for(int i = 0; i < n; i++) {
-            while(!pq.isEmpty()) {
-                if(nums[pq.peek()] >= nums[i]) 
-                    break;
-                ans[pq.poll()] = nums[i];
+            while(top1!=-1 && nums[stack2[top1]] < nums[i]) {
+                ans[stack2[top1]] = nums[i];
+                top1--;
             }
             while(top!=-1 && nums[stack[top]] < nums[i]) {
-                pq.offer(stack[top]);
-                top--;
+                tmp[++k] = stack[top--];
+            }
+            while(k!=-1) {
+                stack2[++top1] = tmp[k--];
             }
             stack[++top] = i;
         }
