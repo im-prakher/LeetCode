@@ -1,27 +1,37 @@
 class Solution {
     public String predictPartyVictory(String senate) {
-        int cntR = 0, revR= 0, exR = 0, cntD = 0, exD = 0, revD= 0;
+        int cntR = 0, cntD = 0, revR= 0, revD= 0;
+        Queue<Character> que = new LinkedList<>();
         for(char s : senate.toCharArray()) {
-            if(s == 'D') {
-                if(cntR > exR) {
-                    exR++;
+            que.offer(s);
+            cntR += s == 'R'? 1: 0;
+            cntD += s == 'D'? 1: 0;
+        }
+        while(!que.isEmpty()) { 
+            char ch = que.poll();
+            if(cntD == 0)
+                return "Radiant";
+            if(cntR == 0)
+                return "Dire";
+            if(ch == 'R'){
+                if(revR == 0) {
                     revD++;
-                } else if(revR < cntR) {
-                    exD++;
-                    revR++;
+                    que.offer(ch);
+                } else {
+                    revR--;
+                    cntR--;
                 }
-                cntD++;
-            } else {
-                if(cntD > exD) {
-                    exD++;
+            }
+            if(ch == 'D'){
+                if(revD == 0) {
                     revR++;
-                } else if(revD < cntD) {
-                    exR++;
-                    revD++;
+                    que.offer(ch);
+                } else {
+                    revD--;
+                    cntD--;
                 }
-                cntR++;
             }
         }
-        return (cntD - revD - exR) > (cntR - revR - exD) ? "Dire" : "Radiant";
+        return "Radiant";
     }
 }
