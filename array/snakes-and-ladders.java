@@ -7,6 +7,16 @@ class Solution {
         return (cell-1) % n;
     }
 
+    public void reverse(int[][] board, int n) {
+        int i = 0, j = n-1;
+        while(i < j) {
+            int[] tmp = board[i];
+            board[i] = board[j];
+            board[j] = tmp;
+            i++; j--;
+        }
+    }
+
     public int snakesAndLadders(int[][] board) {
         // do bfs for next 6 cells
         //if any cell has snake/ladder push that in queue
@@ -15,9 +25,10 @@ class Solution {
         que.offer(new int[] {1, 0});
         Set<Integer> vis = new HashSet<>();
         int n = board.length;
+        reverse(board, n);
         while(!que.isEmpty()) {
             int[] cell = que.poll();
-            if(cell[0] == (n*n - 1))
+            if(cell[0] == (n*n))
                 return cell[1];
             for(int k = cell[0]; k < Math.min(cell[0] + 6, n * n + 1); k++) {
                 int i = row(k, n), j = col(k, n);
