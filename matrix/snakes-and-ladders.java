@@ -39,7 +39,7 @@ class Solution {
             for(int k = cell[0]+1; k < Math.min(cell[0] + 7, n * n + 1); k++) {
                 int i = row(k, n), j = col(k, n);
                 if(board[i][j] != -1) {
-                    if(!vis.contains(board[i][j])) 
+                    if(!vis.contains(board[i][j]) || !vis.contains(board[i][j]+6)) 
                         que.offer(new int[] {board[i][j], cell[1]+1});
                     vis.add(board[i][j]);
                 } else if(!vis.contains(k)) {
