@@ -6,6 +6,8 @@ class Solution {
         Set<String> vis = new HashSet<>();
         for(var ends : deadends)
             vis.add(ends);
+        if(vis.contains("0000"))
+            return -1;
         que.offer("0000");
         Map<String, Integer> mp = new HashMap<>();
         mp.put("0000", 0);
