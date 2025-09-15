@@ -1,10 +1,14 @@
 class Solution {
     public int row(int cell, int n) {
-        return (cell-1) / n;
+        // if((cell / n) % 2 == 0)
+            return (cell-1) / n;
     }
 
     public int col(int cell, int n) {
-        return (cell-1) % n;
+        int c = (cell-1) % n;
+        if(((cell - 1) / n) % 2 == 0)
+            return c;
+        return n - 1 - c;
     }
 
     public void reverse(int[][] board, int n) {
@@ -27,10 +31,11 @@ class Solution {
         int n = board.length;
         reverse(board, n);
         vis.add(1);
+        int ans = Integer.MAX_VALUE;
         while(!que.isEmpty()) {
             int[] cell = que.poll();
-            if(cell[0] == (n*n))
-                return cell[1];
+            if(cell[0] == n*n)
+                ans = Math.min(ans, cell[1]);
             for(int k = cell[0]+1; k < Math.min(cell[0] + 7, n * n + 1); k++) {
                 int i = row(k, n), j = col(k, n);
                 if(board[i][j] != -1) {
@@ -43,6 +48,6 @@ class Solution {
                 vis.add(k);
             }
         }
-        return -1;
+        return ans == Integer.MAX_VALUE ? -1 : ans;
     }
 }
