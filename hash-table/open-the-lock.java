@@ -4,9 +4,10 @@ class Solution {
             return 0;
         Queue<String> que = new LinkedList<>();
         Set<String> vis = new HashSet<>();
-        for(var ends : deadends)
-            vis.add(ends);
-        if(vis.contains("0000"))
+        Set<String> ends = new HashSet<>();
+        for(var dead : deadends)
+            ends.add(dead);
+        if(ends.contains("0000"))
             return -1;
         que.offer("0000");
         Map<String, Integer> mp = new HashMap<>();
@@ -23,11 +24,11 @@ class Solution {
                 String n = new String(ntr);
                 if(a.equals(target) || n.equals(target)) 
                     return mp.get(s) + 1;
-                if(!vis.contains(a)) {
+                if(!vis.contains(a) && !ends.contains(a)) {
                     que.offer(a);
                     mp.put(a, mp.get(s) + 1);
                 }
-                if(!vis.contains(n) ){
+                if(!vis.contains(n) && !ends.contains(n)) {
                     que.offer(n);    
                     mp.put(n, mp.get(s) + 1);
                 }
