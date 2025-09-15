@@ -34,8 +34,8 @@ class Solution {
         int ans = Integer.MAX_VALUE;
         while(!que.isEmpty()) {
             int[] cell = que.poll();
-            if(cell[0] == n*n)
-                return cell[1];
+            // if(cell[0] == n*n)
+            //     return cell[1];
             for(int k = cell[0]+1; k < Math.min(cell[0] + 7, n * n + 1); k++) {
                 int i = row(k, n), j = col(k, n);
                 if(board[i][j] != -1) {
@@ -45,6 +45,8 @@ class Solution {
                 } else if(!vis.contains(k)) {
                     que.offer(new int[] {k, cell[1]+1});
                 }
+                if(board[i][j] == n * n || k == n*n)
+                    return cell[1] + 1;
                 vis.add(k);
             }
         }
