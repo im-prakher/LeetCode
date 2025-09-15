@@ -35,7 +35,7 @@ class Solution {
         while(!que.isEmpty()) {
             int[] cell = que.poll();
             if(cell[0] == n*n)
-                ans = Math.min(ans, cell[1]);
+                return cell[1];
             for(int k = cell[0]+1; k < Math.min(cell[0] + 7, n * n + 1); k++) {
                 int i = row(k, n), j = col(k, n);
                 if(board[i][j] != -1) {
@@ -48,6 +48,6 @@ class Solution {
                 vis.add(k);
             }
         }
-        return ans == Integer.MAX_VALUE ? -1 : ans;
+        return -1;
     }
 }
