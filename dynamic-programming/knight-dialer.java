@@ -1,14 +1,14 @@
 class Solution {
-    public long moves(int pos, int n, long[][] dp, List<List<Integer>> adj, long mod) {
+    public int moves(int pos, int n, int[][] dp, List<List<Integer>> adj, int mod) {
         if(n == 0)
             return 1;
         if(dp[pos][n] != -1)
-            return dp[pos][n];
-        long res = 0;
+            return dp[pos][n] % mod;
+        int res = 0;
         for(var num : adj.get(pos)) {
-            res += moves(num, n-1, dp, adj, mod);
+            res = (res + moves(num, n-1, dp, adj, mod)) % mod;
         }
-        return dp[pos][n] = res % mod;
+        return dp[pos][n] = res;
     }
 
     public int knightDialer(int n) {
@@ -24,14 +24,13 @@ class Solution {
             List.of(1, 3),       // 8
             List.of(2, 4)        // 9
         );
-        long ans = 0, mod = (long)1e9 + 7;
-        long[][] dp = new long[10][n+1];
-        for(long[] row : dp)
+        int ans = 0, mod = (int)1e9 + 7;
+        int[][] dp = new int[10][n+1];
+        for(int[] row : dp)
             Arrays.fill(row, -1);
         for(int i = 0; i <= 9; i++) {
-            ans += moves(i, n-1, dp, adj, mod) ;
+            ans = (ans + moves(i, n-1, dp, adj, mod)) % mod;
         }
-        ans = ans % mod;
-        return (int) ans;
+        return ans;
     }
 }
