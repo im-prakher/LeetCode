@@ -22,7 +22,7 @@ class Solution {
 
     public int search(MountainArray mountainArr, int target, int i, int j, boolean flag) {
         int ans = -1;
-        while(i < j) {
+        while(i <= j) {
             int mid = (i + j) >> 1;
             int found = mountainArr.get(mid);
             if(found == target) {
@@ -46,7 +46,7 @@ class Solution {
         int n = mountainArr.length();
         int k = getMaxIdx(mountainArr, n);
         int a = search(mountainArr, target, 0, k, false);
-        int b = search(mountainArr, target, k+1, n-1, true);
+        int b = search(mountainArr, target, k, n-1, true);
         return a != -1 ? a : b;
     }
 }
