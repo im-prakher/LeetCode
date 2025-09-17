@@ -10,7 +10,7 @@
 class Solution {
     public int getMaxIdx(MountainArray mountainArr, int n) {
         int i = 0, j = n-1, ans = 0;
-        while(i < j) {
+        while(i <= j) {
             int mid = (i + j) >> 1;
             if(mountainArr.get(mid) < mountainArr.get(mid+1)) {
                 i = mid + 1;
