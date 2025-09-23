@@ -1,22 +1,23 @@
 class Solution {
+    void swap(int[] nums, int i, int j) {
+        int tmp = nums[j];
+        nums[j] = nums[i];
+        nums[i] = tmp;
+    }
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
         for(int i = 0; i < n; i++) {
-            nums[i] = nums[i] < 0 ? 0 : nums[i];
-        }
-        for(int i = 0; i < n; i++) {
-            if(nums[i] == 0 || Math.abs(nums[i]) > n)
+            if(nums[i] <= 0 || nums[i] > n)
                 continue;
-            int pos = Math.abs(nums[i]) - 1;
-            if(nums[pos] > 0)
-                nums[pos] = -nums[pos];
-            if(nums[pos] == 0)
-                nums[pos] = -1;
+            int pos = nums[i]-1;
+            swap(nums, pos, i);
+            if(pos > i) 
+                i--;
         }
         for(int i = 0; i < n; i++) {
-            if(nums[i] >= 0) 
+            if(nums[i] != i + 1)
                 return i + 1;
         }
-        return n + 1;
+        return n+1;
     }
 }
