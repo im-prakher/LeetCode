@@ -1,14 +1,15 @@
 class Solution {
     public int[] arrayChange(int[] nums, int[][] operations) {
-        Map<Integer, Integer> mp = new HashMap<>();
+        int[] mp = new int[100_000];
+        Arrays.fill(mp, -1);
         for(int i = 0; i < nums.length; i++) {
-            mp.put(nums[i], i);
+            mp[nums[i]] = i;
         }
         for(int[] ops : operations) {
-            int idx = mp.get(ops[0]);
+            int idx = mp[ops[0]];
             nums[idx] = ops[1];
-            mp.remove(ops[0]);
-            mp.put(ops[1], idx);
+            mp[ops[0]] = -1;
+            mp[ops[1]] = idx;
         }
         return nums;
     }
