@@ -8,14 +8,16 @@ class Solution {
         int n = nums.length;
         for(int i = 0; i < n; i++) {
             if(nums[i] <= 0 || nums[i] > n)
-                continue;
-            int pos = nums[i]-1;
-            swap(nums, pos, i);
-            if(pos > i && nums[pos] != nums[i]) 
-                i--;
+                nums[i] = n + 1;
         }
         for(int i = 0; i < n; i++) {
-            if(nums[i] != i + 1)
+            int pos = Math.abs(nums[i]) - 1;
+            if(pos < n) {
+                nums[pos] = -Math.abs(nums[pos]);
+            }
+        }
+        for(int i = 0; i < n; i++) {
+            if(nums[i] > 0)
                 return i + 1;
         }
         return n+1;
