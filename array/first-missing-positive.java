@@ -11,7 +11,7 @@ class Solution {
                 continue;
             int pos = nums[i]-1;
             swap(nums, pos, i);
-            if(pos > i) 
+            if(pos > i && nums[pos] != nums[i]) 
                 i--;
         }
         for(int i = 0; i < n; i++) {
