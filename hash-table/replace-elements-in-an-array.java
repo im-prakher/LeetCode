@@ -1,6 +1,6 @@
 class Solution {
     public int[] arrayChange(int[] nums, int[][] operations) {
-        int[] mp = new int[100_000];
+        int[] mp = new int[1000_001];
         Arrays.fill(mp, -1);
         for(int i = 0; i < nums.length; i++) {
             mp[nums[i]] = i;
