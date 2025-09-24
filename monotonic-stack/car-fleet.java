@@ -1,13 +1,14 @@
 class Solution {
     public boolean canMeet(int a, int x, int b, int y, int tar) {
+        int p = a, q = b;
         if(x <= y)
             return false;
-        while(a < tar && b < tar) {
-            a += x;
-            b += y;
+        while(b <= tar) {
             if(a >= b)
                 return true;
-        }
+            a += x;
+            b += y;
+        } 
         return false;
     }
     public int carFleet(int target, int[] position, int[] speed) {
