@@ -2,7 +2,7 @@ class Solution {
     public boolean canMeet(int a, int x, int b, int y, int tar) {
         if(x <= y)
             return false;
-        while(a <= tar && b <= tar) {
+        while(a < tar && b < tar) {
             a += x;
             b += y;
             if(a >= b)
