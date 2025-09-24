@@ -1,10 +1,12 @@
 class Solution {
     public boolean canMeet(int a, int x, int b, int y, int tar) {
+        if(x <= y)
+            return false;
         while(a <= tar && b <= tar) {
-            if(a >= b)
-                return true;
             a += x;
             b += y;
+            if(a >= b)
+                return true;
         }
         return false;
     }
