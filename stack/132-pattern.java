@@ -3,12 +3,12 @@ class Solution {
         int n = nums.length, top = -1;
         int[] stack = new int[n];
         for(int i = 0; i < n; i++) {
-            while(top!= -1 && stack[top] > nums[i]) {
-                if(top > 0)
+            while(top!= -1 && nums[stack[top]] > nums[i]) {
+                if(top > 0 && stack[top-1] < nums[i])
                     return true;
                 top--;
             }
-            stack[++top] = nums[i];
+            stack[++top] = i;
         }
         return false;
     }
