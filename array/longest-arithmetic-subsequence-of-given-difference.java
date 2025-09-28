@@ -1,17 +1,12 @@
 class Solution {
     public int longestSubsequence(int[] arr, int difference) {
         int n = arr.length;
-        int nums[] = new int[n];
+        int nums[] = new int[100_00];
+        Map<Integer, Integer> mp = new HashMap<>();
         for(int i = 0; i < n; i++) {
-            nums[i] = 1;
-            int max = 0;
-            for(int j = 0; j < i; j++) {
-                if(arr[i] - arr[j] == difference)
-                    max = Math.max(max, nums[j]);
-            }
-            nums[i] += max;
+            mp.put(arr[i], 1 + mp.getOrDefault(arr[i]-difference, 0));
         }
-        int res = Arrays.stream(nums).max().getAsInt();
+        int res = mp.values().stream().max(Integer::compare).get();
         return res;
     }
 }
