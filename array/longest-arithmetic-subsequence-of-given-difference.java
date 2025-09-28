@@ -4,8 +4,9 @@ class Solution {
         int ans = 0;
         Map<Integer, Integer> mp = new HashMap<>();
         for(int i = 0; i < n; i++) {
-            mp.put(arr[i], 1 + mp.getOrDefault(arr[i]-difference, 0));
-            ans = Math.max(ans, mp.get(arr[i]));
+            int val = 1 + mp.getOrDefault(arr[i]-difference, 0);
+            mp.put(arr[i], val);
+            ans = Math.max(ans, val);
         }
         return ans;
     }
