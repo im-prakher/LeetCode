@@ -2,7 +2,7 @@ class Solution {
     boolean signMatch(List<Integer> seq, int num) {
         int val1 = seq.get(seq.size()-1) - seq.get(seq.size()- 2);
         int val2 = num - seq.get(seq.size()- 1);
-        return (val1 > 0 && val2 < 0) || (val1 < 0 && val2 > 0);
+        return val2!= 0 && ((val1 > 0 && val2 < 0) || (val1 < 0 && val2 > 0));
     }
     int func(int[] nums, int idx, List<Integer> seq) {
         if(idx == nums.length)
@@ -18,6 +18,10 @@ class Solution {
     }
 
     public int wiggleMaxLength(int[] nums) {
+        if(nums.length == 1)
+            return 1;
+        if(nums.length == 2)
+            return nums[0] != nums[1] ? 2 : 1;
         return func(nums, 0, new ArrayList<Integer>());
     }
 }
