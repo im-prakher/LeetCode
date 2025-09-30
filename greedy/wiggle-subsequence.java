@@ -1,14 +1,18 @@
 class Solution {
     boolean signMatch(List<Integer> seq, int num) {
-        int val1 = seq.get(seq.size()-1) - seq.get(seq.size()- 2);
-        int val2 = num - seq.get(seq.size()- 1);
-        return val2!= 0 && ((val1 > 0 && val2 < 0) || (val1 < 0 && val2 > 0));
+        if(seq.size() == 0)
+            return true;
+        else if(seq.size() == 1)    
+            return seq.getLast() != num;
+        int val1 = seq.getLast()  - seq.get(seq.size()- 2);
+        int val2 = num - seq.getLast();
+        return (val1 > 0 && val2 < 0) || (val1 < 0 && val2 > 0);
     }
     int func(int[] nums, int idx, List<Integer> seq) {
         if(idx == nums.length)
             return 0;
         int pick = 0;
-        if(seq.size() <  2 || signMatch(seq, nums[idx])) {
+        if(signMatch(seq, nums[idx])) {
             seq.add(nums[idx]);
             pick = 1 + func(nums, idx + 1, seq);
             seq.remove(seq.size()-1);
