@@ -1,28 +1,36 @@
 class Solution {
+int m, n;
+    int[][] dp;
+    int[][] grid;
+    int[] dy = {-1, 0, 1}; 
+    int answer = 0;
 
     public int maxMoves(int[][] grid) {
-        int n = grid.length, m = grid[0].length;
-        int[] prev = new int[n];
-        int[] next = new int[n];
-        for(int j = m-2; j >= 0; j--) {
-            for(int i = 0; i < n; i++) {
-                int up = i-1 < 0 ? Integer.MIN_VALUE : grid[i-1][j+1];
-                int down = i+1 == n ? Integer.MIN_VALUE : grid[i+1][j+1];
-                int cell = grid[i][j];
-                if(grid[i][j+1] > cell)
-                    next[i] = prev[i] + 1;
-                if(up > cell)
-                    next[i] = Math.max(next[i], prev[i-1] + 1);
-                if(down > cell)
-                    next[i] = Math.max(next[i], prev[i+1] + 1);
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+        dp = new int[m][n]; 
+
+        for(int i = 0; i < m; i++) {
+            answer = Math.max(answer, dfs(i, 0)); 
+        }
+
+        return answer;
+    }
+
+    private int dfs(int y, int x) {
+        if(dp[y][x] != 0) return dp[y][x];
+
+        int maxStep = 0;
+        for(int dir = 0; dir < 3; dir++) {
+            int ny = y + dy[dir];
+            int nx = x + 1;
+            if(ny >= 0 && ny < m && nx < n && grid[ny][nx] > grid[y][x]) {
+                maxStep = Math.max(maxStep, 1 + dfs(ny, nx));
             }
-            prev = next;
-            next = new int[n];
         }
-        int ans = 0;
-        for(int i : prev) {
-            ans = Math.max(ans, i);
-        }
-        return ans;
+
+        dp[y][x] = maxStep;
+        return maxStep;
     }
 }
