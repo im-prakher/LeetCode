@@ -11,16 +11,13 @@ class Solution {
                 int cell = grid[i][j];
                 if(grid[i][j+1] > cell)
                     next[i] = prev[i] + 1;
-                else if(up > cell)
-                    next[i] = prev[i-1] + 1;
-                else if(down > cell)
-                    next[i] = prev[i+1] + 1;
-                else 
-                    next[i] = 0;
+                if(up > cell)
+                    next[i] = Math.max(next[i], prev[i-1] + 1);
+                if(down > cell)
+                    next[i] = Math.max(next[i], prev[i+1] + 1);
             }
-            int[] tmp = prev;
             prev = next;
-            next = tmp;
+            next = new int[n];
         }
         int ans = 0;
         for(int i : prev) {
