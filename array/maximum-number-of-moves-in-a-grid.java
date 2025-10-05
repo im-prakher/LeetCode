@@ -2,8 +2,8 @@ class Solution {
 
     public int maxMoves(int[][] grid) {
         int n = grid.length, m = grid[0].length;
-        int[] prev = new int[m];
-        int[] next = new int[m];
+        int[] prev = new int[n];
+        int[] next = new int[n];
         for(int j = m-2; j >= 0; j--) {
             for(int i = 0; i < n; i++) {
                 int up = i-1 < 0 ? Integer.MIN_VALUE : grid[i-1][j+1];
