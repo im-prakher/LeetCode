@@ -3,8 +3,8 @@ class Solution {
         int[][] dp = new int[k][k];
         int ans = 0;
         for(int i = 0; i < nums.length; i++) {
-            int curr_rem = nums[i] % k;
-            for(int j = 0; j < k; j++) {
+            int curr_rem = nums[i] % k; // curr remainder
+            for(int j = 0; j < k; j++) { // j-> prev remainder
                 dp[curr_rem][j] = 1 + dp[j][curr_rem];
                 ans = Math.max(ans, dp[curr_rem][j]);
             }
