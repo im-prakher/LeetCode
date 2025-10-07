@@ -19,7 +19,7 @@ class Solution {
         int[] hash = new int[n];
         Arrays.fill(dp, 1);
         Arrays.fill(hash, -1);
-        for(int i = 1; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             for(int j = 0; j < i; j++) {
                 if(groups[i] != groups[j] && isHammingDiff(i, j, words)) {
                     if(dp[i] < 1 + dp[j]) {
