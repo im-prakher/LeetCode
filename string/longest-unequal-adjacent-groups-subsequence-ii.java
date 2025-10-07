@@ -14,7 +14,7 @@ class Solution {
     }
 
     public List<String> getWordsInLongestSubsequence(String[] words, int[] groups) {
-        int n = words.length;
+        int ans = 0, idx = -1, n = words.length;
         int[] dp = new int[n];
         int[] hash = new int[n];
         Arrays.fill(dp, 1);
@@ -28,9 +28,7 @@ class Solution {
                     }
                 }
             }
-        }
-        int ans = 0, idx = -1;
-        for(int i = 0; i < n; i++) {
+
             if(dp[i] > ans) {
                 ans = dp[i];
                 idx = i;
