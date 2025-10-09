@@ -17,8 +17,6 @@ class Solution {
         bin.add(nums[0]);
         for(int i = 1; i < nums.length; i++) {
             int[] last = bin.getLast();
-            if(last[0] == nums[i][0])
-                continue;
             if(last[1] < nums[i][1])
                 bin.add(nums[i]);
             else {
