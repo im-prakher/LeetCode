@@ -11,17 +11,17 @@ class Solution {
         return i;
     }
 
-    public int maxEnvelopes(int[][] nums) {
-        Arrays.sort(nums, (a, b)-> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, (a, b)-> a[0] != b[0] ? a[0] - b[0] : b[1] - a[1]);
         List<int[]> bin = new ArrayList<>(); // will always be in increasing order
-        bin.add(nums[0]);
-        for(int i = 1; i < nums.length; i++) {
+        bin.add(envelopes[0]);
+        for(int[] envelope : envelopes) {
             int[] last = bin.getLast();
-            if(last[1] < nums[i][1])
-                bin.add(nums[i]);
+            if(last[1] < envelope[1])
+                bin.add(envelope);
             else {
-                int lb = lower_bound2d(bin, nums[i]);
-                bin.set(lb, nums[i]);
+                int lb = lower_bound2d(bin, envelope);
+                bin.set(lb, envelope);
             }
         }
         return bin.size();
