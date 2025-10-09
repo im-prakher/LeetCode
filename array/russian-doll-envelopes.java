@@ -3,7 +3,7 @@ class Solution {
         int i = 0, j = nums.size()-1;
         while(i <= j) {
             int mid = (i + j) >> 1;
-            if(nums.get(mid)[0] < target[0] && nums.get(mid)[1] < target[1])
+            if(nums.get(mid)[1] < target[1])
                 i = mid + 1;
             else
                 j = mid - 1;
@@ -17,14 +17,10 @@ class Solution {
         bin.add(nums[0]);
         for(int i = 1; i < nums.length; i++) {
             int[] last = bin.getLast();
-            // if(last[0] == nums[i][0])
-            //     continue;
-            if(last[0] < nums[i][0] && last[1] < nums[i][1])
+            if(last[1] < nums[i][1])
                 bin.add(nums[i]);
             else {
                 int lb = lower_bound2d(bin, nums[i]);
-                // nums[i][0] = Math.min(bin.get(lb)[0], nums[i][0]);
-                // nums[i][1] = Math.min(bin.get(lb)[1], nums[i][1]);
                 if(bin.getLast()[1] != nums[i][1])
                 bin.set(lb, nums[i]);
             }
