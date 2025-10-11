@@ -11,19 +11,19 @@
 class Solution {
     public ListNode removeZeroSumSublists(ListNode head) {
         int sum = 0;
-        ListNode dum = new ListNode(1001);
+        ListNode dum = new ListNode(0);
         dum.next = head;
         ListNode curr = head;
         ListNode prev = dum;
         Map<Integer, ListNode> mp = new LinkedHashMap<>();
-        mp.put(0, head);
+        mp.put(0, dum);
         while(curr != null) {
             sum += curr.val;
             mp.put(sum, curr);
             curr = curr.next;
         }
 
-        curr = head;
+        curr = dum;
         sum = 0;
         while(curr!=null) {
             sum += curr.val;
