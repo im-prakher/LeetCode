@@ -9,14 +9,15 @@
  * }
  */
 class Solution {
-    LinkedHashMap<Integer, ListNode> resetMap(int k, Map<Integer, ListNode> mp) {
-        LinkedHashMap<Integer, ListNode> temp = new LinkedHashMap<>();
+    void clearMap(int k, Map<Integer, ListNode> mp) {
+        Map<Integer, ListNode> temp = new LinkedHashMap<>();
         for(int key : mp.keySet()) {
             temp.put(key, mp.get(key));
             if(key == k)
                 break;
         }
-        return temp;
+        mp.clear();
+        mp.putAll(temp);
     }
 
     public ListNode removeZeroSumSublists(ListNode head) {
@@ -32,7 +33,7 @@ class Solution {
             if(mp.containsKey(sum)) {
                 prev = mp.get(sum);
                 prev.next = curr.next;
-                mp = resetMap(sum, mp);
+                clearMap(sum, mp);
             } else { 
                 mp.put(sum, curr);
             }
