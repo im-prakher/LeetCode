@@ -15,14 +15,15 @@ class Solution {
         dum.next = head;
         ListNode curr = head;
         ListNode prev = dum;
-        Map<Integer, ListNode> mp = new HashMap<>();
+        TreeMap<Integer, ListNode> mp = new TreeMap<>();
         mp.put(0, dum);
         while(curr != null) {
             sum += curr.val;
             if(mp.containsKey(sum)) {
                 prev = mp.get(sum);
                 prev.next = curr.next;
-            } else {
+                mp.tailMap(sum, false).clear();
+            } else { 
                 mp.put(sum, curr);
             }
             curr = curr.next;
