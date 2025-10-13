@@ -5,12 +5,10 @@ class Solution {
             int height = Math.min(nums[i], nums[j]);
             area = Math.max(area, height * (j-i));
             if(nums[i] < nums[j]) {
-                i++;
-                // while(++i < j && nums[i] <= height);
+                while(++i < j && nums[i] <= height);
             }
             else {
-                j--;
-                // while(--j > i && nums[j] <= height);
+                while(--j > i && nums[j] <= height);
             }
         }
         return area;
