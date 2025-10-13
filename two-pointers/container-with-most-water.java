@@ -4,8 +4,8 @@ class Solution {
         while(i < j) {
             int height = Math.min(nums[i], nums[j]);
             area = Math.max(area, height * (j-i));
-            while(++i < j && nums[i] <= height);
-            while(--j > i && nums[j] <= height);
+            while(i < j && nums[i] <= height) i++;
+            while(j > i && nums[j] <= height) j--;
         }
         return area;
     }
