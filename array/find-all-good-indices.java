@@ -4,7 +4,8 @@ class Solution {
         int n = nums.length, days = 0;
         long[] inc = new long[n];
         long[] dec = new long[n];
-        // inc[0] = dec[n-1] = 1;
+        Arrays.fill(inc, 1);
+        Arrays.fill(dec, 1);
         for(int i = 1, j = n-2; i < n && j >= 0; i++, j--) {
             if(nums[i-1] >= nums[i])
                 inc[i] = inc[i-1] + 1;
@@ -18,7 +19,7 @@ class Solution {
                 dec[i] = 1;
         }
         for(int i = k ; i < n-k; i++) {
-            if((inc[i-1] >= k || inc[i] >= k) && (k <= dec[i] || dec[i+1] >= k))
+            if(inc[i-1] >= k && dec[i+1] >= k)
                 ans.add(i);
         }
         return ans;
