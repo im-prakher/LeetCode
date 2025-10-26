@@ -3,7 +3,7 @@ class Solution {
         return Math.abs(num);
     }
     public long minCost(int[] nums, int[] cost) {
-        long sum = 0l, nat_sum = 0l, mul_sum = 0l, tml_sum = 0l;
+        long sum = 0, nat_sum = 0, mul_sum = 0, tml_sum = 0;
         int n = nums.length;
         long[][] conv = new long[n][2];
         for(int i = 0; i < n; i++) {
@@ -13,7 +13,7 @@ class Solution {
             nat_sum += 1l * cost[i];
         }
         Arrays.sort(conv, (a, b)-> Long.compare(a[0],  b[0]));
-        long ans = tml_sum * 1l;
+        long ans = tml_sum;
         for(long[] cov : conv) {
             mul_sum += cov[0] * cov[1];
             sum += cov[1];
