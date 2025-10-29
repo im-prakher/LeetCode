@@ -5,8 +5,8 @@ class Solution {
             return nums[i];
         while(i < j) {
             int mid = i + (j-i) / 2;
-            if(nums[mid-1] > nums[mid])
-                return nums[mid];
+            if(nums[mid] > nums[mid+1])
+                return nums[mid+1];
             else if(nums[0] < nums[mid])
                 i = mid+1;
             else
