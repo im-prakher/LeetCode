@@ -21,10 +21,11 @@ class Solution {
             adj[edge[1]].add(edge[0]);
         }
         boolean[] vis = new boolean[n];
+        boolean res = dfsCycle(-1, 0, adj, vis);
         for(int i = 0; i < n; i++) {
-            if(!vis[i] && dfsCycle(-1, i, adj, vis))
+            if(!vis[i])
                 return false;
         }
-        return true;
+        return !res;
     }
 }
