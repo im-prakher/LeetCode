@@ -8,7 +8,7 @@ class Solution {
         int dy[] = {1, 0, -1, 0};
         int[][] time = new int[n][m];
         for(int[] row: time)
-            Arrays.fill(row, (int) 1e9);
+            Arrays.fill(row, Integer.MAX_VALUE);
         time[0][0] = 0;
         while(!que.isEmpty()) {
             int[] node = que.poll();
