@@ -13,10 +13,10 @@ class Solution {
         while(!que.isEmpty()) {
             int[] node = que.poll();
             int a = node[0], b = node[1], curTime = node[2];
-            if(curTime > time[a][b])
-                continue;
             if(a == n-1 && b == m-1)
                 return curTime;
+            if(curTime > time[a][b])
+                continue;
             for(int i = 0; i < 4; i++) {
                 int x = a + dx[i], y = b + dy[i];
                 if(x >= 0 && x < n && y >= 0 && y < m) {
