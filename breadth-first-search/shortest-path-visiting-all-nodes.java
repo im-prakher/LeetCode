@@ -23,6 +23,6 @@ class Solution {
             }
             path++;
         }
-        return -1;
+        return 0;
     }
 }
