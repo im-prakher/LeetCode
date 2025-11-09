@@ -4,8 +4,8 @@ class Solution {
         Queue<int[]> que = new LinkedList<>();
         for(int i = 0; i < n; i++) 
             que.offer(new int[]{i, 0}); 
-        int all = (1 << n) - 1, path = 0;
-        boolean[][] vis = new boolean[n][all+1];
+        int allMask = (1 << n) - 1, path = 0;
+        boolean[][] vis = new boolean[n][allMask+1];
         while(!que.isEmpty()) {
             int size = que.size();
             while(size-- > 0) {
@@ -13,7 +13,7 @@ class Solution {
                 int node = next[0], mask = next[1];
                 for(int vtx : graph[node]) {
                     int nxtMask = mask | (1 << vtx);
-                    if((nxtMask & all) == all)
+                    if((nxtMask & allMask) == allMask)
                         return path;
                     if(!vis[vtx][nxtMask]) {
                         vis[vtx][nxtMask] = true;
