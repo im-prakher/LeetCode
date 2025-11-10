@@ -1,6 +1,7 @@
 class Solution {
     Map<Character, List<Character>> cmp;
-    Map<String, Integer> dp;
+    Map<Character, Integer> num;
+    int dp[][];
     int MOD = (int)1e9 + 7;
     void initMap() {
         cmp = new HashMap<>();
@@ -10,6 +11,10 @@ class Solution {
         cmp.put('i', List.of('a', 'e', 'o', 'u'));
         cmp.put('o', List.of('u', 'i'));
         cmp.put('u', List.of('a'));
+
+        num = new HashMap<>();
+        num.put('*', 0);
+        num.put('*', 0);
     }
 
     public int count(char prv, int i, int n) {
@@ -28,7 +33,7 @@ class Solution {
 
     public int countVowelPermutation(int n) {
         initMap();
-        dp = new HashMap<>();
+        dp = new int[6][n];
         return count('*', 0, n);
     }
 }
