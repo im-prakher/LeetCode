@@ -14,26 +14,31 @@ class Solution {
 
         num = new HashMap<>();
         num.put('*', 0);
-        num.put('*', 0);
+        num.put('a', 1);
+        num.put('e', 2);
+        num.put('i', 3);
+        num.put('o', 4);
+        num.put('u', 5);
     }
 
     public int count(char prv, int i, int n) {
-        String key = prv + '_' + String.valueOf(i);
-        if(dp.containsKey(key))
-            return dp.get(key);
+        int c = num.get(prv); 
+        if(dp[c][i] != -1)
+            return dp[c][i];
         if(i == n)
             return 1;
         int ans = 0;
         for(char ch : cmp.get(prv)) {
             ans = (ans + count(ch, i + 1, n)) % MOD;
         }
-        dp.put(key, ans);
-        return ans;
+        return dp[c][i] = ans;
     }
 
     public int countVowelPermutation(int n) {
         initMap();
-        dp = new int[6][n];
+        dp = new int[6][n+1];
+        for(int[] row : dp) 
+            Arrays.fill(row, -1);
         return count('*', 0, n);
     }
 }
