@@ -1,5 +1,5 @@
 class Solution {
-    Map<Integer, Integer> dp;
+    int[] dp;
     
     int setBit(int mask, int i) {
         return mask | (1 << i);
@@ -9,8 +9,8 @@ class Solution {
         int n = nums2.length, idx = Integer.bitCount(mask);
         if(idx == n) 
             return 0;
-        if(dp.containsKey(mask))
-            return dp.get(mask);
+        if(dp[mask] != -1)
+            return dp[mask];
         int ans = Integer.MAX_VALUE;
         for(int i = 0; i < n; i++) {
             int newMask = setBit(mask, i);
@@ -19,13 +19,13 @@ class Solution {
                 ans = Math.min(ans, xor + permute(nums1, nums2, newMask));
             }
         }
-        dp.put(mask, ans);
-        return ans;
+        return dp[mask] = ans;
     }
 
     public int minimumXORSum(int[] nums1, int[] nums2) {
-        dp = new HashMap<>();
         int mask = 0, n = nums1.length;
+        dp = new int[1 << n];
+        Arrays.fill(dp, -1);
         return permute(nums1, nums2, mask);
     }
 }
