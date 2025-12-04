@@ -68,10 +68,10 @@ class Solution {
         for(int i = 1; i < n; i++) {
             for(int j = 1; j < m; j++) {
                 if(mat[i][j] >= mat[i-1][j]) {
-                    flow[i][j].pac = flow[i-1][j].pac;
+                    flow[i][j].pac |= flow[i-1][j].pac;
                 }
                 if(mat[i][j] >= mat[i][j-1]) {
-                    flow[i][j].pac = flow[i][j-1].pac;
+                    flow[i][j].pac |= flow[i][j-1].pac;
                 }
             }
         }
@@ -79,10 +79,10 @@ class Solution {
         for(int i = n-2; i >= 0; i--) {
             for(int j = m-2; j >= 0; j--) {
                 if(mat[i][j] >= mat[i+1][j]) {
-                    flow[i][j].atl = flow[i+1][j].atl;
+                    flow[i][j].atl |= flow[i+1][j].atl;
                 }
                 if(mat[i][j] >= mat[i][j+1]) {
-                    flow[i][j].atl = flow[i][j+1].atl;
+                    flow[i][j].atl |= flow[i][j+1].atl;
                 }
             }
         }
