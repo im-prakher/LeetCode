@@ -1,98 +1,45 @@
 class Solution {
-    public class Flow{
-        boolean atl;
-        boolean pac;
-        public Flow() {
-            atl = pac = false;
+    boolean isValid(int i, int j, boolean[][] vis) {
+        return i >= 0 && j >= 0 && i < vis.length 
+                        && j < vis[0].length && !vis[i][j];
+    }
+
+    public void dfs(int[][] mat, int i, int j, boolean[][] vis) {
+        vis[i][j] = true;
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = {0, 1, 0, -1};
+        for(int k = 0; k < 4; k++) {
+            int ni = i + dr[k], nj = j + dc[k];
+            if(isValid(ni, nj, vis) && mat[i][j] <= mat[ni][nj]) {
+                dfs(mat, ni, nj, vis);
+            }
         }
     }
 
-    // void pacificFlow(int i, int j, Flow[][] flow, int[][] heights) {
-    //     int n = heights.length, m = heights[0].length;
-    //     if(i == 0 && j == 0)
-    //         return;
-    //     flow[i][j].pac = true;
-        
-    //         res.add(List.of(i, j));
-    //     if(j != m-1 && j != 0 && heights[i][j+1] >= heights[i][j]) {
-    //         pacificFlow(i, j+1, flow, heights);
-    //     }
-    //     if(i != n-1 && i != 0 && heights[i+1][j] >= heights[i][j]) {
-    //         pacificFlow(i+1, j, flow, heights);
-    //     }
-    // }
-
-    // void atlanticFlow(int i, int j, Flow[][] flow, int[][] heights) {
-    //     int n = heights.length, m = heights[0].length;
-    //     if(i == n-1 && j == m-1)
-    //         return;
-    //     flow[i][j].atl = true;
-    //     if(flow[i][j].pac)
-    //         res.add(List.of(i, j));
-    //     if(j != 0 && j != m-1 && heights[i][j-1] >= heights[i][j]) {
-    //         atlanticFlow(i, j-1, flow, heights);
-    //     }
-    //     if(i != 0 && i != n-1 && heights[i-1][j] >= heights[i][j]) {
-    //         atlanticFlow(i-1, j, flow, heights);
-    //     }
-    // }
-
     public List<List<Integer>> pacificAtlantic(int[][] mat) {
         int n = mat.length, m = mat[0].length;
-        List<List<Integer>> res = new ArrayList<>();
-        if(n <= 1 || m <= 1) {
-            for(int i = 0; i < n; i++) {
-                for(int j = 0; j < m; j++) {
-                    res.add(List.of(i, j));
-                }
-            }
-            return res;
+        boolean[][] pacVis = new boolean[n][m];
+        boolean[][] atlVis = new boolean[n][m];
+        for(int j = 0; j < m; j++) {
+            if(!pacVis[0][j])
+                dfs(mat, 0, j, pacVis);
+            if(!atlVis[n-1][j])
+                dfs(mat, n-1, j, atlVis);
         }
-        Flow[][] flow = new Flow[n][m];   
-        
         for(int i = 0; i < n; i++) {
+            if(!pacVis[i][0])
+                dfs(mat, i, 0, pacVis);
+            if(!atlVis[i][m-1])
+                dfs(mat, i, m-1, atlVis);
+        }
+
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i = 0 ; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                flow[i][j] = new Flow();
+                if(pacVis[i][j] && atlVis[i][j])
+                    ans.add(List.of(i, j));
             }
         }
-        for(int i = 0; i < n; i++) {
-            flow[i][0].pac = true;
-            flow[i][m-1].atl = true;
-        }
-
-        for(int i = 0; i < m; i++) {
-            flow[0][i].pac = true;
-            flow[n-1][i].atl = true;
-        }
-
-        for(int i = 1; i < n; i++) {
-            for(int j = 1; j < m; j++) {
-                if(mat[i][j] >= mat[i-1][j]) {
-                    flow[i][j].pac |= flow[i-1][j].pac;
-                }
-                if(mat[i][j] >= mat[i][j-1]) {
-                    flow[i][j].pac |= flow[i][j-1].pac;
-                }
-            }
-        }
-
-        for(int i = n-2; i >= 0; i--) {
-            for(int j = m-2; j >= 0; j--) {
-                if(mat[i][j] >= mat[i+1][j]) {
-                    flow[i][j].atl |= flow[i+1][j].atl;
-                }
-                if(mat[i][j] >= mat[i][j+1]) {
-                    flow[i][j].atl |= flow[i][j+1].atl;
-                }
-            }
-        }
-
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(flow[i][j].atl && flow[i][j].pac)
-                    res.add(List.of(i, j));
-            }
-        }
-        return res;
+        return ans;
     }
 }
