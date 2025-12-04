@@ -40,7 +40,7 @@ class Solution {
     public List<List<Integer>> pacificAtlantic(int[][] mat) {
         int n = mat.length, m = mat[0].length;
         List<List<Integer>> res = new ArrayList<>();
-        if(n <= 2 || m <= 2) {
+        if(n <= 1 || m <= 1) {
             for(int i = 0; i < n; i++) {
                 for(int j = 0; j < m; j++) {
                     res.add(List.of(i, j));
@@ -93,6 +93,6 @@ class Solution {
                     res.add(List.of(i, j));
             }
         }
-        return (res);
+        return res;
     }
 }
