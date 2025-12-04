@@ -57,7 +57,7 @@ class Solution {
         }
         for(int i = 0; i < n; i++) {
             flow[i][0].pac = true;
-            flow[i][n-1].atl = true;
+            flow[i][m-1].atl = true;
         }
 
         for(int i = 0; i < m; i++) {
